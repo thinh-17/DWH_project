@@ -5,3 +5,7 @@ obj/
 *.user
 *.suo
 *.dtproj.user
+.vs/
+**/bin/
+**/obj/
+*.user

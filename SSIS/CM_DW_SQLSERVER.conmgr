@@ -1,0 +1,16 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="CM_DW_SQLSERVER"
+  DTS:DTSID="{92C61F5A-46B9-4BA0-9D3F-5F0222D9D592}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectRetryCount="1"
+      DTS:ConnectRetryInterval="5"
+      DTS:ConnectionString="Data Source=127.0.0.1,11433;User ID=sa;Initial Catalog=DW_Project;Provider=MSOLEDBSQL.1;Persist Security Info=False;Initial File Name=;Trust Server Certificate=True;Server SPN=;Authentication=;Access Token=;Application Name=SSIS-Package1-{92C61F5A-46B9-4BA0-9D3F-5F0222D9D592}127.0.0.1,11433.DW_Project.sa;Auto Translate=False;">
+      <DTS:Password
+        DTS:Name="Password"
+        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAnmPninwIyEGarkFO0rQHpwAAAAACAAAAAAAQZgAAAAEAACAAAACaOLoCOGmXz3EIhld3KU16kh0k2wLkNouYSvhSc26x2QAAAAAOgAAAAAIAACAAAAC1U+qDmo3Lm/8X0hktPRC3v9MM25CWOf6lknmEDzKZ1IAAAAAWQPa5Aw/SZDDDTsOXqX/ZzAQXNzL/xEGanwiV//1iG0ADDAeFUdw/ug4YaUHNay+7Y4DFKQAjef66KMn/AbgY/uBVVUvBP+j2WfSdQIfAPTnXcbikL6MrDz/9YUO+Oa999q5bW3afAWOhCVjsI3meYeuIWrmi32O3ZGkOCUX9bEAAAABD6stI5OCLyS1pzNbd9PuIjjLnD2g7XDmuCrJqCPanA6w0RS1hOf4zfPhTka8qwYFmE/E7J/s4TlUOQArWYq7O</DTS:Password>
+    </DTS:ConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

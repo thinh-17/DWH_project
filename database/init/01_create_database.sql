@@ -1,0 +1,5 @@
+IF DB_ID('DW_Project') IS NULL
+BEGIN
+    CREATE DATABASE DW_Project;
+END;
+GO
