@@ -11,12 +11,513 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="8"
-  DTS:VersionGUID="{DB049782-26C9-444A-B184-8A2FB49E6D96}">
+  DTS:VersionBuild="21"
+  DTS:VersionGUID="{B022DA4D-BBCC-408C-9642-A630A82DF08E}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
-  <DTS:Executables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{377585DE-225F-44F3-9291-EF624F08DB27}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT_Load_ProductCategoryTranslation_To_Staging"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Data Conversion.Inputs[Data Conversion Input].Columns[product_category_name]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="product_category_name"
+                      lineageId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Flat File Source.Outputs[Flat File Source Output].Columns[product_category_name]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Data Conversion.Inputs[Data Conversion Input].Columns[product_category_name_english]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="product_category_name_english"
+                      lineageId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Flat File Source.Outputs[Flat File Source Output].Columns[product_category_name_english]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Data Conversion.Outputs[Data Conversion Output].Columns[DC_product_category_name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="100"
+                      lineageId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Data Conversion.Outputs[Data Conversion Output].Columns[DC_product_category_name]"
+                      name="DC_product_category_name"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\DFT_Load_ProductCategoryTranslation_To_Staging\Flat File Source.Outputs[Flat File Source Output].Columns[product_category_name]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Data Conversion.Outputs[Data Conversion Output].Columns[DC_product_category_name_english]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="100"
+                      lineageId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Data Conversion.Outputs[Data Conversion Output].Columns[DC_product_category_name_english]"
+                      name="DC_product_category_name_english"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\DFT_Load_ProductCategoryTranslation_To_Staging\Flat File Source.Outputs[Flat File Source Output].Columns[product_category_name_english]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Derived Column.Inputs[Derived Column Input].Columns[DC_product_category_name]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="DC_product_category_name"
+                      lineageId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Data Conversion.Outputs[Data Conversion Output].Columns[DC_product_category_name]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Derived Column.Inputs[Derived Column Input].Columns[DC_product_category_name_english]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="DC_product_category_name_english"
+                      lineageId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Data Conversion.Outputs[Data Conversion Output].Columns[DC_product_category_name_english]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Derived Column.Outputs[Derived Column Output].Columns[product_category_name_clean]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="100"
+                      lineageId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Derived Column.Outputs[Derived Column Output].Columns[product_category_name_clean]"
+                      name="product_category_name_clean"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[TRIM](#{Package\DFT_Load_ProductCategoryTranslation_To_Staging\Data Conversion.Outputs[Data Conversion Output].Columns[DC_product_category_name]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">TRIM(DC_product_category_name)</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Derived Column.Outputs[Derived Column Output].Columns[product_category_name_english_clean]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="100"
+                      lineageId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Derived Column.Outputs[Derived Column Output].Columns[product_category_name_english_clean]"
+                      name="product_category_name_english_clean"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[TRIM](#{Package\DFT_Load_ProductCategoryTranslation_To_Staging\Data Conversion.Outputs[Data Conversion Output].Columns[DC_product_category_name_english]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">TRIM(DC_product_category_name_english)</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Flat File Source"
+              componentClassID="Microsoft.FlatFileSource"
+              contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Source"
+              localeId="1033"
+              name="Flat File Source"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether zero-length columns are treated as null."
+                  name="RetainNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Flat File Source.Connections[FlatFileConnection]"
+                  connectionManagerID="{6312F671-FE65-4670-836F-80DD1DBADB92}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[FF_ProductCategoryTranslation]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Flat File Source.Outputs[Flat File Source Output]"
+                  name="Flat File Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Flat File Source.Outputs[Flat File Source Output].Columns[product_category_name]"
+                      codePage="65001"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[product_category_name]"
+                      length="100"
+                      lineageId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Flat File Source.Outputs[Flat File Source Output].Columns[product_category_name]"
+                      name="product_category_name"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Flat File Source.Outputs[Flat File Source Output].Columns[product_category_name_english]"
+                      codePage="65001"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[product_category_name_english]"
+                      length="100"
+                      lineageId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Flat File Source.Outputs[Flat File Source Output].Columns[product_category_name_english]"
+                      name="product_category_name_english"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[product_category_name]"
+                      codePage="65001"
+                      dataType="str"
+                      length="100"
+                      name="product_category_name" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[product_category_name_english]"
+                      codePage="65001"
+                      dataType="str"
+                      length="100"
+                      name="product_category_name_english" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Flat File Source.Outputs[Flat File Source Error Output]"
+                  isErrorOut="true"
+                  name="Flat File Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      codePage="65001"
+                      dataType="text"
+                      description="Flat File Source Error Output Column"
+                      lineageId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      name="Flat File Source Error Output Column" />
+                    <outputColumn
+                      refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[stg].[product_category_name_translation]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="{92C61F5A-46B9-4BA0-9D3F-5F0222D9D592}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[CM_DW_SQLSERVER]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[product_category_name_clean]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="product_category_name_clean"
+                      externalMetadataColumnId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[product_category_name]"
+                      lineageId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Derived Column.Outputs[Derived Column Output].Columns[product_category_name_clean]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[product_category_name_english_clean]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="product_category_name_english_clean"
+                      externalMetadataColumnId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[product_category_name_english]"
+                      lineageId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Derived Column.Outputs[Derived Column Output].Columns[product_category_name_english_clean]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[product_category_name]"
+                      dataType="wstr"
+                      length="255"
+                      name="product_category_name" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[product_category_name_english]"
+                      dataType="wstr"
+                      length="255"
+                      name="product_category_name_english" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging.Paths[Data Conversion Output]"
+              endId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Derived Column.Inputs[Derived Column Input]"
+              name="Data Conversion Output"
+              startId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging.Paths[Derived Column Output]"
+              endId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\DFT_Load_ProductCategoryTranslation_To_Staging.Paths[Flat File Source Output]"
+              endId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Data Conversion.Inputs[Data Conversion Input]"
+              name="Flat File Source Output"
+              startId="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Flat File Source.Outputs[Flat File Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
 <!--If you manually edit this section and make a mistake, you can delete it. -->
@@ -24,5 +525,120 @@
 <Objects
   Version="8">
   <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="320.8,41.6"
+          Id="Package\DFT_Load_ProductCategoryTranslation_To_Staging"
+          TopLeft="202.142857573166,70.3529411148035" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DFT_Load_ProductCategoryTranslation_To_Staging">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\DFT_Load_ProductCategoryTranslation_To_Staging\OLE DB Destination"
+          TopLeft="279.28571488024,313.529411489885" />
+        <NodeLayout
+          Size="150.4,41.6"
+          Id="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Flat File Source"
+          TopLeft="279.28571488024,71.1176469964862" />
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Derived Column"
+          TopLeft="286.428572038303,227.882352741429" />
+        <NodeLayout
+          Size="155.2,41.6"
+          Id="Package\DFT_Load_ProductCategoryTranslation_To_Staging\Data Conversion"
+          TopLeft="281.428572027659,152.941176336529" />
+        <EdgeLayout
+          Id="Package\DFT_Load_ProductCategoryTranslation_To_Staging.Paths[Derived Column Output]"
+          TopLeft="363.657143459272,269.482352741429">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,44.0470587484563"
+              Start="0,0"
+              End="0,36.5470587484563">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.5470587484563" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_Load_ProductCategoryTranslation_To_Staging.Paths[Data Conversion Output]"
+          TopLeft="360.928572032981,194.541176336529">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,33.3411764048995"
+              Start="0,0"
+              End="0,25.8411764048995">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.8411764048995" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_Load_ProductCategoryTranslation_To_Staging.Paths[Flat File Source Output]"
+          TopLeft="356.75714345395,112.717646996486">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,40.2235293400432"
+              Start="0,0"
+              End="0,32.7235293400432">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.7235293400432" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_Load_ProductCategoryTranslation_To_Staging\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>
