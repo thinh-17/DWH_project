@@ -12,25 +12,25 @@
       DTS:RowDelimiter=""
       DTS:TextQualifier="_x0022_"
       DTS:CodePage="1252"
-      DTS:ConnectionString="F:\2025-2026_HK2\DataWarehouse\DWH_project\datasource\olist_customers_dataset.csv">
+      DTS:ConnectionString="A:\DW_PROJECT\DWH_project\datasource\olist_customers_dataset.csv">
       <DTS:FlatFileColumns>
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
           DTS:ColumnDelimiter="_x002C_"
-          DTS:MaximumWidth="200"
+          DTS:MaximumWidth="50"
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="customer_id"
-          DTS:DTSID="{B0C12B19-EBB3-4003-B479-736E90E9CEC7}"
+          DTS:DTSID="{5AAB4785-0EFA-4468-AFA6-4E19287D00B6}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
           DTS:ColumnDelimiter="_x002C_"
-          DTS:MaximumWidth="200"
+          DTS:MaximumWidth="50"
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="customer_unique_id"
-          DTS:DTSID="{6EC121DF-A591-45C5-A3E7-A1C416806B7B}"
+          DTS:DTSID="{3B867380-AD00-48B0-BCB4-BA9F831D0021}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -39,16 +39,16 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="customer_zip_code_prefix"
-          DTS:DTSID="{BDA0FD29-F208-415C-B34E-C977B438174F}"
+          DTS:DTSID="{3A6EFEE9-D9EF-46A5-9FEF-66659DD45EDB}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
           DTS:ColumnDelimiter="_x002C_"
-          DTS:MaximumWidth="100"
+          DTS:MaximumWidth="50"
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="customer_city"
-          DTS:DTSID="{5018FFBF-643B-4D61-B36F-D74368ACB805}"
+          DTS:DTSID="{D9BB128F-B4B5-43DC-8B15-A2BB17B83929}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -57,7 +57,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="customer_state"
-          DTS:DTSID="{C762288A-9CE2-4E61-BC16-1103C955779D}"
+          DTS:DTSID="{A7E9CE6F-DE52-4BFD-A2A7-434161722FBF}"
           DTS:CreationName="" />
       </DTS:FlatFileColumns>
     </DTS:ConnectionManager>
