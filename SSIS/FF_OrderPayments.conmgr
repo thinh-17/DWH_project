@@ -12,7 +12,7 @@
       DTS:RowDelimiter=""
       DTS:TextQualifier="_x0022_"
       DTS:CodePage="1252"
-      DTS:ConnectionString="F:\2025-2026_HK2\DataWarehouse\DWH_project\datasource\olist_order_payments_dataset.csv">
+      DTS:ConnectionString="A:\DW_PROJECT\DWH_project\datasource\olist_order_payments_dataset.csv">
       <DTS:FlatFileColumns>
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -21,7 +21,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="order_id"
-          DTS:DTSID="{4E0114B7-59AD-4BCF-A385-4238B24BA3D7}"
+          DTS:DTSID="{D3025899-1AD1-48AE-9B95-D1E9788A4629}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -30,7 +30,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="payment_sequential"
-          DTS:DTSID="{DE0D31D0-9A6E-48A9-A28F-0501F3B018AB}"
+          DTS:DTSID="{0728D12F-D79E-4284-A361-B2CDA407E234}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -39,7 +39,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="payment_type"
-          DTS:DTSID="{24CA2527-F9F2-4B97-8B03-54F703272F87}"
+          DTS:DTSID="{140CD636-7494-4D18-B692-C2A33BA81C7E}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -48,7 +48,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="payment_installments"
-          DTS:DTSID="{C4B55538-776F-41C0-B2C3-F36F5687C3AD}"
+          DTS:DTSID="{2995B962-EB94-44EA-BAC3-8A1899FF385D}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -57,7 +57,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="payment_value"
-          DTS:DTSID="{90ECF902-FA48-4276-81F9-C672EB18685A}"
+          DTS:DTSID="{B709B287-F27A-4BE4-A266-7578F32FA651}"
           DTS:CreationName="" />
       </DTS:FlatFileColumns>
     </DTS:ConnectionManager>

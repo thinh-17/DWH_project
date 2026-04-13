@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="8"
-  DTS:VersionGUID="{98F84D71-B799-47D1-9FF4-D49030EB4401}">
+  DTS:VersionBuild="6"
+  DTS:VersionGUID="{4476E25F-B92E-42FB-93F2-B15D26A7864B}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -583,7 +583,7 @@
           TopLeft="337.642857849902,206.617646882536" />
         <EdgeLayout
           Id="Package\DFT_Load_Sellers_To_Staging.Paths[Derived Column Output]"
-          TopLeft="413.907143560387,248.217646882536">
+          TopLeft="413.907143560386,248.217646882536">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -606,21 +606,21 @@
         <NodeLayout
           Size="150.4,41.6"
           Id="Package\DFT_Load_Sellers_To_Staging\Flat File Source"
-          TopLeft="332.857143565708,113.941176370714" />
+          TopLeft="336.42857214474,106.388235278701" />
         <EdgeLayout
           Id="Package\DFT_Load_Sellers_To_Staging.Paths[Flat File Source Output]"
-          TopLeft="411.050000707805,155.541176370714">
+          TopLeft="412.835714997321,147.988235278701">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,51.0764705118216"
+              EndConnector="0,58.6294116038351"
               Start="0,0"
-              End="0,43.5764705118216">
+              End="0,51.1294116038351">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,43.5764705118216" />
+                    End="0,51.1294116038351" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

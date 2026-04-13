@@ -11,25 +11,25 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="17"
-  DTS:VersionGUID="{2DBEB533-431B-4B64-AE65-DB743891EF93}">
+  DTS:VersionBuild="25"
+  DTS:VersionGUID="{E1BFD232-7360-4248-8744-3931D1CC1CFD}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
     <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[127.0.0.1,11433.DW_Project.sa]"
+      DTS:refId="Package.ConnectionManagers[CM_DW_SQLSERVER]"
       DTS:CreationName="OLEDB"
       DTS:DTSID="{9A3B41A1-5C99-4E08-8168-BC2B3113ADA9}"
-      DTS:ObjectName="127.0.0.1,11433.DW_Project.sa">
+      DTS:ObjectName="CM_DW_SQLSERVER">
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=127.0.0.1,11433;User ID=sa;Initial Catalog=DW_Project;Provider=MSOLEDBSQL.1;Persist Security Info=False;Initial File Name=;Trust Server Certificate=True;Server SPN=;Authentication=;Access Token=;Application Name=SSIS-Package1-{9A3B41A1-5C99-4E08-8168-BC2B3113ADA9}127.0.0.1,11433.DW_Project.sa;Auto Translate=False;">
+          DTS:ConnectionString="Data Source=127.0.0.1,11433;User ID=sa;Initial Catalog=DW_Project;Provider=MSOLEDBSQL.1;Persist Security Info=False;Auto Translate=False;Application Name=SSIS-Package1-{9A3B41A1-5C99-4E08-8168-BC2B3113ADA9}127.0.0.1,11433.DW_Project.sa;Trust Server Certificate=True;">
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAnmPninwIyEGarkFO0rQHpwAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAo/SBk31lBLb6gPGN3ZqcgyJTo1wziWKUWLloJ2lhsuAAAAAAOgAAAAAIAACAAAACWm3ntvjOBh8Lj+GrdvFFDFB5ISSVZB0caH+IMpTP98jAAAABSPgo9elh6b3V96u9jGOAMofS/zMppmfTQ1iGjI8GH97NdzURmHOMzxu1FuCbIsb1AAAAApxttAje6GOM3ji744DDUXhFeN6C79/nJgzDgabHaY6+7R0auTmntYfq5PjR2kFPHz8j3KAHWHo3d3F6zrajjMA</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAX2mzZLknwkGbOGjW14CBuAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACGtUZHxJgA4vY6ivSoodlgfFRbIKAL/nvYix4E4+6/3AAAAAAOgAAAAAIAACAAAADrtfPfqMB9OycgRmYE0SpCYRtqThfwEE/Cqs3n4Yw4SDAAAACwJj4SGMFtgLprzwYIjBJcDvVJMAHVU3fnUjsI1BOKKz9Ovc28l2/CtkdB/ha2oVZAAAAAudLDSbMrUeNSV2AXqboF4EdpaomcgskiTaDQXLHqMTFIBxvKTp9VDnfdDh0Z56ioXJZEOHYJ7yqdDxrMbt2Mtg</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -817,8 +817,8 @@
               <connections>
                 <connection
                   refId="Package\DFT_Load_Orders_To_Staging\OLE DB Destination.Connections[OleDbConnection]"
-                  connectionManagerID="{92C61F5A-46B9-4BA0-9D3F-5F0222D9D592}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[CM_DW_SQLSERVER]"
+                  connectionManagerID="Package.ConnectionManagers[CM_DW_SQLSERVER]"
+                  connectionManagerRefId="Package.ConnectionManagers[CM_DW_SQLSERVER]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
