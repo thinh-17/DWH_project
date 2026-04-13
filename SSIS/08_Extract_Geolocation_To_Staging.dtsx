@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="5"
-  DTS:VersionGUID="{096C4EA1-175A-44B4-BA13-C083D22544E4}">
+  DTS:VersionBuild="7"
+  DTS:VersionGUID="{04ADA84D-134E-4FC6-8328-D8917AAEAB0D}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -650,10 +650,6 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="150.4,41.6"
-          Id="Package\DFT_Load_Geolocation_To_Staging\Flat File Source"
-          TopLeft="356.428572187314,79.5294116949953" />
-        <NodeLayout
           Size="152.8,41.6"
           Id="Package\DFT_Load_Geolocation_To_Staging\Derived Column"
           TopLeft="358.571429334733,162.117646916721" />
@@ -661,6 +657,10 @@
           Size="170.4,41.6"
           Id="Package\DFT_Load_Geolocation_To_Staging\OLE DB Destination"
           TopLeft="355.000000755702,246.235293901812" />
+        <NodeLayout
+          Size="150.4,41.6"
+          Id="Package\DFT_Load_Geolocation_To_Staging\Flat File Source"
+          TopLeft="356.428572187314,79.5294116949953" />
         <EdgeLayout
           Id="Package\DFT_Load_Geolocation_To_Staging.Paths[Flat File Source Output]"
           TopLeft="433.300000761024,121.129411694995">
