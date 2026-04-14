@@ -74,13 +74,8 @@ BEGIN
         product_id NVARCHAR(50) NOT NULL,
         product_category_name_english NVARCHAR(200) NULL,
         product_description_length INT NULL,
-        product_photos_qty INT NULL,
-        product_weight_g DECIMAL(18,2) NULL,
-        product_length_cm DECIMAL(18,2) NULL,
-        product_height_cm DECIMAL(18,2) NULL,
-        product_width_cm DECIMAL(18,2) NULL,
-        product_volume_cm3 DECIMAL(18,2) NULL,
-        product_price DECIMAL(18,2) NULL
+        product_price DECIMAL(18,2) NULL,
+        version INT NOT NULL
     );
 END;
 GO
@@ -93,8 +88,8 @@ BEGIN
     CREATE TABLE dbo.DimOrderStatus
     (
         order_status_key INT IDENTITY(1,1) PRIMARY KEY,
-        order_status NVARCHAR(50) NOT NULL,
-        status_group NVARCHAR(50) NULL
+        order_status NVARCHAR(50) NOT NULL
+
     );
 END;
 GO

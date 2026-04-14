@@ -1,30 +1,30 @@
 ﻿<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
-  DTS:CreationDate="4/13/2026 5:26:09 PM"
+  DTS:CreationDate="4/14/2026 3:14:50 PM"
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="LAPTOP-RFOC5L94"
   DTS:CreatorName="LAPTOP-RFOC5L94\PC"
-  DTS:DTSID="{03071C62-6430-47BA-9637-DFEC41A30840}"
+  DTS:DTSID="{99BC191E-9A0F-453B-94A8-8C109B51C5C6}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="17.0.1016.0"
   DTS:LocaleID="1033"
-  DTS:ObjectName="Package4"
+  DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="2"
-  DTS:VersionGUID="{752340D0-9C57-406F-B80A-4B73EFF6C61D}">
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{BAFDF65E-C443-44D1-9222-6FBCD322AC68}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
   <DTS:Executables>
     <DTS:Executable
-      DTS:refId="Package\DFT_Load_Dim_Review_Score"
+      DTS:refId="Package\Load Fact Daily Product Snapshot"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
-      DTS:DTSID="{1493b963-9a40-4b0d-8784-6336a2135e11}"
+      DTS:DTSID="{b27f6023-bde9-42cd-93f7-985500934f67}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
-      DTS:ObjectName="DFT_Load_Dim_Review_Score"
+      DTS:ObjectName="Load Fact Daily Product Snapshot"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
       <DTS:ObjectData>
@@ -32,7 +32,7 @@
           version="1">
           <components>
             <component
-              refId="Package\DFT_Load_Dim_Review_Score\Derived Column"
+              refId="Package\Load Fact Daily Product Snapshot\Derived Column"
               componentClassID="Microsoft.DerivedColumn"
               contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
               description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
@@ -40,34 +40,34 @@
               usesDispositions="true">
               <inputs>
                 <input
-                  refId="Package\DFT_Load_Dim_Review_Score\Derived Column.Inputs[Derived Column Input]"
+                  refId="Package\Load Fact Daily Product Snapshot\Derived Column.Inputs[Derived Column Input]"
                   description="Input to the Derived Column Transformation"
                   name="Derived Column Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\DFT_Load_Dim_Review_Score\Derived Column.Inputs[Derived Column Input].Columns[review_score]"
+                      refId="Package\Load Fact Daily Product Snapshot\Derived Column.Inputs[Derived Column Input].Columns[review_score]"
                       cachedDataType="i4"
                       cachedName="review_score"
-                      lineageId="Package\DFT_Load_Dim_Review_Score\OLE DB Source.Outputs[OLE DB Source Output].Columns[review_score]" />
+                      lineageId="Package\Load Fact Daily Product Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[review_score]" />
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\DFT_Load_Dim_Review_Score\Derived Column.Outputs[Derived Column Output]"
+                  refId="Package\Load Fact Daily Product Snapshot\Derived Column.Outputs[Derived Column Output]"
                   description="Default Output of the Derived Column Transformation"
                   exclusionGroup="1"
                   name="Derived Column Output"
-                  synchronousInputId="Package\DFT_Load_Dim_Review_Score\Derived Column.Inputs[Derived Column Input]">
+                  synchronousInputId="Package\Load Fact Daily Product Snapshot\Derived Column.Inputs[Derived Column Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\DFT_Load_Dim_Review_Score\Derived Column.Outputs[Derived Column Output].Columns[score_label]"
+                      refId="Package\Load Fact Daily Product Snapshot\Derived Column.Outputs[Derived Column Output].Columns[score_label]"
                       dataType="wstr"
                       errorOrTruncationOperation="Computation"
                       errorRowDisposition="FailComponent"
                       length="9"
-                      lineageId="Package\DFT_Load_Dim_Review_Score\Derived Column.Outputs[Derived Column Output].Columns[score_label]"
+                      lineageId="Package\Load Fact Daily Product Snapshot\Derived Column.Outputs[Derived Column Output].Columns[score_label]"
                       name="score_label"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -75,7 +75,7 @@
                           containsID="true"
                           dataType="System.String"
                           description="Derived Column Expression"
-                          name="Expression">#{Package\DFT_Load_Dim_Review_Score\OLE DB Source.Outputs[OLE DB Source Output].Columns[review_score]} == 1 ? "very bad" : #{Package\DFT_Load_Dim_Review_Score\OLE DB Source.Outputs[OLE DB Source Output].Columns[review_score]} == 2 ? "bad" : #{Package\DFT_Load_Dim_Review_Score\OLE DB Source.Outputs[OLE DB Source Output].Columns[review_score]} == 3 ? "neutral" : #{Package\DFT_Load_Dim_Review_Score\OLE DB Source.Outputs[OLE DB Source Output].Columns[review_score]} == 4 ? "good" : #{Package\DFT_Load_Dim_Review_Score\OLE DB Source.Outputs[OLE DB Source Output].Columns[review_score]} == 5 ? "very good" : "unknown"</property>
+                          name="Expression">#{Package\Load Fact Daily Product Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[review_score]} == 1 ? "very bad" : #{Package\Load Fact Daily Product Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[review_score]} == 2 ? "bad" : #{Package\Load Fact Daily Product Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[review_score]} == 3 ? "neutral" : #{Package\Load Fact Daily Product Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[review_score]} == 4 ? "good" : #{Package\Load Fact Daily Product Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[review_score]} == 5 ? "very good" : "unknown"</property>
                         <property
                           containsID="true"
                           dataType="System.String"
@@ -88,23 +88,23 @@
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\DFT_Load_Dim_Review_Score\Derived Column.Outputs[Derived Column Error Output]"
+                  refId="Package\Load Fact Daily Product Snapshot\Derived Column.Outputs[Derived Column Error Output]"
                   description="Error Output of the Derived Column Transformation"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="Derived Column Error Output"
-                  synchronousInputId="Package\DFT_Load_Dim_Review_Score\Derived Column.Inputs[Derived Column Input]">
+                  synchronousInputId="Package\Load Fact Daily Product Snapshot\Derived Column.Inputs[Derived Column Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\DFT_Load_Dim_Review_Score\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      refId="Package\Load Fact Daily Product Snapshot\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\DFT_Load_Dim_Review_Score\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Load Fact Daily Product Snapshot\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\DFT_Load_Dim_Review_Score\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      refId="Package\Load Fact Daily Product Snapshot\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\DFT_Load_Dim_Review_Score\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Load Fact Daily Product Snapshot\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -113,7 +113,7 @@
               </outputs>
             </component>
             <component
-              refId="Package\DFT_Load_Dim_Review_Score\Lookup"
+              refId="Package\Load Fact Daily Product Snapshot\Lookup"
               componentClassID="Microsoft.Lookup"
               contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
               description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
@@ -169,7 +169,7 @@ where [refTable].[review_score] = ?</property>
                   containsID="true"
                   dataType="System.String"
                   description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
-                  name="ParameterMap">#{Package\DFT_Load_Dim_Review_Score\OLE DB Source.Outputs[OLE DB Source Output].Columns[review_score]};</property>
+                  name="ParameterMap">#{Package\Load Fact Daily Product Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[review_score]};</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -181,7 +181,7 @@ where [refTable].[review_score] = ?</property>
               </properties>
               <connections>
                 <connection
-                  refId="Package\DFT_Load_Dim_Review_Score\Lookup.Connections[OleDbConnection]"
+                  refId="Package\Load Fact Daily Product Snapshot\Lookup.Connections[OleDbConnection]"
                   connectionManagerID="{92C61F5A-46B9-4BA0-9D3F-5F0222D9D592}:external"
                   connectionManagerRefId="Project.ConnectionManagers[CM_DW_SQLSERVER]"
                   description="Connection manager used to access lookup data."
@@ -189,14 +189,14 @@ where [refTable].[review_score] = ?</property>
               </connections>
               <inputs>
                 <input
-                  refId="Package\DFT_Load_Dim_Review_Score\Lookup.Inputs[Lookup Input]"
+                  refId="Package\Load Fact Daily Product Snapshot\Lookup.Inputs[Lookup Input]"
                   name="Lookup Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\DFT_Load_Dim_Review_Score\Lookup.Inputs[Lookup Input].Columns[review_score]"
+                      refId="Package\Load Fact Daily Product Snapshot\Lookup.Inputs[Lookup Input].Columns[review_score]"
                       cachedDataType="i4"
                       cachedName="review_score"
-                      lineageId="Package\DFT_Load_Dim_Review_Score\OLE DB Source.Outputs[OLE DB Source Output].Columns[review_score]">
+                      lineageId="Package\Load Fact Daily Product Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[review_score]">
                       <properties>
                         <property
                           dataType="System.String"
@@ -214,38 +214,38 @@ where [refTable].[review_score] = ?</property>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\DFT_Load_Dim_Review_Score\Lookup.Outputs[Lookup Match Output]"
+                  refId="Package\Load Fact Daily Product Snapshot\Lookup.Outputs[Lookup Match Output]"
                   errorOrTruncationOperation="Lookup"
                   exclusionGroup="1"
                   name="Lookup Match Output"
-                  synchronousInputId="Package\DFT_Load_Dim_Review_Score\Lookup.Inputs[Lookup Input]">
+                  synchronousInputId="Package\Load Fact Daily Product Snapshot\Lookup.Inputs[Lookup Input]">
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\DFT_Load_Dim_Review_Score\Lookup.Outputs[Lookup No Match Output]"
+                  refId="Package\Load Fact Daily Product Snapshot\Lookup.Outputs[Lookup No Match Output]"
                   description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
                   exclusionGroup="1"
                   name="Lookup No Match Output"
-                  synchronousInputId="Package\DFT_Load_Dim_Review_Score\Lookup.Inputs[Lookup Input]">
+                  synchronousInputId="Package\Load Fact Daily Product Snapshot\Lookup.Inputs[Lookup Input]">
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\DFT_Load_Dim_Review_Score\Lookup.Outputs[Lookup Error Output]"
+                  refId="Package\Load Fact Daily Product Snapshot\Lookup.Outputs[Lookup Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="Lookup Error Output"
-                  synchronousInputId="Package\DFT_Load_Dim_Review_Score\Lookup.Inputs[Lookup Input]">
+                  synchronousInputId="Package\Load Fact Daily Product Snapshot\Lookup.Inputs[Lookup Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\DFT_Load_Dim_Review_Score\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      refId="Package\Load Fact Daily Product Snapshot\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\DFT_Load_Dim_Review_Score\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Load Fact Daily Product Snapshot\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\DFT_Load_Dim_Review_Score\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      refId="Package\Load Fact Daily Product Snapshot\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\DFT_Load_Dim_Review_Score\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Load Fact Daily Product Snapshot\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -254,7 +254,7 @@ where [refTable].[review_score] = ?</property>
               </outputs>
             </component>
             <component
-              refId="Package\DFT_Load_Dim_Review_Score\OLE DB Destination"
+              refId="Package\Load Fact Daily Product Snapshot\OLE DB Destination"
               componentClassID="Microsoft.OLEDBDestination"
               contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
               description="OLE DB Destination"
@@ -311,7 +311,7 @@ where [refTable].[review_score] = ?</property>
               </properties>
               <connections>
                 <connection
-                  refId="Package\DFT_Load_Dim_Review_Score\OLE DB Destination.Connections[OleDbConnection]"
+                  refId="Package\Load Fact Daily Product Snapshot\OLE DB Destination.Connections[OleDbConnection]"
                   connectionManagerID="{92C61F5A-46B9-4BA0-9D3F-5F0222D9D592}:external"
                   connectionManagerRefId="Project.ConnectionManagers[CM_DW_SQLSERVER]"
                   description="The OLE DB runtime connection used to access the database."
@@ -319,38 +319,38 @@ where [refTable].[review_score] = ?</property>
               </connections>
               <inputs>
                 <input
-                  refId="Package\DFT_Load_Dim_Review_Score\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  refId="Package\Load Fact Daily Product Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input]"
                   errorOrTruncationOperation="Insert"
                   errorRowDisposition="FailComponent"
                   hasSideEffects="true"
                   name="OLE DB Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\DFT_Load_Dim_Review_Score\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[review_score]"
+                      refId="Package\Load Fact Daily Product Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[review_score]"
                       cachedDataType="i4"
                       cachedName="review_score"
-                      externalMetadataColumnId="Package\DFT_Load_Dim_Review_Score\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[review_score]"
-                      lineageId="Package\DFT_Load_Dim_Review_Score\OLE DB Source.Outputs[OLE DB Source Output].Columns[review_score]" />
+                      externalMetadataColumnId="Package\Load Fact Daily Product Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[review_score]"
+                      lineageId="Package\Load Fact Daily Product Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[review_score]" />
                     <inputColumn
-                      refId="Package\DFT_Load_Dim_Review_Score\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[score_label]"
+                      refId="Package\Load Fact Daily Product Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[score_label]"
                       cachedDataType="wstr"
                       cachedLength="9"
                       cachedName="score_label"
-                      externalMetadataColumnId="Package\DFT_Load_Dim_Review_Score\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[score_label]"
-                      lineageId="Package\DFT_Load_Dim_Review_Score\Derived Column.Outputs[Derived Column Output].Columns[score_label]" />
+                      externalMetadataColumnId="Package\Load Fact Daily Product Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[score_label]"
+                      lineageId="Package\Load Fact Daily Product Snapshot\Derived Column.Outputs[Derived Column Output].Columns[score_label]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\DFT_Load_Dim_Review_Score\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[review_score_key]"
+                      refId="Package\Load Fact Daily Product Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[review_score_key]"
                       dataType="i4"
                       name="review_score_key" />
                     <externalMetadataColumn
-                      refId="Package\DFT_Load_Dim_Review_Score\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[review_score]"
+                      refId="Package\Load Fact Daily Product Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[review_score]"
                       dataType="i4"
                       name="review_score" />
                     <externalMetadataColumn
-                      refId="Package\DFT_Load_Dim_Review_Score\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[score_label]"
+                      refId="Package\Load Fact Daily Product Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[score_label]"
                       dataType="wstr"
                       length="50"
                       name="score_label" />
@@ -359,22 +359,22 @@ where [refTable].[review_score] = ?</property>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\DFT_Load_Dim_Review_Score\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  refId="Package\Load Fact Daily Product Snapshot\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="OLE DB Destination Error Output"
-                  synchronousInputId="Package\DFT_Load_Dim_Review_Score\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  synchronousInputId="Package\Load Fact Daily Product Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\DFT_Load_Dim_Review_Score\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      refId="Package\Load Fact Daily Product Snapshot\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\DFT_Load_Dim_Review_Score\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Load Fact Daily Product Snapshot\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\DFT_Load_Dim_Review_Score\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      refId="Package\Load Fact Daily Product Snapshot\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\DFT_Load_Dim_Review_Score\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Load Fact Daily Product Snapshot\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -383,7 +383,7 @@ where [refTable].[review_score] = ?</property>
               </outputs>
             </component>
             <component
-              refId="Package\DFT_Load_Dim_Review_Score\OLE DB Source"
+              refId="Package\Load Fact Daily Product Snapshot\OLE DB Source"
               componentClassID="Microsoft.OLEDBSource"
               contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
               description="OLE DB Source"
@@ -432,7 +432,7 @@ where [refTable].[review_score] = ?</property>
               </properties>
               <connections>
                 <connection
-                  refId="Package\DFT_Load_Dim_Review_Score\OLE DB Source.Connections[OleDbConnection]"
+                  refId="Package\Load Fact Daily Product Snapshot\OLE DB Source.Connections[OleDbConnection]"
                   connectionManagerID="{92C61F5A-46B9-4BA0-9D3F-5F0222D9D592}:external"
                   connectionManagerRefId="Project.ConnectionManagers[CM_DW_SQLSERVER]"
                   description="The OLE DB runtime connection used to access the database."
@@ -440,47 +440,47 @@ where [refTable].[review_score] = ?</property>
               </connections>
               <outputs>
                 <output
-                  refId="Package\DFT_Load_Dim_Review_Score\OLE DB Source.Outputs[OLE DB Source Output]"
+                  refId="Package\Load Fact Daily Product Snapshot\OLE DB Source.Outputs[OLE DB Source Output]"
                   name="OLE DB Source Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\DFT_Load_Dim_Review_Score\OLE DB Source.Outputs[OLE DB Source Output].Columns[review_score]"
+                      refId="Package\Load Fact Daily Product Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[review_score]"
                       dataType="i4"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\DFT_Load_Dim_Review_Score\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[review_score]"
-                      lineageId="Package\DFT_Load_Dim_Review_Score\OLE DB Source.Outputs[OLE DB Source Output].Columns[review_score]"
+                      externalMetadataColumnId="Package\Load Fact Daily Product Snapshot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[review_score]"
+                      lineageId="Package\Load Fact Daily Product Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[review_score]"
                       name="review_score"
                       truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\DFT_Load_Dim_Review_Score\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[review_score]"
+                      refId="Package\Load Fact Daily Product Snapshot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[review_score]"
                       dataType="i4"
                       name="review_score" />
                   </externalMetadataColumns>
                 </output>
                 <output
-                  refId="Package\DFT_Load_Dim_Review_Score\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  refId="Package\Load Fact Daily Product Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output]"
                   isErrorOut="true"
                   name="OLE DB Source Error Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\DFT_Load_Dim_Review_Score\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[review_score]"
+                      refId="Package\Load Fact Daily Product Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[review_score]"
                       dataType="i4"
-                      lineageId="Package\DFT_Load_Dim_Review_Score\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[review_score]"
+                      lineageId="Package\Load Fact Daily Product Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[review_score]"
                       name="review_score" />
                     <outputColumn
-                      refId="Package\DFT_Load_Dim_Review_Score\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      refId="Package\Load Fact Daily Product Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\DFT_Load_Dim_Review_Score\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Load Fact Daily Product Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\DFT_Load_Dim_Review_Score\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      refId="Package\Load Fact Daily Product Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\DFT_Load_Dim_Review_Score\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Load Fact Daily Product Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -491,20 +491,20 @@ where [refTable].[review_score] = ?</property>
           </components>
           <paths>
             <path
-              refId="Package\DFT_Load_Dim_Review_Score.Paths[Derived Column Output]"
-              endId="Package\DFT_Load_Dim_Review_Score\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              refId="Package\Load Fact Daily Product Snapshot.Paths[Derived Column Output]"
+              endId="Package\Load Fact Daily Product Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input]"
               name="Derived Column Output"
-              startId="Package\DFT_Load_Dim_Review_Score\Derived Column.Outputs[Derived Column Output]" />
+              startId="Package\Load Fact Daily Product Snapshot\Derived Column.Outputs[Derived Column Output]" />
             <path
-              refId="Package\DFT_Load_Dim_Review_Score.Paths[Lookup No Match Output]"
-              endId="Package\DFT_Load_Dim_Review_Score\Derived Column.Inputs[Derived Column Input]"
+              refId="Package\Load Fact Daily Product Snapshot.Paths[Lookup No Match Output]"
+              endId="Package\Load Fact Daily Product Snapshot\Derived Column.Inputs[Derived Column Input]"
               name="Lookup No Match Output"
-              startId="Package\DFT_Load_Dim_Review_Score\Lookup.Outputs[Lookup No Match Output]" />
+              startId="Package\Load Fact Daily Product Snapshot\Lookup.Outputs[Lookup No Match Output]" />
             <path
-              refId="Package\DFT_Load_Dim_Review_Score.Paths[OLE DB Source Output]"
-              endId="Package\DFT_Load_Dim_Review_Score\Lookup.Inputs[Lookup Input]"
+              refId="Package\Load Fact Daily Product Snapshot.Paths[OLE DB Source Output]"
+              endId="Package\Load Fact Daily Product Snapshot\Lookup.Inputs[Lookup Input]"
               name="OLE DB Source Output"
-              startId="Package\DFT_Load_Dim_Review_Score\OLE DB Source.Outputs[OLE DB Source Output]" />
+              startId="Package\Load Fact Daily Product Snapshot\OLE DB Source.Outputs[OLE DB Source Output]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
@@ -523,69 +523,35 @@ where [refTable].[review_score] = ?</property>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
-          Size="221.6,41.6"
-          Id="Package\DFT_Load_Dim_Review_Score"
+          Size="236,41.6"
+          Id="Package\Load Fact Daily Product Snapshot"
           TopLeft="60,60" />
       </GraphLayout>
     </LayoutInfo>
   </Package>
   <TaskHost
-    design-time-name="Package\DFT_Load_Dim_Review_Score">
+    design-time-name="Package\Load Fact Daily Product Snapshot">
     <LayoutInfo>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="170.4,41.6"
-          Id="Package\DFT_Load_Dim_Review_Score\OLE DB Destination"
-          TopLeft="542.857144012744,372.411764379449" />
-        <NodeLayout
-          Size="149.6,41.6"
-          Id="Package\DFT_Load_Dim_Review_Score\OLE DB Source"
-          TopLeft="58.5714286961115,18.3529411603835" />
-        <NodeLayout
           Size="112.8,41.6"
-          Id="Package\DFT_Load_Dim_Review_Score\Lookup"
+          Id="Package\Load Fact Daily Product Snapshot\Lookup"
           TopLeft="157.857143193179,282.388235050801" />
-        <EdgeLayout
-          Id="Package\DFT_Load_Dim_Review_Score.Paths[OLE DB Source Output]"
-          TopLeft="133.371428696111,59.9529411603835">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="80.8857144970678,222.435293890417"
-              Start="0,0"
-              End="80.8857144970678,214.935293890417">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,107.217646945209" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,107.217646945209"
-                    Point2="0,111.217646945209"
-                    Point3="4,111.217646945209" />
-                  <mssgle:LineSegment
-                    End="76.8857144970678,111.217646945209" />
-                  <mssgle:CubicBezierSegment
-                    Point1="76.8857144970678,111.217646945209"
-                    Point2="80.8857144970678,111.217646945209"
-                    Point3="80.8857144970678,115.217646945209" />
-                  <mssgle:LineSegment
-                    End="80.8857144970678,214.935293890417" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <NodeLayout
           Size="152.8,41.6"
-          Id="Package\DFT_Load_Dim_Review_Score\Derived Column"
+          Id="Package\Load Fact Daily Product Snapshot\Derived Column"
           TopLeft="395.000000840851,261.529411535465" />
+        <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\Load Fact Daily Product Snapshot\OLE DB Source"
+          TopLeft="58.5714286961115,18.3529411603835" />
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\Load Fact Daily Product Snapshot\OLE DB Destination"
+          TopLeft="542.857144012744,372.411764379449" />
         <EdgeLayout
-          Id="Package\DFT_Load_Dim_Review_Score.Paths[Lookup No Match Output]"
+          Id="Package\Load Fact Daily Product Snapshot.Paths[Lookup No Match Output]"
           TopLeft="270.657143193179,303.188235050801">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -621,7 +587,7 @@ where [refTable].[review_score] = ?</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\DFT_Load_Dim_Review_Score.Paths[Derived Column Output]"
+          Id="Package\Load Fact Daily Product Snapshot.Paths[Derived Column Output]"
           TopLeft="471.400000840851,303.129411535465">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -654,52 +620,42 @@ where [refTable].[review_score] = ?</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Fact Daily Product Snapshot.Paths[OLE DB Source Output]"
+          TopLeft="133.371428696111,59.9529411603835">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="80.8857144970678,222.435293890417"
+              Start="0,0"
+              End="80.8857144970678,214.935293890417">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,107.217646945209" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,107.217646945209"
+                    Point2="0,111.217646945209"
+                    Point3="4,111.217646945209" />
+                  <mssgle:LineSegment
+                    End="76.8857144970678,111.217646945209" />
+                  <mssgle:CubicBezierSegment
+                    Point1="76.8857144970678,111.217646945209"
+                    Point2="80.8857144970678,111.217646945209"
+                    Point3="80.8857144970678,115.217646945209" />
+                  <mssgle:LineSegment
+                    End="80.8857144970678,214.935293890417" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\DFT_Load_Dim_Review_Score\OLE DB Destination">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\DFT_Load_Dim_Review_Score\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\DFT_Load_Dim_Review_Score\Lookup">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[dbo].[DimReviewScore]</Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>
