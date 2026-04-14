@@ -1,0 +1,1765 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/13/2026 5:25:10 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LAPTOP-RFOC5L94"
+  DTS:CreatorName="LAPTOP-RFOC5L94\PC"
+  DTS:DTSID="{2FEF0BD4-3C80-4F64-9E12-66763FBFA356}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1016.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="30"
+  DTS:VersionGUID="{14DF4FA8-B8D4-4FD2-9C9E-B38B97C16CCE}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DFT_Load_Dim_Customer"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{2b3cc3fa-0f39-4204-ad03-37ff86ec96ac}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT_Load_Dim_Customer"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT_Load_Dim_Customer\Build LocationKey"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Build LocationKey"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT_Load_Dim_Customer\Build LocationKey.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Load_Dim_Customer\Build LocationKey.Inputs[Derived Column Input].Columns[customer_city_clean]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="customer_city_clean"
+                      lineageId="Package\DFT_Load_Dim_Customer\DC Clean Location.Outputs[Derived Column Output].Columns[customer_city_clean]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_Dim_Customer\Build LocationKey.Inputs[Derived Column Input].Columns[customer_state_clean]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="customer_state_clean"
+                      lineageId="Package\DFT_Load_Dim_Customer\DC Clean Location.Outputs[Derived Column Output].Columns[customer_state_clean]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Load_Dim_Customer\Build LocationKey.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\DFT_Load_Dim_Customer\Build LocationKey.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customer\Build LocationKey.Outputs[Derived Column Output].Columns[locationKeyInput]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="266"
+                      lineageId="Package\DFT_Load_Dim_Customer\Build LocationKey.Outputs[Derived Column Output].Columns[locationKeyInput]"
+                      name="locationKeyInput"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">([TRIM](#{Package\DFT_Load_Dim_Customer\DC Clean Location.Outputs[Derived Column Output].Columns[customer_city_clean]}) == "" || [TRIM](#{Package\DFT_Load_Dim_Customer\DC Clean Location.Outputs[Derived Column Output].Columns[customer_state_clean]}) == "") ? NULL(DT_WSTR,110) : [TRIM](#{Package\DFT_Load_Dim_Customer\DC Clean Location.Outputs[Derived Column Output].Columns[customer_city_clean]}) + "_" + [TRIM](#{Package\DFT_Load_Dim_Customer\DC Clean Location.Outputs[Derived Column Output].Columns[customer_state_clean]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(TRIM(customer_city_clean) == "" || TRIM(customer_state_clean) == "") ? NULL(DT_WSTR,110) : TRIM(customer_city_clean) + "_" + TRIM(customer_state_clean)</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Load_Dim_Customer\Build LocationKey.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\DFT_Load_Dim_Customer\Build LocationKey.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customer\Build LocationKey.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Dim_Customer\Build LocationKey.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customer\Build LocationKey.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Dim_Customer\Build LocationKey.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Load_Dim_Customer\Check_Update_Location"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="Check_Update_Location"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT_Load_Dim_Customer\Check_Update_Location.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Load_Dim_Customer\Check_Update_Location.Inputs[Conditional Split Input].Columns[locationKeyInput]"
+                      cachedDataType="wstr"
+                      cachedLength="266"
+                      cachedName="locationKeyInput"
+                      lineageId="Package\DFT_Load_Dim_Customer\Build LocationKey.Outputs[Derived Column Output].Columns[locationKeyInput]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_Dim_Customer\Check_Update_Location.Inputs[Conditional Split Input].Columns[customer_location_key]"
+                      cachedDataType="wstr"
+                      cachedLength="110"
+                      cachedName="customer_location_key"
+                      lineageId="Package\DFT_Load_Dim_Customer\Lookup_Exist_Customer.Outputs[Lookup Match Output].Columns[customer_location_key]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Load_Dim_Customer\Check_Update_Location.Outputs[UpdateLocation]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="UpdateLocation"
+                  synchronousInputId="Package\DFT_Load_Dim_Customer\Check_Update_Location.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">#{Package\DFT_Load_Dim_Customer\Build LocationKey.Outputs[Derived Column Output].Columns[locationKeyInput]} != #{Package\DFT_Load_Dim_Customer\Lookup_Exist_Customer.Outputs[Lookup Match Output].Columns[customer_location_key]}</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">locationKeyInput != customer_location_key</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Load_Dim_Customer\Check_Update_Location.Outputs[NonUpdateLocation]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="NonUpdateLocation"
+                  synchronousInputId="Package\DFT_Load_Dim_Customer\Check_Update_Location.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Load_Dim_Customer\Check_Update_Location.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\DFT_Load_Dim_Customer\Check_Update_Location.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customer\Check_Update_Location.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Dim_Customer\Check_Update_Location.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customer\Check_Update_Location.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Dim_Customer\Check_Update_Location.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Load_Dim_Customer\Conditional Split"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="Conditional Split"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT_Load_Dim_Customer\Conditional Split.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Load_Dim_Customer\Conditional Split.Inputs[Conditional Split Input].Columns[customer_city_clean]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="customer_city_clean"
+                      lineageId="Package\DFT_Load_Dim_Customer\DC Clean Location.Outputs[Derived Column Output].Columns[customer_city_clean]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_Dim_Customer\Conditional Split.Inputs[Conditional Split Input].Columns[customer_state_clean]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="customer_state_clean"
+                      lineageId="Package\DFT_Load_Dim_Customer\DC Clean Location.Outputs[Derived Column Output].Columns[customer_state_clean]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_Dim_Customer\Conditional Split.Inputs[Conditional Split Input].Columns[customer_id]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="customer_id"
+                      lineageId="Package\DFT_Load_Dim_Customer\OLE DB Source.Outputs[OLE DB Source Output].Columns[customer_id]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Load_Dim_Customer\Conditional Split.Outputs[ValidCustomer]"
+                  description="Output 2 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="ValidCustomer"
+                  synchronousInputId="Package\DFT_Load_Dim_Customer\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">![ISNULL](#{Package\DFT_Load_Dim_Customer\OLE DB Source.Outputs[OLE DB Source Output].Columns[customer_id]}) &amp;&amp; ![ISNULL](#{Package\DFT_Load_Dim_Customer\DC Clean Location.Outputs[Derived Column Output].Columns[customer_city_clean]}) &amp;&amp; ![ISNULL](#{Package\DFT_Load_Dim_Customer\DC Clean Location.Outputs[Derived Column Output].Columns[customer_state_clean]})</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">!ISNULL(customer_id) &amp;&amp; !ISNULL(customer_city_clean) &amp;&amp; !ISNULL(customer_state_clean)</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Load_Dim_Customer\Conditional Split.Outputs[InvalidCustomer]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="InvalidCustomer"
+                  synchronousInputId="Package\DFT_Load_Dim_Customer\Conditional Split.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Load_Dim_Customer\Conditional Split.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\DFT_Load_Dim_Customer\Conditional Split.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customer\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Dim_Customer\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customer\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Dim_Customer\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Load_Dim_Customer\Create_Version"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Create_Version"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT_Load_Dim_Customer\Create_Version.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Load_Dim_Customer\Create_Version.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\DFT_Load_Dim_Customer\Create_Version.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customer\Create_Version.Outputs[Derived Column Output].Columns[versionNew]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT_Load_Dim_Customer\Create_Version.Outputs[Derived Column Output].Columns[versionNew]"
+                      name="versionNew"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_I4)1</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_I4)1</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Load_Dim_Customer\Create_Version.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\DFT_Load_Dim_Customer\Create_Version.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customer\Create_Version.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Dim_Customer\Create_Version.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customer\Create_Version.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Dim_Customer\Create_Version.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Load_Dim_Customer\DC Clean Location"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="DC Clean Location"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT_Load_Dim_Customer\DC Clean Location.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Load_Dim_Customer\DC Clean Location.Inputs[Derived Column Input].Columns[customer_state_std]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="customer_state_std"
+                      lineageId="Package\DFT_Load_Dim_Customer\DC Standardize Location.Outputs[Derived Column Output].Columns[customer_state_std]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_Dim_Customer\DC Clean Location.Inputs[Derived Column Input].Columns[customer_city_std]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="customer_city_std"
+                      lineageId="Package\DFT_Load_Dim_Customer\DC Standardize Location.Outputs[Derived Column Output].Columns[customer_city_std]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Load_Dim_Customer\DC Clean Location.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\DFT_Load_Dim_Customer\DC Clean Location.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customer\DC Clean Location.Outputs[Derived Column Output].Columns[customer_city_clean]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\DFT_Load_Dim_Customer\DC Clean Location.Outputs[Derived Column Output].Columns[customer_city_clean]"
+                      name="customer_city_clean"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[TRIM](#{Package\DFT_Load_Dim_Customer\DC Standardize Location.Outputs[Derived Column Output].Columns[customer_city_std]}) == "" ? NULL(DT_WSTR,255) : [TRIM](#{Package\DFT_Load_Dim_Customer\DC Standardize Location.Outputs[Derived Column Output].Columns[customer_city_std]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">TRIM(customer_city_std) == "" ? NULL(DT_WSTR,255) : TRIM(customer_city_std)</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customer\DC Clean Location.Outputs[Derived Column Output].Columns[customer_state_clean]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="10"
+                      lineageId="Package\DFT_Load_Dim_Customer\DC Clean Location.Outputs[Derived Column Output].Columns[customer_state_clean]"
+                      name="customer_state_clean"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[TRIM](#{Package\DFT_Load_Dim_Customer\DC Standardize Location.Outputs[Derived Column Output].Columns[customer_state_std]}) == "" ? NULL(DT_WSTR,10) : [TRIM](#{Package\DFT_Load_Dim_Customer\DC Standardize Location.Outputs[Derived Column Output].Columns[customer_state_std]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">TRIM(customer_state_std) == "" ? NULL(DT_WSTR,10) : TRIM(customer_state_std)</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Load_Dim_Customer\DC Clean Location.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\DFT_Load_Dim_Customer\DC Clean Location.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customer\DC Clean Location.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Dim_Customer\DC Clean Location.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customer\DC Clean Location.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Dim_Customer\DC Clean Location.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Load_Dim_Customer\DC Standardize Location"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="DC Standardize Location"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT_Load_Dim_Customer\DC Standardize Location.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Load_Dim_Customer\DC Standardize Location.Inputs[Derived Column Input].Columns[customer_city]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="customer_city"
+                      lineageId="Package\DFT_Load_Dim_Customer\OLE DB Source.Outputs[OLE DB Source Output].Columns[customer_city]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_Dim_Customer\DC Standardize Location.Inputs[Derived Column Input].Columns[customer_state]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="customer_state"
+                      lineageId="Package\DFT_Load_Dim_Customer\OLE DB Source.Outputs[OLE DB Source Output].Columns[customer_state]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Load_Dim_Customer\DC Standardize Location.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\DFT_Load_Dim_Customer\DC Standardize Location.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customer\DC Standardize Location.Outputs[Derived Column Output].Columns[customer_city_std]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="100"
+                      lineageId="Package\DFT_Load_Dim_Customer\DC Standardize Location.Outputs[Derived Column Output].Columns[customer_city_std]"
+                      name="customer_city_std"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[UPPER]([TRIM](#{Package\DFT_Load_Dim_Customer\OLE DB Source.Outputs[OLE DB Source Output].Columns[customer_city]}))</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">UPPER(TRIM(customer_city))</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customer\DC Standardize Location.Outputs[Derived Column Output].Columns[customer_state_std]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="10"
+                      lineageId="Package\DFT_Load_Dim_Customer\DC Standardize Location.Outputs[Derived Column Output].Columns[customer_state_std]"
+                      name="customer_state_std"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[UPPER]([TRIM](#{Package\DFT_Load_Dim_Customer\OLE DB Source.Outputs[OLE DB Source Output].Columns[customer_state]}))</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">UPPER(TRIM(customer_state))</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Load_Dim_Customer\DC Standardize Location.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\DFT_Load_Dim_Customer\DC Standardize Location.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customer\DC Standardize Location.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Dim_Customer\DC Standardize Location.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customer\DC Standardize Location.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Dim_Customer\DC Standardize Location.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Load_Dim_Customer\Insert new record"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Insert new record"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DimCustomer]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_Load_Dim_Customer\Insert new record.Connections[OleDbConnection]"
+                  connectionManagerID="{92C61F5A-46B9-4BA0-9D3F-5F0222D9D592}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[CM_DW_SQLSERVER]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT_Load_Dim_Customer\Insert new record.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Load_Dim_Customer\Insert new record.Inputs[OLE DB Destination Input].Columns[customer_id]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="customer_id"
+                      externalMetadataColumnId="Package\DFT_Load_Dim_Customer\Insert new record.Inputs[OLE DB Destination Input].ExternalColumns[customer_id]"
+                      lineageId="Package\DFT_Load_Dim_Customer\OLE DB Source.Outputs[OLE DB Source Output].Columns[customer_id]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_Dim_Customer\Insert new record.Inputs[OLE DB Destination Input].Columns[locationKeyInput]"
+                      cachedDataType="wstr"
+                      cachedLength="266"
+                      cachedName="locationKeyInput"
+                      externalMetadataColumnId="Package\DFT_Load_Dim_Customer\Insert new record.Inputs[OLE DB Destination Input].ExternalColumns[customer_location_key]"
+                      lineageId="Package\DFT_Load_Dim_Customer\Build LocationKey.Outputs[Derived Column Output].Columns[locationKeyInput]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_Dim_Customer\Insert new record.Inputs[OLE DB Destination Input].Columns[versionNew]"
+                      cachedDataType="i4"
+                      cachedName="versionNew"
+                      externalMetadataColumnId="Package\DFT_Load_Dim_Customer\Insert new record.Inputs[OLE DB Destination Input].ExternalColumns[version]"
+                      lineageId="Package\DFT_Load_Dim_Customer\Create_Version.Outputs[Derived Column Output].Columns[versionNew]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_Dim_Customer\Insert new record.Inputs[OLE DB Destination Input].ExternalColumns[customer_key]"
+                      dataType="i4"
+                      name="customer_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_Dim_Customer\Insert new record.Inputs[OLE DB Destination Input].ExternalColumns[customer_id]"
+                      dataType="wstr"
+                      length="50"
+                      name="customer_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_Dim_Customer\Insert new record.Inputs[OLE DB Destination Input].ExternalColumns[customer_location_key]"
+                      dataType="wstr"
+                      length="110"
+                      name="customer_location_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_Dim_Customer\Insert new record.Inputs[OLE DB Destination Input].ExternalColumns[version]"
+                      dataType="i4"
+                      name="version" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Load_Dim_Customer\Insert new record.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT_Load_Dim_Customer\Insert new record.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customer\Insert new record.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Dim_Customer\Insert new record.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customer\Insert new record.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Dim_Customer\Insert new record.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Load_Dim_Customer\Insert new version"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Insert new version"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DimCustomer]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_Load_Dim_Customer\Insert new version.Connections[OleDbConnection]"
+                  connectionManagerID="{92C61F5A-46B9-4BA0-9D3F-5F0222D9D592}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[CM_DW_SQLSERVER]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT_Load_Dim_Customer\Insert new version.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Load_Dim_Customer\Insert new version.Inputs[OLE DB Destination Input].Columns[customer_id]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="customer_id"
+                      externalMetadataColumnId="Package\DFT_Load_Dim_Customer\Insert new version.Inputs[OLE DB Destination Input].ExternalColumns[customer_id]"
+                      lineageId="Package\DFT_Load_Dim_Customer\OLE DB Source.Outputs[OLE DB Source Output].Columns[customer_id]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_Dim_Customer\Insert new version.Inputs[OLE DB Destination Input].Columns[version_new]"
+                      cachedDataType="i4"
+                      cachedName="version_new"
+                      externalMetadataColumnId="Package\DFT_Load_Dim_Customer\Insert new version.Inputs[OLE DB Destination Input].ExternalColumns[version]"
+                      lineageId="Package\DFT_Load_Dim_Customer\Update_Version.Outputs[Derived Column Output].Columns[version_new]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_Dim_Customer\Insert new version.Inputs[OLE DB Destination Input].Columns[locationKeyInput]"
+                      cachedDataType="wstr"
+                      cachedLength="266"
+                      cachedName="locationKeyInput"
+                      externalMetadataColumnId="Package\DFT_Load_Dim_Customer\Insert new version.Inputs[OLE DB Destination Input].ExternalColumns[customer_location_key]"
+                      lineageId="Package\DFT_Load_Dim_Customer\Build LocationKey.Outputs[Derived Column Output].Columns[locationKeyInput]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_Dim_Customer\Insert new version.Inputs[OLE DB Destination Input].ExternalColumns[customer_key]"
+                      dataType="i4"
+                      name="customer_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_Dim_Customer\Insert new version.Inputs[OLE DB Destination Input].ExternalColumns[customer_id]"
+                      dataType="wstr"
+                      length="50"
+                      name="customer_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_Dim_Customer\Insert new version.Inputs[OLE DB Destination Input].ExternalColumns[customer_location_key]"
+                      dataType="wstr"
+                      length="110"
+                      name="customer_location_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_Dim_Customer\Insert new version.Inputs[OLE DB Destination Input].ExternalColumns[version]"
+                      dataType="i4"
+                      name="version" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Load_Dim_Customer\Insert new version.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT_Load_Dim_Customer\Insert new version.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customer\Insert new version.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Dim_Customer\Insert new version.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customer\Insert new version.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Dim_Customer\Insert new version.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Load_Dim_Customer\Lookup_Exist_Customer"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup_Exist_Customer"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT d.customer_id,
+       d.customer_location_key,
+       d.version
+FROM dbo.DimCustomer d
+INNER JOIN
+(
+    SELECT customer_id, MAX(version) AS max_version
+    FROM dbo.DimCustomer
+    GROUP BY customer_id
+) x
+    ON d.customer_id = x.customer_id
+   AND d.version = x.max_version;</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT d.customer_id,
+       d.customer_location_key,
+       d.version
+FROM dbo.DimCustomer d
+INNER JOIN
+(
+    SELECT customer_id, MAX(version) AS max_version
+    FROM dbo.DimCustomer
+    GROUP BY customer_id
+) x
+    ON d.customer_id = x.customer_id
+   AND d.version = x.max_version;) [refTable]
+where [refTable].[customer_id] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="customer_id" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="customer_location_key" dataType="DT_WSTR" length="110" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="version" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\DFT_Load_Dim_Customer\OLE DB Source.Outputs[OLE DB Source Output].Columns[customer_id]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_Load_Dim_Customer\Lookup_Exist_Customer.Connections[OleDbConnection]"
+                  connectionManagerID="{92C61F5A-46B9-4BA0-9D3F-5F0222D9D592}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[CM_DW_SQLSERVER]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT_Load_Dim_Customer\Lookup_Exist_Customer.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Load_Dim_Customer\Lookup_Exist_Customer.Inputs[Lookup Input].Columns[customer_id]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="customer_id"
+                      lineageId="Package\DFT_Load_Dim_Customer\OLE DB Source.Outputs[OLE DB Source Output].Columns[customer_id]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">customer_id</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Load_Dim_Customer\Lookup_Exist_Customer.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\DFT_Load_Dim_Customer\Lookup_Exist_Customer.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customer\Lookup_Exist_Customer.Outputs[Lookup Match Output].Columns[customer_location_key]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="110"
+                      lineageId="Package\DFT_Load_Dim_Customer\Lookup_Exist_Customer.Outputs[Lookup Match Output].Columns[customer_location_key]"
+                      name="customer_location_key"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">customer_location_key</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customer\Lookup_Exist_Customer.Outputs[Lookup Match Output].Columns[version]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\DFT_Load_Dim_Customer\Lookup_Exist_Customer.Outputs[Lookup Match Output].Columns[version]"
+                      name="version"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">version</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Load_Dim_Customer\Lookup_Exist_Customer.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\DFT_Load_Dim_Customer\Lookup_Exist_Customer.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Load_Dim_Customer\Lookup_Exist_Customer.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\DFT_Load_Dim_Customer\Lookup_Exist_Customer.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customer\Lookup_Exist_Customer.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Dim_Customer\Lookup_Exist_Customer.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customer\Lookup_Exist_Customer.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Dim_Customer\Lookup_Exist_Customer.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Load_Dim_Customer\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
+    customer_id,
+    customer_city,
+    customer_state
+FROM stg.customers;</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_Load_Dim_Customer\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="{92C61F5A-46B9-4BA0-9D3F-5F0222D9D592}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[CM_DW_SQLSERVER]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT_Load_Dim_Customer\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customer\OLE DB Source.Outputs[OLE DB Source Output].Columns[customer_id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_Dim_Customer\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[customer_id]"
+                      length="50"
+                      lineageId="Package\DFT_Load_Dim_Customer\OLE DB Source.Outputs[OLE DB Source Output].Columns[customer_id]"
+                      name="customer_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customer\OLE DB Source.Outputs[OLE DB Source Output].Columns[customer_city]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_Dim_Customer\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[customer_city]"
+                      length="100"
+                      lineageId="Package\DFT_Load_Dim_Customer\OLE DB Source.Outputs[OLE DB Source Output].Columns[customer_city]"
+                      name="customer_city"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customer\OLE DB Source.Outputs[OLE DB Source Output].Columns[customer_state]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_Dim_Customer\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[customer_state]"
+                      length="10"
+                      lineageId="Package\DFT_Load_Dim_Customer\OLE DB Source.Outputs[OLE DB Source Output].Columns[customer_state]"
+                      name="customer_state"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_Dim_Customer\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[customer_id]"
+                      dataType="wstr"
+                      length="50"
+                      name="customer_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_Dim_Customer\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[customer_city]"
+                      dataType="wstr"
+                      length="100"
+                      name="customer_city" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_Dim_Customer\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[customer_state]"
+                      dataType="wstr"
+                      length="10"
+                      name="customer_state" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT_Load_Dim_Customer\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customer\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[customer_id]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\DFT_Load_Dim_Customer\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[customer_id]"
+                      name="customer_id" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customer\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[customer_city]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\DFT_Load_Dim_Customer\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[customer_city]"
+                      name="customer_city" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customer\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[customer_state]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\DFT_Load_Dim_Customer\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[customer_state]"
+                      name="customer_state" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customer\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Dim_Customer\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customer\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Dim_Customer\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Load_Dim_Customer\Update_Version"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Update_Version"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT_Load_Dim_Customer\Update_Version.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Load_Dim_Customer\Update_Version.Inputs[Derived Column Input].Columns[version]"
+                      cachedDataType="i4"
+                      cachedName="version"
+                      lineageId="Package\DFT_Load_Dim_Customer\Lookup_Exist_Customer.Outputs[Lookup Match Output].Columns[version]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Load_Dim_Customer\Update_Version.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\DFT_Load_Dim_Customer\Update_Version.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customer\Update_Version.Outputs[Derived Column Output].Columns[version_new]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT_Load_Dim_Customer\Update_Version.Outputs[Derived Column Output].Columns[version_new]"
+                      name="version_new"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_I4)(#{Package\DFT_Load_Dim_Customer\Lookup_Exist_Customer.Outputs[Lookup Match Output].Columns[version]} + 1)</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_I4)(version + 1)</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Load_Dim_Customer\Update_Version.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\DFT_Load_Dim_Customer\Update_Version.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customer\Update_Version.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Dim_Customer\Update_Version.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Customer\Update_Version.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Dim_Customer\Update_Version.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT_Load_Dim_Customer.Paths[Derived Column Output]"
+              endId="Package\DFT_Load_Dim_Customer\DC Clean Location.Inputs[Derived Column Input]"
+              name="Derived Column Output"
+              startId="Package\DFT_Load_Dim_Customer\DC Standardize Location.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\DFT_Load_Dim_Customer.Paths[Derived Column Output1]"
+              endId="Package\DFT_Load_Dim_Customer\Conditional Split.Inputs[Conditional Split Input]"
+              name="Derived Column Output"
+              startId="Package\DFT_Load_Dim_Customer\DC Clean Location.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\DFT_Load_Dim_Customer.Paths[Derived Column Output2]"
+              endId="Package\DFT_Load_Dim_Customer\Lookup_Exist_Customer.Inputs[Lookup Input]"
+              name="Derived Column Output"
+              startId="Package\DFT_Load_Dim_Customer\Build LocationKey.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\DFT_Load_Dim_Customer.Paths[Derived Column Output3]"
+              endId="Package\DFT_Load_Dim_Customer\Insert new record.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\DFT_Load_Dim_Customer\Create_Version.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\DFT_Load_Dim_Customer.Paths[Derived Column Output4]"
+              endId="Package\DFT_Load_Dim_Customer\Insert new version.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\DFT_Load_Dim_Customer\Update_Version.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\DFT_Load_Dim_Customer.Paths[Lookup Match Output]"
+              endId="Package\DFT_Load_Dim_Customer\Check_Update_Location.Inputs[Conditional Split Input]"
+              name="Lookup Match Output"
+              startId="Package\DFT_Load_Dim_Customer\Lookup_Exist_Customer.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\DFT_Load_Dim_Customer.Paths[Lookup No Match Output]"
+              endId="Package\DFT_Load_Dim_Customer\Create_Version.Inputs[Derived Column Input]"
+              name="Lookup No Match Output"
+              startId="Package\DFT_Load_Dim_Customer\Lookup_Exist_Customer.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\DFT_Load_Dim_Customer.Paths[OLE DB Source Output]"
+              endId="Package\DFT_Load_Dim_Customer\DC Standardize Location.Inputs[Derived Column Input]"
+              name="OLE DB Source Output"
+              startId="Package\DFT_Load_Dim_Customer\OLE DB Source.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\DFT_Load_Dim_Customer.Paths[UpdateLocation]"
+              endId="Package\DFT_Load_Dim_Customer\Update_Version.Inputs[Derived Column Input]"
+              name="UpdateLocation"
+              startId="Package\DFT_Load_Dim_Customer\Check_Update_Location.Outputs[UpdateLocation]" />
+            <path
+              refId="Package\DFT_Load_Dim_Customer.Paths[ValidCustomer]"
+              endId="Package\DFT_Load_Dim_Customer\Build LocationKey.Inputs[Derived Column Input]"
+              name="ValidCustomer"
+              startId="Package\DFT_Load_Dim_Customer\Conditional Split.Outputs[ValidCustomer]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="200.8,41.6"
+          Id="Package\DFT_Load_Dim_Customer"
+          TopLeft="60,60" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DFT_Load_Dim_Customer">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="164,41.6"
+          Id="Package\DFT_Load_Dim_Customer\DC Clean Location"
+          TopLeft="340.535715010626,162.117646916721" />
+        <NodeLayout
+          Size="192.8,41.6"
+          Id="Package\DFT_Load_Dim_Customer\DC Standardize Location"
+          TopLeft="40.5357143720041,159.058823389991" />
+        <NodeLayout
+          Size="162.4,41.6"
+          Id="Package\DFT_Load_Dim_Customer\Insert new record"
+          TopLeft="268.750000572099,512.926470138635" />
+        <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\DFT_Load_Dim_Customer\OLE DB Source"
+          TopLeft="64.8214287094161,18.3529411603835" />
+        <NodeLayout
+          Size="154.4,41.6"
+          Id="Package\DFT_Load_Dim_Customer\Conditional Split"
+          TopLeft="61.2500001303851,272.999999760705" />
+        <EdgeLayout
+          Id="Package\DFT_Load_Dim_Customer.Paths[OLE DB Source Output]"
+          TopLeft="138.27857154071,59.9529411603835">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,99.1058822296075"
+              Start="0,0"
+              End="0,91.6058822296075">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,91.6058822296075" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_Load_Dim_Customer.Paths[Derived Column Output1]"
+          TopLeft="422.535715010626,203.717646916721">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-284.08571488024,69.2823528439838"
+              Start="0,0"
+              End="-284.08571488024,61.7823528439838">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.6411764219919" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,30.6411764219919"
+                    Point2="0,34.6411764219919"
+                    Point3="-4,34.6411764219919" />
+                  <mssgle:LineSegment
+                    End="-280.08571488024,34.6411764219919" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-280.08571488024,34.6411764219919"
+                    Point2="-284.08571488024,34.6411764219919"
+                    Point3="-284.08571488024,38.6411764219919" />
+                  <mssgle:LineSegment
+                    End="-284.08571488024,61.7823528439838" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_Load_Dim_Customer.Paths[Derived Column Output]"
+          TopLeft="233.335714372005,181.388235153356">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="107.200000638621,0"
+              Start="0,0"
+              End="99.7000006386214,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="99.7000006386214,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="191.2,41.6"
+          Id="Package\DFT_Load_Dim_Customer\Lookup_Exist_Customer"
+          TopLeft="25.17857148217,405.611764356659" />
+        <NodeLayout
+          Size="161.6,41.6"
+          Id="Package\DFT_Load_Dim_Customer\Build LocationKey"
+          TopLeft="332.82142926821,280.657030626787" />
+        <EdgeLayout
+          Id="Package\DFT_Load_Dim_Customer.Paths[ValidCustomer]"
+          TopLeft="215.650000130385,297.628515193746">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="117.171429137825,0"
+              Start="0,0"
+              End="109.671429137825,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="109.671429137825,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="22.1338395689126,5,65.40375,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_Load_Dim_Customer.Paths[Derived Column Output2]"
+          TopLeft="413.62142926821,322.257030626787">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-292.84285778604,83.3547337298716"
+              Start="0,0"
+              End="-292.84285778604,75.8547337298716">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.6773668649358" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,37.6773668649358"
+                    Point2="0,41.6773668649358"
+                    Point3="-4,41.6773668649358" />
+                  <mssgle:LineSegment
+                    End="-288.84285778604,41.6773668649358" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-288.84285778604,41.6773668649358"
+                    Point2="-292.84285778604,41.6773668649358"
+                    Point3="-292.84285778604,45.6773668649358" />
+                  <mssgle:LineSegment
+                    End="-292.84285778604,75.8547337298716" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="191.2,41.6"
+          Id="Package\DFT_Load_Dim_Customer\Check_Update_Location"
+          TopLeft="364.285715061183,410.073529052319" />
+        <EdgeLayout
+          Id="Package\DFT_Load_Dim_Customer.Paths[Lookup Match Output]"
+          TopLeft="216.37857148217,428.642646704489">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="147.907143579013,0"
+              Start="0,0"
+              End="140.407143579013,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="140.407143579013,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="22.0121850707564,5,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\DFT_Load_Dim_Customer\Create_Version"
+          TopLeft="39.2857143693432,517.13235248789" />
+        <EdgeLayout
+          Id="Package\DFT_Load_Dim_Customer.Paths[Lookup No Match Output]"
+          TopLeft="117.432142925757,447.211764356659">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,69.9205881312311"
+              Start="0,0"
+              End="0,62.4205881312311">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,62.4205881312311" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-55.80638671875,25.4056065656155,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_Load_Dim_Customer.Paths[Derived Column Output3]"
+          TopLeft="188.885714369343,535.829411313262">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="79.8642862027557,0"
+              Start="0,0"
+              End="72.3642862027557,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="72.3642862027557,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\DFT_Load_Dim_Customer\Update_Version"
+          TopLeft="646.6071442336,410.349999729369" />
+        <EdgeLayout
+          Id="Package\DFT_Load_Dim_Customer.Paths[UpdateLocation]"
+          TopLeft="555.485715061183,431.011764390844">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="91.1214291724172,0"
+              Start="0,0"
+              End="83.6214291724172,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="83.6214291724172,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="7.25983567995857,5,69.1017578125,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="165.6,41.6"
+          Id="Package\DFT_Load_Dim_Customer\Insert new version"
+          TopLeft="640.357144220295,509.761764348113" />
+        <EdgeLayout
+          Id="Package\DFT_Load_Dim_Customer.Paths[Derived Column Output4]"
+          TopLeft="723.082144226947,451.949999729369">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,57.8117646187441"
+              Start="0,0"
+              End="0,50.3117646187441">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,50.3117646187441" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_Load_Dim_Customer\Insert new record">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_Load_Dim_Customer\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_Load_Dim_Customer\Lookup_Exist_Customer">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_Load_Dim_Customer\Insert new version">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

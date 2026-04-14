@@ -12,7 +12,7 @@
       DTS:RowDelimiter=""
       DTS:TextQualifier="_x0022_"
       DTS:CodePage="1252"
-      DTS:ConnectionString="A:\DW_PROJECT\DWH_project\datasource\olist_customers_dataset.csv">
+      DTS:ConnectionString="F:\2025-2026_HK2\DataWarehouse\DWH_project\datasource\olist_customers_dataset.csv">
       <DTS:FlatFileColumns>
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -21,7 +21,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="customer_id"
-          DTS:DTSID="{5AAB4785-0EFA-4468-AFA6-4E19287D00B6}"
+          DTS:DTSID="{EEB763B0-D15F-4CA2-99CC-0E9F4BCF47A1}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -30,7 +30,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="customer_unique_id"
-          DTS:DTSID="{3B867380-AD00-48B0-BCB4-BA9F831D0021}"
+          DTS:DTSID="{FAA26A8F-58AE-4ABA-83E6-DC8AB28C5AB1}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -39,7 +39,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="customer_zip_code_prefix"
-          DTS:DTSID="{3A6EFEE9-D9EF-46A5-9FEF-66659DD45EDB}"
+          DTS:DTSID="{819C6DE1-E0AC-4B51-936C-EEBFCF1DDAAC}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -48,7 +48,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="customer_city"
-          DTS:DTSID="{D9BB128F-B4B5-43DC-8B15-A2BB17B83929}"
+          DTS:DTSID="{B8ECF9ED-08EA-4306-8364-8570A7636C13}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -57,7 +57,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="customer_state"
-          DTS:DTSID="{A7E9CE6F-DE52-4BFD-A2A7-434161722FBF}"
+          DTS:DTSID="{3BAE3B9C-E5D7-46F7-B281-C6C2AB810D40}"
           DTS:CreationName="" />
       </DTS:FlatFileColumns>
     </DTS:ConnectionManager>

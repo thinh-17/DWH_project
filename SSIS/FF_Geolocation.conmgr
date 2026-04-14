@@ -12,7 +12,7 @@
       DTS:RowDelimiter=""
       DTS:TextQualifier="_x0022_"
       DTS:CodePage="1252"
-      DTS:ConnectionString="A:\DW_PROJECT\DWH_project\datasource\olist_geolocation_dataset.csv">
+      DTS:ConnectionString="F:\2025-2026_HK2\DataWarehouse\DWH_project\datasource\olist_geolocation_dataset.csv">
       <DTS:FlatFileColumns>
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -21,7 +21,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="geolocation_zip_code_prefix"
-          DTS:DTSID="{95C3BBAC-9E4A-404F-B285-404443EB628F}"
+          DTS:DTSID="{8D157760-848E-4A63-8902-800FDF1DDD02}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -30,7 +30,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="geolocation_lat"
-          DTS:DTSID="{08835EF3-B6D2-4D40-8BEF-EC717B43999E}"
+          DTS:DTSID="{9F9100E1-F26A-45D5-BC2F-587FE29AA305}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -39,7 +39,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="geolocation_lng"
-          DTS:DTSID="{B7E2448E-B9D3-491E-98AB-4AC26D4CD023}"
+          DTS:DTSID="{89127CBA-3876-4416-8CB0-9418AB74BA74}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -48,7 +48,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="geolocation_city"
-          DTS:DTSID="{ACD28340-6AD3-44A2-91B2-4C41B95D4B37}"
+          DTS:DTSID="{4E635034-EF69-4F15-A42A-2C98FE42B2F7}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -57,7 +57,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="geolocation_state"
-          DTS:DTSID="{C570EF11-FAD0-46B8-B37C-6C99FE760CE5}"
+          DTS:DTSID="{B83B1ED9-3EA3-45F3-A9D3-B828F613B2E2}"
           DTS:CreationName="" />
       </DTS:FlatFileColumns>
     </DTS:ConnectionManager>

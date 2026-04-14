@@ -12,7 +12,7 @@
       DTS:RowDelimiter=""
       DTS:TextQualifier="_x0022_"
       DTS:CodePage="65001"
-      DTS:ConnectionString="A:\DW_PROJECT\DWH_project\datasource\product_category_name_translation.csv">
+      DTS:ConnectionString="F:\2025-2026_HK2\DataWarehouse\DWH_project\datasource\product_category_name_translation.csv">
       <DTS:FlatFileColumns>
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -21,7 +21,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="product_category_name"
-          DTS:DTSID="{3220B437-142F-4402-ACDF-F8D5A4E9F372}"
+          DTS:DTSID="{0B65A84C-A1D8-4DC2-BA36-BB2ECD869FC8}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -30,7 +30,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="product_category_name_english"
-          DTS:DTSID="{C9D50D27-C58B-43DB-B5B2-E9EFFB12DC5D}"
+          DTS:DTSID="{2F983AA2-F194-4D0D-9A28-3318BDB91679}"
           DTS:CreationName="" />
       </DTS:FlatFileColumns>
     </DTS:ConnectionManager>

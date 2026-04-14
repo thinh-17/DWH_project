@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="25"
-  DTS:VersionGUID="{E1BFD232-7360-4248-8744-3931D1CC1CFD}">
+  DTS:VersionBuild="30"
+  DTS:VersionGUID="{74F4B7D5-E2B4-4753-9189-CA15338786EC}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -25,11 +25,11 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=127.0.0.1,11433;User ID=sa;Initial Catalog=DW_Project;Provider=MSOLEDBSQL.1;Persist Security Info=False;Auto Translate=False;Application Name=SSIS-Package1-{9A3B41A1-5C99-4E08-8168-BC2B3113ADA9}127.0.0.1,11433.DW_Project.sa;Trust Server Certificate=True;">
+          DTS:ConnectionString="Data Source=127.0.0.1,11433;User ID=sa;Initial Catalog=DW_Project;Provider=MSOLEDBSQL.1;Persist Security Info=False;Auto Translate=False;Application Name=SSIS-Package1-{9A3B41A1-5C99-4E08-8168-BC2B3113ADA9}127.0.0.1,11433.DW_Project.sa;Initial File Name=;Trust Server Certificate=True;Server SPN=;Authentication=;Access Token=;">
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAX2mzZLknwkGbOGjW14CBuAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACGtUZHxJgA4vY6ivSoodlgfFRbIKAL/nvYix4E4+6/3AAAAAAOgAAAAAIAACAAAADrtfPfqMB9OycgRmYE0SpCYRtqThfwEE/Cqs3n4Yw4SDAAAACwJj4SGMFtgLprzwYIjBJcDvVJMAHVU3fnUjsI1BOKKz9Ovc28l2/CtkdB/ha2oVZAAAAAudLDSbMrUeNSV2AXqboF4EdpaomcgskiTaDQXLHqMTFIBxvKTp9VDnfdDh0Z56ioXJZEOHYJ7yqdDxrMbt2Mtg</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAnmPninwIyEGarkFO0rQHpwAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADyvSitXzO3hMW2AzkD+lIkhZXOaas0icHvTgiu/LLRsgAAAAAOgAAAAAIAACAAAAAVV8AnFNpM2xrtx8Z5Kh2PXOLhfGk1Qfmnt6BoRU7joTAAAADSIhq1aeqrn+SiXX42cJEXJy7NMEgYQr4Suysny3dopdLUfdZg8C8n5Mx5tRZCyStAAAAA3olsFB5BnXBeGYQHTJyXMNQg2Bwx9KHf0kHqiMMA12+/oHhhtz9aCRZb3Icfv7EG7AUwqs5wzubxtJpfePc8cg</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>

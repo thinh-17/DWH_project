@@ -12,7 +12,7 @@
       DTS:RowDelimiter=""
       DTS:TextQualifier="_x0022_"
       DTS:CodePage="1252"
-      DTS:ConnectionString="A:\DW_PROJECT\DWH_project\datasource\olist_order_reviews_dataset.csv">
+      DTS:ConnectionString="F:\2025-2026_HK2\DataWarehouse\DWH_project\datasource\olist_order_reviews_dataset.csv">
       <DTS:FlatFileColumns>
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -21,7 +21,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="review_id"
-          DTS:DTSID="{44614B34-1A3B-4F52-9082-22734A09C0A5}"
+          DTS:DTSID="{7A490F53-AFE3-4E46-9B93-023841667610}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -30,7 +30,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="order_id"
-          DTS:DTSID="{0943C069-05E7-448D-BC37-EA5E8EF2C5BB}"
+          DTS:DTSID="{1905D8DD-46F6-4BCB-9D20-6273D2ADDC2B}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -39,7 +39,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="review_score"
-          DTS:DTSID="{494F051C-D3FB-47ED-AA1A-88C5D5E43F6B}"
+          DTS:DTSID="{73C9E835-1C0B-4293-A2D0-C884EE5F0BE2}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -48,7 +48,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="review_comment_title"
-          DTS:DTSID="{3181809F-46BE-40C3-9646-05B5A62BE60C}"
+          DTS:DTSID="{B87FB94E-4C43-4652-941B-019E73682EAD}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -57,7 +57,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="review_comment_message"
-          DTS:DTSID="{17355A67-A7BB-41DF-9DFD-7E73C305D80B}"
+          DTS:DTSID="{5B9F3BD4-147C-4AA7-B17F-44BEBBA1AF44}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -66,7 +66,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="review_creation_date"
-          DTS:DTSID="{4D6EE85E-99BB-4A1C-AACB-E47DE91888BC}"
+          DTS:DTSID="{C883EF7B-C80D-41AF-BFD4-93F54E9D498D}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -75,7 +75,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="review_answer_timestamp"
-          DTS:DTSID="{68B1728D-86E4-48F0-9CD9-ED497692A1E8}"
+          DTS:DTSID="{581A2E2A-102C-48FD-B0A4-17B7AE590D90}"
           DTS:CreationName="" />
       </DTS:FlatFileColumns>
     </DTS:ConnectionManager>

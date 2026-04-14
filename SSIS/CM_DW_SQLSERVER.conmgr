@@ -10,7 +10,7 @@
       DTS:ConnectionString="Data Source=127.0.0.1,11433;User ID=sa;Initial Catalog=DW_Project;Provider=MSOLEDBSQL.1;Persist Security Info=False;Auto Translate=False;Application Name=SSIS-Package1-{92C61F5A-46B9-4BA0-9D3F-5F0222D9D592}127.0.0.1,11433.DW_Project.sa;Trust Server Certificate=True;">
       <DTS:Password
         DTS:Name="Password"
-        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAX2mzZLknwkGbOGjW14CBuAAAAAACAAAAAAAQZgAAAAEAACAAAAC+vrqIubj8gizBKo9cosIY02vlFHrl+4q7vPyE5lgcwwAAAAAOgAAAAAIAACAAAAAVSuP0XqTtTASW4Dt3TrOpBp3wtqTMw/tHnsdexBOXCIAAAAASncwrcpsQaWrMNVS91C0zgN2jABTAkm40Ue7TugMfBx1FT3dWmkKrfxZiHnm0tW1QMfC/FuceumSJYgPHSyEpaVybw42MX3Ixs/lwGdVYS6jHR232mDdNO8/7wGRlE8yYeREaaT+iXhod6CburieWUOJ91Vp0tD9X0EdwVODdVkAAAAAbd2viAZQT0haIetr//TIKxIMROtCZCJPd0Ad2lE3O+333A0A5VI+LmJJVMd9gO9UtxtGEcT+McCWZNSAg6/N9</DTS:Password>
+        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAnmPninwIyEGarkFO0rQHpwAAAAACAAAAAAAQZgAAAAEAACAAAAC2rxOdFFv40qXQrcpd9s62gxm1x1s0TcIXrphCgEqqRgAAAAAOgAAAAAIAACAAAADfIlby9tjXGccwp6NXzj6//Bg9eW3UQncTXZXeKpOHJoAAAABrLuw9qajBo7JXPxKAapQ15Whs+gXrvftW6YwmllISfE6ySa7FVZH518SUCP6TiQeOc2yMtjSvxzc7fISB/DML6RbLRBt/1Ey+hiSSKr1FzI09GDCDBO6bChphRusAbr7TXmUXHmoU/ZAvHBcIYtUWDhw2EadpaZHsxRRLbIz5JEAAAADRfUrGzWai3x2E9WpttukyPSqeFH/LX/5df9zS5DizbZKJP7M3ggtd5QuA3ucL62JFizRUbkIGo/miljBkC3B1</DTS:Password>
     </DTS:ConnectionManager>
   </DTS:ObjectData>
 </DTS:ConnectionManager>

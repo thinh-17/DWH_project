@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="10"
-  DTS:VersionGUID="{42968641-EE46-41E2-B79E-A7864BAED889}">
+  DTS:VersionBuild="12"
+  DTS:VersionGUID="{60ED3CA1-0D5C-426D-BD09-2220D9F97F0B}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -994,21 +994,21 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="170.4,41.6"
-          Id="Package\DFT_Load_Products_To_Staging\OLE DB Destination"
-          TopLeft="270.714286290565,298.235293856232" />
-        <NodeLayout
-          Size="155.2,41.6"
-          Id="Package\DFT_Load_Products_To_Staging\Data Conversion"
-          TopLeft="284.285714890884,133.823529294464" />
+          Size="150.4,41.6"
+          Id="Package\DFT_Load_Products_To_Staging\Flat File Source"
+          TopLeft="277.142857732822,48.1764705460068" />
         <NodeLayout
           Size="152.8,41.6"
           Id="Package\DFT_Load_Products_To_Staging\Derived Column"
           TopLeft="276.428572017015,204.176470409267" />
         <NodeLayout
-          Size="150.4,41.6"
-          Id="Package\DFT_Load_Products_To_Staging\Flat File Source"
-          TopLeft="277.142857732822,48.1764705460068" />
+          Size="155.2,41.6"
+          Id="Package\DFT_Load_Products_To_Staging\Data Conversion"
+          TopLeft="284.285714890884,133.823529294464" />
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\DFT_Load_Products_To_Staging\OLE DB Destination"
+          TopLeft="270.714286290565,298.235293856232" />
         <EdgeLayout
           Id="Package\DFT_Load_Products_To_Staging.Paths[Flat File Source Output]"
           TopLeft="352.342857732822,89.7764705460068">
@@ -1044,6 +1044,28 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
+          Id="Package\DFT_Load_Products_To_Staging.Paths[Derived Column Output]"
+          TopLeft="354.37142915379,245.776470409267">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,52.458823446965"
+              Start="0,0"
+              End="0,44.958823446965">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,44.958823446965" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
           Id="Package\DFT_Load_Products_To_Staging.Paths[Data Conversion Output]"
           TopLeft="361.885714890884,175.423529294464">
           <EdgeLayout.Curve>
@@ -1069,28 +1091,6 @@
                     Point3="-9.05714287386911,18.3764705574017" />
                   <mssgle:LineSegment
                     End="-9.05714287386911,21.2529411148034" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\DFT_Load_Products_To_Staging.Paths[Derived Column Output]"
-          TopLeft="354.37142915379,245.776470409267">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,52.458823446965"
-              Start="0,0"
-              End="0,44.958823446965">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,44.958823446965" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
