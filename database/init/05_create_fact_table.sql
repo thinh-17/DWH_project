@@ -203,3 +203,28 @@ BEGIN
     );
 END;
 GO
+/* =========================================
+   7. FCT_CUSTOMER_BEHAVIOR_SNAPSHOT
+========================================= */
+IF OBJECT_ID('dbo.FCT_CUSTOMER_BEHAVIOR_SNAPSHOT', 'U') IS NULL
+BEGIN
+    CREATE TABLE dbo.FCT_CUSTOMER_BEHAVIOR_SNAPSHOT
+    (
+        customer_key INT NOT NULL PRIMARY KEY,
+
+        avg_score_review DECIMAL(5,2) NULL,
+
+        total_spend DECIMAL(18,2) NOT NULL DEFAULT 0,
+
+        order_cnt INT NOT NULL DEFAULT 0,
+
+        order_cancelled_cnt INT NOT NULL DEFAULT 0,
+
+        avg_day_return_to_buy DECIMAL(10,2) NULL,
+
+        CONSTRAINT FK_FCBS_Customer
+            FOREIGN KEY (customer_key)
+            REFERENCES dbo.DimCustomer(customer_key)
+    );
+END;
+GO
