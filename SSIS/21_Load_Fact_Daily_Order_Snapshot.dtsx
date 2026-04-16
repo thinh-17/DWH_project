@@ -1,30 +1,30 @@
 ﻿<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
-  DTS:CreationDate="4/14/2026 3:14:50 PM"
+  DTS:CreationDate="4/16/2026 1:40:21 PM"
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="LAPTOP-RFOC5L94"
   DTS:CreatorName="LAPTOP-RFOC5L94\PC"
-  DTS:DTSID="{99BC191E-9A0F-453B-94A8-8C109B51C5C6}"
+  DTS:DTSID="{39110EF1-E306-40C5-A5EA-BF107E64E215}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="17.0.1016.0"
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="17"
-  DTS:VersionGUID="{AEFA6520-A642-4B10-BEAC-88D541C8B5BC}">
+  DTS:VersionBuild="7"
+  DTS:VersionGUID="{6E505228-6C41-4200-96B8-FA52B99BFB8E}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
   <DTS:Executables>
     <DTS:Executable
-      DTS:refId="Package\DFT_Load_Fact_Daily_Product_Snapshot"
+      DTS:refId="Package\DFT_Load_Fact_Daily_Order_Snapshot"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
-      DTS:DTSID="{b27f6023-bde9-42cd-93f7-985500934f67}"
+      DTS:DTSID="{06658F67-1235-4B68-92C8-238CD030BB8D}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
-      DTS:ObjectName="DFT_Load_Fact_Daily_Product_Snapshot"
+      DTS:ObjectName="DFT_Load_Fact_Daily_Order_Snapshot"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
       <DTS:ObjectData>
@@ -32,7 +32,7 @@
           version="1">
           <components>
             <component
-              refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Destination"
+              refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Destination"
               componentClassID="Microsoft.OLEDBDestination"
               contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
               description="OLE DB Destination"
@@ -47,7 +47,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[dbo].[FCT_DAILY_PRODUCT_SNAPSHOT]</property>
+                  name="OpenRowset">[dbo].[FCT_DAILY_ORDER_SNAPSHOT]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -89,7 +89,7 @@
               </properties>
               <connections>
                 <connection
-                  refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Destination.Connections[OleDbConnection]"
+                  refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Destination.Connections[OleDbConnection]"
                   connectionManagerID="{92C61F5A-46B9-4BA0-9D3F-5F0222D9D592}:external"
                   connectionManagerRefId="Project.ConnectionManagers[CM_DW_SQLSERVER]"
                   description="The OLE DB runtime connection used to access the database."
@@ -97,92 +97,90 @@
               </connections>
               <inputs>
                 <input
-                  refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input]"
                   errorOrTruncationOperation="Insert"
                   errorRowDisposition="FailComponent"
                   hasSideEffects="true"
                   name="OLE DB Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[snapshot_date_key]"
+                      refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[snapshot_date_key]"
                       cachedDataType="i4"
                       cachedName="snapshot_date_key"
-                      externalMetadataColumnId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[snapshot_date_key]"
-                      lineageId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[snapshot_date_key]" />
+                      externalMetadataColumnId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[snapshot_date_key]"
+                      lineageId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[snapshot_date_key]" />
                     <inputColumn
-                      refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[product_key]"
+                      refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[total_orders_created]"
                       cachedDataType="i4"
-                      cachedName="product_key"
-                      externalMetadataColumnId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[product_key]"
-                      lineageId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[product_key]" />
+                      cachedName="total_orders_created"
+                      externalMetadataColumnId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[total_orders_created]"
+                      lineageId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[total_orders_created]" />
                     <inputColumn
-                      refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[items_sold_cnt]"
+                      refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[total_orders_delivered]"
                       cachedDataType="i4"
-                      cachedName="items_sold_cnt"
-                      externalMetadataColumnId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[items_sold_cnt]"
-                      lineageId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[items_sold_cnt]" />
+                      cachedName="total_orders_delivered"
+                      externalMetadataColumnId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[total_orders_delivered]"
+                      lineageId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[total_orders_delivered]" />
                     <inputColumn
-                      refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[total_revenue]"
+                      refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[total_orders_cancelled]"
+                      cachedDataType="i4"
+                      cachedName="total_orders_cancelled"
+                      externalMetadataColumnId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[total_orders_cancelled]"
+                      lineageId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[total_orders_cancelled]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[total_revenue]"
                       cachedDataType="numeric"
                       cachedName="total_revenue"
                       cachedPrecision="38"
                       cachedScale="2"
-                      externalMetadataColumnId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[total_revenue]"
-                      lineageId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[total_revenue]" />
-                    <inputColumn
-                      refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[avg_review_score]"
-                      cachedDataType="r8"
-                      cachedName="avg_review_score"
-                      externalMetadataColumnId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[avg_review_score]"
-                      lineageId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[avg_review_score]" />
+                      externalMetadataColumnId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[total_revenue]"
+                      lineageId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[total_revenue]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[snapshot_date_key]"
+                      refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[snapshot_date_key]"
                       dataType="i4"
                       name="snapshot_date_key" />
                     <externalMetadataColumn
-                      refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[product_key]"
+                      refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[total_orders_created]"
                       dataType="i4"
-                      name="product_key" />
+                      name="total_orders_created" />
                     <externalMetadataColumn
-                      refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[items_sold_cnt]"
+                      refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[total_orders_delivered]"
                       dataType="i4"
-                      name="items_sold_cnt" />
+                      name="total_orders_delivered" />
                     <externalMetadataColumn
-                      refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[total_revenue]"
+                      refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[total_orders_cancelled]"
+                      dataType="i4"
+                      name="total_orders_cancelled" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[total_revenue]"
                       dataType="numeric"
                       name="total_revenue"
                       precision="18"
-                      scale="2" />
-                    <externalMetadataColumn
-                      refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[avg_review_score]"
-                      dataType="numeric"
-                      name="avg_review_score"
-                      precision="5"
                       scale="2" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="OLE DB Destination Error Output"
-                  synchronousInputId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  synchronousInputId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      lineageId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -191,7 +189,7 @@
               </outputs>
             </component>
             <component
-              refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source"
+              refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source"
               componentClassID="Microsoft.OLEDBSource"
               contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
               description="OLE DB Source"
@@ -217,31 +215,41 @@
                   name="SqlCommand"
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
     dd.date_key AS snapshot_date_key,
-    dp.product_key,
-    COUNT(*) AS items_sold_cnt,
-    SUM(ISNULL(oi.price, 0)) AS total_revenue,
-    AVG(rv.review_score) AS avg_review_score
-FROM stg.order_items oi
-INNER JOIN stg.orders o
-    ON oi.order_id = o.order_id
-INNER JOIN dbo.DimProduct dp
-    ON oi.product_id = dp.product_id
-    AND dp.version = 1
-INNER JOIN dbo.DimDate dd
-    ON CAST(CONVERT(VARCHAR(8), o.order_purchase_timestamp, 112) AS INT)
-       = dd.date_key
-LEFT JOIN
-(
-    SELECT
-        order_id,
-        AVG(CAST(review_score AS FLOAT)) AS review_score
-    FROM dbo.FCT_ORDER_REVIEW
-    GROUP BY order_id
-) rv
-    ON oi.order_id = rv.order_id
-GROUP BY
-    dd.date_key,
-    dp.product_key</property>
+
+    /* tổng số order tạo trong ngày */
+    COUNT(fo.order_id) AS total_orders_created,
+
+    /* tổng số order delivered */
+    SUM(
+        CASE
+            WHEN dod.order_status = 'delivered' THEN 1
+            ELSE 0
+        END
+    ) AS total_orders_delivered,
+
+    /* tổng số order cancelled */
+    SUM(
+        CASE
+            WHEN dod.order_status IN ('canceled', 'cancelled') THEN 1
+            ELSE 0
+        END
+    ) AS total_orders_cancelled,
+
+    /* tổng doanh thu */
+    ISNULL(SUM(fo.order_value), 0) AS total_revenue
+
+
+FROM dbo.DimDate dd
+
+LEFT JOIN dbo.DimOrderDetail dod
+    ON dod.purchase_date_key = dd.date_key
+
+LEFT JOIN dbo.FCT_ORDER fo
+    ON dod.order_id = fo.order_id
+
+GROUP BY dd.date_key
+
+ORDER BY dd.date_key;</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -266,7 +274,7 @@ GROUP BY
               </properties>
               <connections>
                 <connection
-                  refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Connections[OleDbConnection]"
+                  refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Connections[OleDbConnection]"
                   connectionManagerID="{92C61F5A-46B9-4BA0-9D3F-5F0222D9D592}:external"
                   connectionManagerRefId="Project.ConnectionManagers[CM_DW_SQLSERVER]"
                   description="The OLE DB runtime connection used to access the database."
@@ -274,125 +282,125 @@ GROUP BY
               </connections>
               <outputs>
                 <output
-                  refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output]"
+                  refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Output]"
                   name="OLE DB Source Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[snapshot_date_key]"
+                      refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[snapshot_date_key]"
                       dataType="i4"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[snapshot_date_key]"
-                      lineageId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[snapshot_date_key]"
+                      externalMetadataColumnId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[snapshot_date_key]"
+                      lineageId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[snapshot_date_key]"
                       name="snapshot_date_key"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[product_key]"
+                      refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[total_orders_created]"
                       dataType="i4"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[product_key]"
-                      lineageId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[product_key]"
-                      name="product_key"
+                      externalMetadataColumnId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[total_orders_created]"
+                      lineageId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[total_orders_created]"
+                      name="total_orders_created"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[items_sold_cnt]"
+                      refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[total_orders_delivered]"
                       dataType="i4"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[items_sold_cnt]"
-                      lineageId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[items_sold_cnt]"
-                      name="items_sold_cnt"
+                      externalMetadataColumnId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[total_orders_delivered]"
+                      lineageId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[total_orders_delivered]"
+                      name="total_orders_delivered"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[total_revenue]"
+                      refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[total_orders_cancelled]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[total_orders_cancelled]"
+                      lineageId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[total_orders_cancelled]"
+                      name="total_orders_cancelled"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[total_revenue]"
                       dataType="numeric"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[total_revenue]"
-                      lineageId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[total_revenue]"
+                      externalMetadataColumnId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[total_revenue]"
+                      lineageId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[total_revenue]"
                       name="total_revenue"
                       precision="38"
                       scale="2"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[avg_review_score]"
-                      dataType="r8"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[avg_review_score]"
-                      lineageId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[avg_review_score]"
-                      name="avg_review_score"
                       truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[snapshot_date_key]"
+                      refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[snapshot_date_key]"
                       dataType="i4"
                       name="snapshot_date_key" />
                     <externalMetadataColumn
-                      refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[product_key]"
+                      refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[total_orders_created]"
                       dataType="i4"
-                      name="product_key" />
+                      name="total_orders_created" />
                     <externalMetadataColumn
-                      refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[items_sold_cnt]"
+                      refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[total_orders_delivered]"
                       dataType="i4"
-                      name="items_sold_cnt" />
+                      name="total_orders_delivered" />
                     <externalMetadataColumn
-                      refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[total_revenue]"
+                      refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[total_orders_cancelled]"
+                      dataType="i4"
+                      name="total_orders_cancelled" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[total_revenue]"
                       dataType="numeric"
                       name="total_revenue"
                       precision="38"
                       scale="2" />
-                    <externalMetadataColumn
-                      refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[avg_review_score]"
-                      dataType="r8"
-                      name="avg_review_score" />
                   </externalMetadataColumns>
                 </output>
                 <output
-                  refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output]"
                   isErrorOut="true"
                   name="OLE DB Source Error Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[snapshot_date_key]"
+                      refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[snapshot_date_key]"
                       dataType="i4"
-                      lineageId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[snapshot_date_key]"
+                      lineageId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[snapshot_date_key]"
                       name="snapshot_date_key" />
                     <outputColumn
-                      refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[product_key]"
+                      refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[total_orders_created]"
                       dataType="i4"
-                      lineageId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[product_key]"
-                      name="product_key" />
+                      lineageId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[total_orders_created]"
+                      name="total_orders_created" />
                     <outputColumn
-                      refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[items_sold_cnt]"
+                      refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[total_orders_delivered]"
                       dataType="i4"
-                      lineageId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[items_sold_cnt]"
-                      name="items_sold_cnt" />
+                      lineageId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[total_orders_delivered]"
+                      name="total_orders_delivered" />
                     <outputColumn
-                      refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[total_revenue]"
+                      refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[total_orders_cancelled]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[total_orders_cancelled]"
+                      name="total_orders_cancelled" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[total_revenue]"
                       dataType="numeric"
-                      lineageId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[total_revenue]"
+                      lineageId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[total_revenue]"
                       name="total_revenue"
                       precision="38"
                       scale="2" />
                     <outputColumn
-                      refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[avg_review_score]"
-                      dataType="r8"
-                      lineageId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[avg_review_score]"
-                      name="avg_review_score" />
-                    <outputColumn
-                      refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      lineageId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -403,10 +411,10 @@ GROUP BY
           </components>
           <paths>
             <path
-              refId="Package\DFT_Load_Fact_Daily_Product_Snapshot.Paths[OLE DB Source Output]"
-              endId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              refId="Package\DFT_Load_Fact_Daily_Order_Snapshot.Paths[OLE DB Source Output]"
+              endId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input]"
               name="OLE DB Source Output"
-              startId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output]" />
+              startId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Output]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
@@ -425,39 +433,51 @@ GROUP BY
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
-          Size="271.2,41.6"
-          Id="Package\DFT_Load_Fact_Daily_Product_Snapshot"
-          TopLeft="60,60" />
+          Size="262.4,41.6"
+          Id="Package\DFT_Load_Fact_Daily_Order_Snapshot"
+          TopLeft="413.571429451814,159.823529271673" />
       </GraphLayout>
     </LayoutInfo>
   </Package>
   <TaskHost
-    design-time-name="Package\DFT_Load_Fact_Daily_Product_Snapshot">
+    design-time-name="Package\DFT_Load_Fact_Daily_Order_Snapshot">
     <LayoutInfo>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="149.6,41.6"
-          Id="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source"
-          TopLeft="493.571429622112,72.6470587598514" />
+          Id="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source"
+          TopLeft="497.85714391695,94.8235293286482" />
         <NodeLayout
           Size="170.4,41.6"
-          Id="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Destination"
-          TopLeft="488.57142961147,304.352940909693" />
+          Id="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Destination"
+          TopLeft="500.000001064369,209.529411581045" />
         <EdgeLayout
-          Id="Package\DFT_Load_Fact_Daily_Product_Snapshot.Paths[OLE DB Source Output]"
-          TopLeft="571.071429616791,114.247058759851">
+          Id="Package\DFT_Load_Fact_Daily_Order_Snapshot.Paths[OLE DB Source Output]"
+          TopLeft="572.65714391695,136.423529328648">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,190.105882149842"
+              EndConnector="12.5428571474188,73.105882252397"
               Start="0,0"
-              End="0,182.605882149842">
+              End="12.5428571474188,65.605882252397">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,182.605882149842" />
+                    End="0,32.5529411261985" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,32.5529411261985"
+                    Point2="0,36.5529411261985"
+                    Point3="4,36.5529411261985" />
+                  <mssgle:LineSegment
+                    End="8.54285714741877,36.5529411261985" />
+                  <mssgle:CubicBezierSegment
+                    Point1="8.54285714741877,36.5529411261985"
+                    Point2="12.5428571474188,36.5529411261985"
+                    Point3="12.5428571474188,40.5529411261985" />
+                  <mssgle:LineSegment
+                    End="12.5428571474188,65.605882252397" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -470,7 +490,7 @@ GROUP BY
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source">
+    design-time-name="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -478,7 +498,7 @@ GROUP BY
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Destination">
+    design-time-name="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
