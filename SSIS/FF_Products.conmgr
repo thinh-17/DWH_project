@@ -12,7 +12,7 @@
       DTS:RowDelimiter=""
       DTS:TextQualifier="_x0022_"
       DTS:CodePage="1252"
-      DTS:ConnectionString="F:\2025-2026_HK2\DataWarehouse\DWH_project\datasource\olist_products_dataset.csv">
+      DTS:ConnectionString="A:\DW_PROJECT\DWH_project\datasource\olist_products_dataset.csv">
       <DTS:FlatFileColumns>
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -21,7 +21,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="product_id"
-          DTS:DTSID="{5EACF34B-D2C5-4004-A919-65A9C7F1517B}"
+          DTS:DTSID="{372B90A9-C0D7-4341-AD6C-1C9D8537E584}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -30,7 +30,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="product_category_name"
-          DTS:DTSID="{1DDD26E0-9323-4F96-B6C1-03AC43CE4D10}"
+          DTS:DTSID="{A2FA8FDC-403C-45B7-B942-09E73147E4F9}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -39,7 +39,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="product_name_lenght"
-          DTS:DTSID="{DC8A4788-7DC2-4F75-8F1E-DDFEDB843DE5}"
+          DTS:DTSID="{39BBB196-3646-4517-B9BA-63AA65BEDE1B}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -48,7 +48,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="product_description_lenght"
-          DTS:DTSID="{8DD97C18-9B4F-4E5B-BDBE-D945FC0DD9CB}"
+          DTS:DTSID="{078D7D44-BB03-41CE-8247-49C1D80CA435}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -57,7 +57,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="product_photos_qty"
-          DTS:DTSID="{B254DF5A-009C-412E-8175-0DEA221B1560}"
+          DTS:DTSID="{D2B77DA4-FA0F-4453-8C4B-8F872767F644}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -66,7 +66,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="product_weight_g"
-          DTS:DTSID="{FFDCDC5B-FEF6-41A4-8322-F9986553810F}"
+          DTS:DTSID="{78684FE2-CE06-475E-833B-7E598735D394}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -75,7 +75,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="product_length_cm"
-          DTS:DTSID="{CE08A4A8-7505-4618-9C75-20D56618117C}"
+          DTS:DTSID="{2ECD5409-767A-46EE-9E44-BB160D9E268A}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -84,7 +84,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="product_height_cm"
-          DTS:DTSID="{B82C285F-D4E9-43D8-A12D-D71EEB0749D2}"
+          DTS:DTSID="{E19102EF-DC41-4057-ADDD-854E4B20024B}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -93,7 +93,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="product_width_cm"
-          DTS:DTSID="{49E0EE8C-82FF-4F4C-8837-A9B7B803E0F6}"
+          DTS:DTSID="{2A11D951-2FAA-458A-8C6E-943D7D9CAB48}"
           DTS:CreationName="" />
       </DTS:FlatFileColumns>
     </DTS:ConnectionManager>

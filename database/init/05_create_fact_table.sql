@@ -1,4 +1,4 @@
-USE DataWarehouse;
+USE DW_Project;
 GO
 
 /* =========================================

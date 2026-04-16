@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="30"
-  DTS:VersionGUID="{74F4B7D5-E2B4-4753-9189-CA15338786EC}">
+  DTS:VersionBuild="37"
+  DTS:VersionGUID="{F2CBC8E0-7A88-4AEB-AD9A-D01D25853076}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -25,11 +25,11 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=127.0.0.1,11433;User ID=sa;Initial Catalog=DW_Project;Provider=MSOLEDBSQL.1;Persist Security Info=False;Auto Translate=False;Application Name=SSIS-Package1-{9A3B41A1-5C99-4E08-8168-BC2B3113ADA9}127.0.0.1,11433.DW_Project.sa;Initial File Name=;Trust Server Certificate=True;Server SPN=;Authentication=;Access Token=;">
+          DTS:ConnectionString="Data Source=127.0.0.1,11433;User ID=sa;Initial Catalog=DW_Project;Provider=MSOLEDBSQL.1;Persist Security Info=False;Auto Translate=False;Application Name=SSIS-Package1-{9A3B41A1-5C99-4E08-8168-BC2B3113ADA9}127.0.0.1,11433.DW_Project.sa;Trust Server Certificate=True;">
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAnmPninwIyEGarkFO0rQHpwAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADyvSitXzO3hMW2AzkD+lIkhZXOaas0icHvTgiu/LLRsgAAAAAOgAAAAAIAACAAAAAVV8AnFNpM2xrtx8Z5Kh2PXOLhfGk1Qfmnt6BoRU7joTAAAADSIhq1aeqrn+SiXX42cJEXJy7NMEgYQr4Suysny3dopdLUfdZg8C8n5Mx5tRZCyStAAAAA3olsFB5BnXBeGYQHTJyXMNQg2Bwx9KHf0kHqiMMA12+/oHhhtz9aCRZb3Icfv7EG7AUwqs5wzubxtJpfePc8cg</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAX2mzZLknwkGbOGjW14CBuAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAg5aKzZAPfTp4FhAwZw9mt8wxXkwt8Dbm1M4o1AzcdvgAAAAAOgAAAAAIAACAAAACAKig0Aq3XNTlAWBHReI+LMD33Y6hlrd8Z8sy3LnzrOTAAAAC1IV++JawJDVDQfKJgwEsY62HZRBK7FCk+ZOP8xhDdCCOIkq9uRZWxPlBBkmTIIYNAAAAAio5CkWn8dNe4YFi3WZSRM7+aceax6OgV+G57qeuiGgsPY2Z+iha31Ag4gwTQ2axVnTAuP4OdH74lbaIShZSyKQ</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -39,6 +39,7 @@
     <DTS:Executable
       DTS:refId="Package\DFT_Load_Orders_To_Staging"
       DTS:CreationName="Microsoft.Pipeline"
+      DTS:DelayValidation="True"
       DTS:Description="Data Flow Task"
       DTS:DTSID="{6AD18F51-5F69-474D-8444-672451EA14E3}"
       DTS:ExecutableType="Microsoft.Pipeline"
@@ -765,6 +766,7 @@
               description="OLE DB Destination"
               name="OLE DB Destination"
               usesDispositions="true"
+              validateExternalMetadata="False"
               version="4">
               <properties>
                 <property
@@ -1010,10 +1012,6 @@
           Size="155.2,41.6"
           Id="Package\DFT_Load_Orders_To_Staging\Data Conversion"
           TopLeft="191.428571836073,140.705882229607" />
-        <NodeLayout
-          Size="170.4,41.6"
-          Id="Package\DFT_Load_Orders_To_Staging\OLE DB Destination"
-          TopLeft="179.285714667367,353.294117337383" />
         <EdgeLayout
           Id="Package\DFT_Load_Orders_To_Staging.Paths[Data Conversion Output]"
           TopLeft="267.714286120266,182.305882229607">
@@ -1058,6 +1056,10 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\DFT_Load_Orders_To_Staging\OLE DB Destination"
+          TopLeft="179.285714667367,353.294117337383" />
         <EdgeLayout
           Id="Package\DFT_Load_Orders_To_Staging.Paths[Derived Column Output]"
           TopLeft="265.442857535913,286.305882138447">
@@ -1083,18 +1085,5 @@
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\DFT_Load_Orders_To_Staging\OLE DB Destination">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>

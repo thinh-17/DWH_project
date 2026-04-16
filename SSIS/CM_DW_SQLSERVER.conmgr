@@ -7,10 +7,10 @@
     <DTS:ConnectionManager
       DTS:ConnectRetryCount="1"
       DTS:ConnectRetryInterval="5"
-      DTS:ConnectionString="Data Source=127.0.0.1,11433;User ID=sa;Initial Catalog=DW_Project;Provider=MSOLEDBSQL.1;Persist Security Info=False;Auto Translate=False;Application Name=SSIS-Package1-{92C61F5A-46B9-4BA0-9D3F-5F0222D9D592}127.0.0.1,11433.DW_Project.sa;Trust Server Certificate=True;">
+      DTS:ConnectionString="Data Source=127.0.0.1,11433;User ID=sa;Initial Catalog=DW_Project;Provider=MSOLEDBSQL.1;Persist Security Info=False;Auto Translate=False;Application Name=SSIS-Package1-{92C61F5A-46B9-4BA0-9D3F-5F0222D9D592}127.0.0.1,11433.DW_Project.sa;Initial File Name=;Trust Server Certificate=True;Server SPN=;Authentication=;Access Token=;">
       <DTS:Password
         DTS:Name="Password"
-        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAnmPninwIyEGarkFO0rQHpwAAAAACAAAAAAAQZgAAAAEAACAAAAC2rxOdFFv40qXQrcpd9s62gxm1x1s0TcIXrphCgEqqRgAAAAAOgAAAAAIAACAAAADfIlby9tjXGccwp6NXzj6//Bg9eW3UQncTXZXeKpOHJoAAAABrLuw9qajBo7JXPxKAapQ15Whs+gXrvftW6YwmllISfE6ySa7FVZH518SUCP6TiQeOc2yMtjSvxzc7fISB/DML6RbLRBt/1Ey+hiSSKr1FzI09GDCDBO6bChphRusAbr7TXmUXHmoU/ZAvHBcIYtUWDhw2EadpaZHsxRRLbIz5JEAAAADRfUrGzWai3x2E9WpttukyPSqeFH/LX/5df9zS5DizbZKJP7M3ggtd5QuA3ucL62JFizRUbkIGo/miljBkC3B1</DTS:Password>
+        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAX2mzZLknwkGbOGjW14CBuAAAAAACAAAAAAAQZgAAAAEAACAAAADUQtvVmZHlwRLKoahq2rLIuRkow/wA53wTH7ol9MNgtAAAAAAOgAAAAAIAACAAAACrF1B9UFjx8b/0UPBil4M/vh+hexXcvebEwX2LiRAB74AAAAAiW4e3ca8/hrdL7lYy7y8KZyjyox61BT487/bIMhb1FsRvk8hX4Nt2Wbp1M7c9FIVvpGdR5K019EDlPA3S6DBvm9/VG7IGp6wU6eUNgQe3YW7BSIUJtqmlJs8L6L9+C4eqIgt6K1MiKT0MC6tfBUjFFHJwmborUq3QH4ZY9PIJUUAAAABEU3/ApVRhTSx7Ji2GXO+8YW80exIsikB2OTL6NSxzY6qabrhQ9pK/2dCojJg5GnqdN+eCMKXCevfvyBw7w1Py</DTS:Password>
     </DTS:ConnectionManager>
   </DTS:ObjectData>
 </DTS:ConnectionManager>

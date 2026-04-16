@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="1"
-  DTS:VersionGUID="{2267DCF6-BFDA-42C8-8869-F02CB094C5C4}">
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{80AD1AB2-29E6-429A-8769-6B5300556F6E}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -30,6 +30,7 @@
       <DTS:ObjectData>
         <ExecutePackageTask>
           <UseProjectReference>True</UseProjectReference>
+          <PackageName>12_Load_DimCustomer.dtsx</PackageName>
         </ExecutePackageTask>
       </DTS:ObjectData>
     </DTS:Executable>
@@ -46,6 +47,7 @@
       <DTS:ObjectData>
         <ExecutePackageTask>
           <UseProjectReference>True</UseProjectReference>
+          <PackageName>11_Load_DimDate.dtsx</PackageName>
         </ExecutePackageTask>
       </DTS:ObjectData>
     </DTS:Executable>
@@ -62,6 +64,7 @@
       <DTS:ObjectData>
         <ExecutePackageTask>
           <UseProjectReference>True</UseProjectReference>
+          <PackageName>17_Load_DimLocation.dtsx</PackageName>
         </ExecutePackageTask>
       </DTS:ObjectData>
     </DTS:Executable>
@@ -78,6 +81,7 @@
       <DTS:ObjectData>
         <ExecutePackageTask>
           <UseProjectReference>True</UseProjectReference>
+          <PackageName>15_Load_DimOrderStatus.dtsx</PackageName>
         </ExecutePackageTask>
       </DTS:ObjectData>
     </DTS:Executable>
@@ -94,6 +98,7 @@
       <DTS:ObjectData>
         <ExecutePackageTask>
           <UseProjectReference>True</UseProjectReference>
+          <PackageName>14_Load_DimProduct.dtsx</PackageName>
         </ExecutePackageTask>
       </DTS:ObjectData>
     </DTS:Executable>
@@ -110,6 +115,7 @@
       <DTS:ObjectData>
         <ExecutePackageTask>
           <UseProjectReference>True</UseProjectReference>
+          <PackageName>16_Load_DimReviewScore.dtsx</PackageName>
         </ExecutePackageTask>
       </DTS:ObjectData>
     </DTS:Executable>
@@ -126,6 +132,7 @@
       <DTS:ObjectData>
         <ExecutePackageTask>
           <UseProjectReference>True</UseProjectReference>
+          <PackageName>13_Load_DimSeller.dtsx</PackageName>
         </ExecutePackageTask>
       </DTS:ObjectData>
     </DTS:Executable>
@@ -193,6 +200,10 @@
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
+          Size="189.6,41.6"
+          Id="Package\Run Load DimCustomer"
+          TopLeft="35.7142857903119,253.882352718639" />
+        <NodeLayout
           Size="167.2,41.6"
           Id="Package\Run Load DimDate"
           TopLeft="42.8571429483745,40.5294117291803" />
@@ -201,6 +212,14 @@
           Id="Package\Run Load DimLocation"
           TopLeft="35.7142857903119,146.823529283068" />
         <NodeLayout
+          Size="200.8,41.6"
+          Id="Package\Run Load DimOrderStatus"
+          TopLeft="437.857143789226,253.882352718639" />
+        <NodeLayout
+          Size="180.8,41.6"
+          Id="Package\Run Load DimProduct"
+          TopLeft="442.142858084063,363.235293799257" />
+        <NodeLayout
           Size="204.8,41.6"
           Id="Package\Run Load DimReviewScore"
           TopLeft="439.285715220838,146.823529283068" />
@@ -208,18 +227,6 @@
           Size="170.4,41.6"
           Id="Package\Run Load DimSeller"
           TopLeft="38.571428653537,357.117646745796" />
-        <NodeLayout
-          Size="180.8,41.6"
-          Id="Package\Run Load DimProduct"
-          TopLeft="442.142858084063,363.235293799257" />
-        <NodeLayout
-          Size="189.6,41.6"
-          Id="Package\Run Load DimCustomer"
-          TopLeft="35.7142857903119,253.882352718639" />
-        <NodeLayout
-          Size="200.8,41.6"
-          Id="Package\Run Load DimOrderStatus"
-          TopLeft="437.857143789226,253.882352718639" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="127.085714369343,82.1294117291803">

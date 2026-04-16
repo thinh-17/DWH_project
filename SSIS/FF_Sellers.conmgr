@@ -12,7 +12,7 @@
       DTS:RowDelimiter=""
       DTS:TextQualifier="_x0022_"
       DTS:CodePage="1252"
-      DTS:ConnectionString="F:\2025-2026_HK2\DataWarehouse\DWH_project\datasource\olist_sellers_dataset.csv">
+      DTS:ConnectionString="A:\DW_PROJECT\DWH_project\datasource\olist_sellers_dataset.csv">
       <DTS:FlatFileColumns>
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -21,7 +21,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="seller_id"
-          DTS:DTSID="{E01DE34C-CE61-4C0B-909D-630195CE837D}"
+          DTS:DTSID="{D84D416D-47B9-4D37-A2F7-868C00194393}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -30,7 +30,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="seller_zip_code_prefix"
-          DTS:DTSID="{D033F657-4223-41E5-A13F-D95F908F447D}"
+          DTS:DTSID="{571DAB8D-C606-4878-B55E-B6B1E55BFCF5}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -39,7 +39,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="seller_city"
-          DTS:DTSID="{7670D1FB-BB01-4A11-9E77-A50500F2BA78}"
+          DTS:DTSID="{9EA8D323-FD82-4312-AA3B-5BE2D53000BA}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -48,7 +48,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="seller_state"
-          DTS:DTSID="{EB7BA069-6D99-40D9-BE9C-E6026D4312E9}"
+          DTS:DTSID="{A4ED76B8-359F-45CE-835F-789466CAD07A}"
           DTS:CreationName="" />
       </DTS:FlatFileColumns>
     </DTS:ConnectionManager>
