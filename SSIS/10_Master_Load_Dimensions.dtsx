@@ -69,19 +69,19 @@
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Run Load DimOrderStatus"
+      DTS:refId="Package\Run Load DimOrderDetail"
       DTS:CreationName="Microsoft.ExecutePackageTask"
       DTS:Description="Execute Package Task"
       DTS:DTSID="{E337BED7-CAF6-46F0-96CA-7695E2FFC4B9}"
       DTS:ExecutableType="Microsoft.ExecutePackageTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Run Load DimOrderStatus"
+      DTS:ObjectName="Run Load DimOrderDetail"
       DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
       <DTS:ObjectData>
         <ExecutePackageTask>
           <UseProjectReference>True</UseProjectReference>
-          <PackageName>15_Load_DimOrderStatus.dtsx</PackageName>
+          <PackageName>15_Load_DimOrderDetail.dtsx</PackageName>
         </ExecutePackageTask>
       </DTS:ObjectData>
     </DTS:Executable>
@@ -177,12 +177,12 @@
       DTS:From="Package\Run Load DimProduct"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 4"
-      DTS:To="Package\Run Load DimOrderStatus" />
+      DTS:To="Package\Run Load DimOrderDetail" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
       DTS:CreationName=""
       DTS:DTSID="{1E812E7C-68F8-4F83-A61B-8AF4E3A2E59D}"
-      DTS:From="Package\Run Load DimOrderStatus"
+      DTS:From="Package\Run Load DimOrderDetail"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 5"
       DTS:To="Package\Run Load DimReviewScore" />
@@ -212,8 +212,8 @@
           Id="Package\Run Load DimLocation"
           TopLeft="35.7142857903119,146.823529283068" />
         <NodeLayout
-          Size="200.8,41.6"
-          Id="Package\Run Load DimOrderStatus"
+          Size="198.4,41.6"
+          Id="Package\Run Load DimOrderDetail"
           TopLeft="437.857143789226,253.882352718639" />
         <NodeLayout
           Size="180.8,41.6"
@@ -317,18 +317,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 4]"
-          TopLeft="535.400000936645,363.235293799257">
+          TopLeft="534.800000936645,363.235293799257">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,-67.7529410806185"
+              EndConnector="0,-67.752941080618"
               Start="0,0"
-              End="0,-60.2529410806185">
+              End="0,-60.252941080618">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,-60.2529410806185" />
+                    End="0,-60.252941080618" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -339,18 +339,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 5]"
-          TopLeft="539.971429505032,253.882352718639">
+          TopLeft="539.371429505032,253.882352718639">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,-65.4588234355706"
+              EndConnector="0,-65.458823435571"
               Start="0,0"
-              End="0,-57.9588234355706">
+              End="0,-57.958823435571">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,-57.9588234355706" />
+                    End="0,-57.958823435571" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

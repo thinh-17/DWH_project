@@ -81,15 +81,28 @@ END;
 GO
 
 /* =========================================
-   6. DimOrderStatus
+   6. DimOrderDetail
 ========================================= */
-IF OBJECT_ID('dbo.DimOrderStatus', 'U') IS NULL
+  IF OBJECT_ID('dbo.DimOrderDetail', 'U') IS NULL
 BEGIN
-    CREATE TABLE dbo.DimOrderStatus
+    CREATE TABLE dbo.DimOrderDetail
     (
-        order_status_key INT IDENTITY(1,1) PRIMARY KEY,
-        order_status NVARCHAR(50) NOT NULL
+        order_detail_key INT IDENTITY(1,1) PRIMARY KEY,
+		order_id NVARCHAR(50) NOT NULL,
+        order_status NVARCHAR(50) NOT NULL,
 
+        purchase_date_key INT NOT NULL,
+
+        delivered_date_key INT NULL,
+        customer_key INT NULL,
+
+        CONSTRAINT FK_DOD_PurchaseDate
+            FOREIGN KEY (purchase_date_key)
+            REFERENCES dbo.DimDate(date_key),
+
+        CONSTRAINT FK_DOD_DeliveredDate
+            FOREIGN KEY (delivered_date_key)
+            REFERENCES dbo.DimDate(date_key)
     );
 END;
 GO
@@ -107,3 +120,52 @@ BEGIN
     );
 END;
 GO
+
+SELECT
+    r.review_id,
+
+    r.order_id,
+
+    fo.customer_key,
+
+    drs.review_score_key,
+
+    dd_creation.date_key AS review_creation_date_key,
+
+    dd_answer.date_key AS review_answer_date_key,
+
+    1 AS review_count,
+
+    ISNULL(r.review_score, 0) AS review_score,
+
+    CASE
+        WHEN r.review_comment_message IS NOT NULL
+             AND LTRIM(RTRIM(r.review_comment_message)) <> ''
+        THEN 1
+        ELSE 0
+    END AS has_comment_message
+
+FROM stg.order_reviews r
+
+/* =========================
+   CUSTOMER lấy từ FACT ORDER
+========================= */
+LEFT JOIN dbo.FCT_ORDER fo
+    ON r.order_id = fo.order_id
+
+/* =========================
+   REVIEW SCORE từ DIM
+========================= */
+LEFT JOIN dbo.DimReviewScore drs
+    ON r.review_score = drs.review_score
+
+/* =========================
+   DATE DIM
+========================= */
+LEFT JOIN dbo.DimDate dd_creation
+    ON CAST(CONVERT(VARCHAR(8), r.review_creation_date, 112) AS INT)
+       = dd_creation.date_key
+
+LEFT JOIN dbo.DimDate dd_answer
+    ON CAST(CONVERT(VARCHAR(8), r.review_answer_timestamp, 112) AS INT)
+       = dd_answer.date_key;
