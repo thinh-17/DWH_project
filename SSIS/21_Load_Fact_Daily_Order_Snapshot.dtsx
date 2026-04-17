@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="7"
-  DTS:VersionGUID="{6E505228-6C41-4200-96B8-FA52B99BFB8E}">
+  DTS:VersionBuild="12"
+  DTS:VersionGUID="{F5C03CA1-1923-4E4F-BF36-79838B4342B7}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -135,6 +135,12 @@
                       cachedScale="2"
                       externalMetadataColumnId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[total_revenue]"
                       lineageId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[total_revenue]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[total_orders_approved]"
+                      cachedDataType="i4"
+                      cachedName="total_orders_approved"
+                      externalMetadataColumnId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[total_orders_approved]"
+                      lineageId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[total_orders_approved]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -160,6 +166,10 @@
                       name="total_revenue"
                       precision="18"
                       scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[total_orders_approved]"
+                      dataType="i4"
+                      name="total_orders_approved" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -219,10 +229,18 @@
     /* tổng số order tạo trong ngày */
     COUNT(fo.order_id) AS total_orders_created,
 
+    /* tổng số order approved */
+    SUM(
+        CASE
+            WHEN LOWER(dod.order_status) = 'approved' THEN 1
+            ELSE 0
+        END
+    ) AS total_orders_approved,
+
     /* tổng số order delivered */
     SUM(
         CASE
-            WHEN dod.order_status = 'delivered' THEN 1
+            WHEN LOWER(dod.order_status) = 'delivered' THEN 1
             ELSE 0
         END
     ) AS total_orders_delivered,
@@ -230,14 +248,13 @@
     /* tổng số order cancelled */
     SUM(
         CASE
-            WHEN dod.order_status IN ('canceled', 'cancelled') THEN 1
+            WHEN LOWER(dod.order_status) IN ('canceled', 'cancelled') THEN 1
             ELSE 0
         END
     ) AS total_orders_cancelled,
 
     /* tổng doanh thu */
     ISNULL(SUM(fo.order_value), 0) AS total_revenue
-
 
 FROM dbo.DimDate dd
 
@@ -332,6 +349,15 @@ ORDER BY dd.date_key;</property>
                       precision="38"
                       scale="2"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[total_orders_approved]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[total_orders_approved]"
+                      lineageId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[total_orders_approved]"
+                      name="total_orders_approved"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -357,6 +383,10 @@ ORDER BY dd.date_key;</property>
                       name="total_revenue"
                       precision="38"
                       scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[total_orders_approved]"
+                      dataType="i4"
+                      name="total_orders_approved" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -374,6 +404,11 @@ ORDER BY dd.date_key;</property>
                       dataType="i4"
                       lineageId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[total_orders_created]"
                       name="total_orders_created" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[total_orders_approved]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[total_orders_approved]"
+                      name="total_orders_approved" />
                     <outputColumn
                       refId="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[total_orders_delivered]"
                       dataType="i4"
@@ -445,13 +480,13 @@ ORDER BY dd.date_key;</property>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="149.6,41.6"
-          Id="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source"
-          TopLeft="497.85714391695,94.8235293286482" />
-        <NodeLayout
           Size="170.4,41.6"
           Id="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Destination"
           TopLeft="500.000001064369,209.529411581045" />
+        <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source"
+          TopLeft="497.85714391695,94.8235293286482" />
         <EdgeLayout
           Id="Package\DFT_Load_Fact_Daily_Order_Snapshot.Paths[OLE DB Source Output]"
           TopLeft="572.65714391695,136.423529328648">
@@ -490,14 +525,6 @@ ORDER BY dd.date_key;</property>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
     design-time-name="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Destination">
     <Properties>
       <Property>
@@ -507,6 +534,14 @@ ORDER BY dd.date_key;</property>
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>

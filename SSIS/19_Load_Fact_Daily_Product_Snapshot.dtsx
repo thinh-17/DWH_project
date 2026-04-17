@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="28"
-  DTS:VersionGUID="{513211DF-399C-4E58-BFCE-E81B8B3484AF}">
+  DTS:VersionBuild="30"
+  DTS:VersionGUID="{555D87DD-DAE0-45E3-85E9-333D99CE3C4F}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -220,7 +220,7 @@
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
     dd.date_key AS snapshot_date_key,
     dp.product_key,
-    COUNT(*) AS items_sold_cnt,
+    COUNT(oi.price) AS items_sold_cnt,
     CAST(SUM(ISNULL(oi.price, 0)) AS DECIMAL(18,2)) AS total_revenue,
     CAST(AVG(rv.review_score) AS DECIMAL(5,2)) AS avg_review_score
 FROM stg.order_items oi

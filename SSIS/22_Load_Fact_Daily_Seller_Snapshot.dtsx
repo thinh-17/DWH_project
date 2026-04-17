@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="6"
-  DTS:VersionGUID="{FDB90F29-765C-4AFE-85A1-23A9FF524388}">
+  DTS:VersionBuild="11"
+  DTS:VersionGUID="{6C57DEA1-9169-414C-8413-CAA604FF0A0E}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -77,7 +77,7 @@
                 <property
                   dataType="System.Boolean"
                   description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
-                  name="FastLoadKeepNulls">false</property>
+                  name="FastLoadKeepNulls">true</property>
                 <property
                   dataType="System.String"
                   description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
@@ -256,60 +256,83 @@
                   description="The SQL command to be executed."
                   name="SqlCommand"
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
-    dd.date_key AS snapshot_date_key,
-
-    ds.seller_key,
-
-    /* số order tạo */
+    ISNULL(dd.date_key, -1) AS snapshot_date_key,
+    ISNULL(ds.seller_key, -1) AS seller_key,
+    -- số order tạo
     COUNT(DISTINCT oi.order_id) AS orders_created_cnt,
 
-    /* tổng số item bán */
+    -- tổng số item bán
     COUNT(*) AS items_sold_cnt,
 
-    /* tổng doanh thu */
-    SUM(ISNULL(oi.price, 0)) AS total_revenue,
+    -- tổng doanh thu
+    CAST(SUM(ISNULL(oi.price, 0)) AS DECIMAL(18,2)) AS total_revenue,
 
-    /* số order delivered */
+    -- số order delivered
     COUNT(DISTINCT CASE
-        WHEN o.order_status = 'delivered'
+        WHEN LOWER(o.order_status) = 'delivered'
         THEN oi.order_id
     END) AS delivered_orders_cnt,
 
-    /* số order cancelled */
+    -- số order cancelled
     COUNT(DISTINCT CASE
-        WHEN o.order_status IN ('canceled', 'cancelled')
+        WHEN LOWER(o.order_status) IN ('canceled', 'cancelled')
         THEN oi.order_id
     END) AS cancelled_orders_cnt,
 
-    /* điểm review trung bình */
-    AVG(CAST(orv.review_score AS FLOAT)) AS avg_review_score,
+    -- điểm review trung bình (đã fix double count)
+    CAST(AVG(rv.review_score) AS DECIMAL(5,2)) AS avg_review_score,
 
-    /* số sản phẩm khác nhau bán */
+    -- số sản phẩm khác nhau bán
     COUNT(DISTINCT oi.product_id) AS distinct_products_sold
 
 FROM stg.order_items oi
 
-LEFT JOIN stg.orders o
+/* =========================
+   ORDER (nên INNER JOIN)
+========================= */
+INNER JOIN stg.orders o
     ON oi.order_id = o.order_id
 
-LEFT JOIN stg.order_reviews orv
-    ON oi.order_id = orv.order_id
+/* =========================
+   REVIEW (PRE-AGG để tránh nhân dòng)
+========================= */
+LEFT JOIN
+(
+    SELECT
+        order_id,
+        AVG(CAST(review_score AS FLOAT)) AS review_score
+    FROM stg.order_reviews
+    GROUP BY order_id
+) rv
+    ON oi.order_id = rv.order_id
 
+/* =========================
+   DIM SELLER
+========================= */
 LEFT JOIN dbo.DimSeller ds
     ON oi.seller_id = ds.seller_id
     AND ds.version = 1
 
+/* =========================
+   DIM DATE
+========================= */
 LEFT JOIN dbo.DimDate dd
     ON CAST(CONVERT(VARCHAR(8), o.order_purchase_timestamp, 112) AS INT)
        = dd.date_key
 
+/* =========================
+   GROUP BY
+========================= */
 GROUP BY
-    dd.date_key,
-    ds.seller_key
+    ISNULL(dd.date_key, -1),
+    ISNULL(ds.seller_key, -1)
 
+/* =========================
+   ORDER
+========================= */
 ORDER BY
-    dd.date_key,
-    ds.seller_key;</property>
+    snapshot_date_key,
+    seller_key;</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -451,7 +474,7 @@ ORDER BY
                       refId="Package\DFT_Load_Fact_Daily_Seller_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[total_revenue]"
                       dataType="numeric"
                       name="total_revenue"
-                      precision="38"
+                      precision="18"
                       scale="2" />
                     <externalMetadataColumn
                       refId="Package\DFT_Load_Fact_Daily_Seller_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[delivered_orders_cnt]"
@@ -463,8 +486,10 @@ ORDER BY
                       name="cancelled_orders_cnt" />
                     <externalMetadataColumn
                       refId="Package\DFT_Load_Fact_Daily_Seller_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[avg_review_score]"
-                      dataType="r8"
-                      name="avg_review_score" />
+                      dataType="numeric"
+                      name="avg_review_score"
+                      precision="5"
+                      scale="2" />
                     <externalMetadataColumn
                       refId="Package\DFT_Load_Fact_Daily_Seller_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[distinct_products_sold]"
                       dataType="i4"
@@ -501,7 +526,7 @@ ORDER BY
                       dataType="numeric"
                       lineageId="Package\DFT_Load_Fact_Daily_Seller_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[total_revenue]"
                       name="total_revenue"
-                      precision="38"
+                      precision="18"
                       scale="2" />
                     <outputColumn
                       refId="Package\DFT_Load_Fact_Daily_Seller_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[delivered_orders_cnt]"
@@ -515,9 +540,11 @@ ORDER BY
                       name="cancelled_orders_cnt" />
                     <outputColumn
                       refId="Package\DFT_Load_Fact_Daily_Seller_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[avg_review_score]"
-                      dataType="r8"
+                      dataType="numeric"
                       lineageId="Package\DFT_Load_Fact_Daily_Seller_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[avg_review_score]"
-                      name="avg_review_score" />
+                      name="avg_review_score"
+                      precision="5"
+                      scale="2" />
                     <outputColumn
                       refId="Package\DFT_Load_Fact_Daily_Seller_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[distinct_products_sold]"
                       dataType="i4"
@@ -579,25 +606,25 @@ ORDER BY
         <NodeLayout
           Size="149.6,41.6"
           Id="Package\DFT_Load_Fact_Daily_Seller_Snapshot\OLE DB Source"
-          TopLeft="499.285715348562,130.764705767733" />
+          TopLeft="499.285715348562,131.529411649416" />
         <NodeLayout
           Size="170.4,41.6"
           Id="Package\DFT_Load_Fact_Daily_Seller_Snapshot\OLE DB Destination"
           TopLeft="495.714286769531,250.823529191908" />
         <EdgeLayout
           Id="Package\DFT_Load_Fact_Daily_Seller_Snapshot.Paths[OLE DB Source Output]"
-          TopLeft="577.500001059047,172.364705767733">
+          TopLeft="577.500001059047,173.129411649416">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,78.4588234241756"
+              EndConnector="0,77.6941175424924"
               Start="0,0"
-              End="0,70.9588234241756">
+              End="0,70.1941175424924">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,70.9588234241756" />
+                    End="0,70.1941175424924" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

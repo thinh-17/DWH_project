@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="20_Load_Fact_Order"
   DTS:PackageType="5"
-  DTS:VersionBuild="16"
-  DTS:VersionGUID="{B12F45B5-BA5C-49DE-92F1-F315EBB5EF9D}">
+  DTS:VersionBuild="24"
+  DTS:VersionGUID="{7699BEFB-6DA0-4704-8150-2AAAE12D48E2}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -77,7 +77,7 @@
                 <property
                   dataType="System.Boolean"
                   description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
-                  name="FastLoadKeepNulls">false</property>
+                  name="FastLoadKeepNulls">true</property>
                 <property
                   dataType="System.String"
                   description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
@@ -117,12 +117,6 @@
                       externalMetadataColumnId="Package\DFT_Load_Fact_Order\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[order_id]"
                       lineageId="Package\DFT_Load_Fact_Order\OLE DB Source.Outputs[OLE DB Source Output].Columns[order_id]" />
                     <inputColumn
-                      refId="Package\DFT_Load_Fact_Order\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[order_detail_key]"
-                      cachedDataType="i4"
-                      cachedName="order_detail_key"
-                      externalMetadataColumnId="Package\DFT_Load_Fact_Order\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[order_detail_key]"
-                      lineageId="Package\DFT_Load_Fact_Order\OLE DB Source.Outputs[OLE DB Source Output].Columns[order_detail_key]" />
-                    <inputColumn
                       refId="Package\DFT_Load_Fact_Order\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[purchase_date_key]"
                       cachedDataType="i4"
                       cachedName="purchase_date_key"
@@ -154,6 +148,12 @@
                       cachedScale="2"
                       externalMetadataColumnId="Package\DFT_Load_Fact_Order\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[order_value]"
                       lineageId="Package\DFT_Load_Fact_Order\OLE DB Source.Outputs[OLE DB Source Output].Columns[order_value]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_Fact_Order\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[order_detail_key]"
+                      cachedDataType="i4"
+                      cachedName="order_detail_key"
+                      externalMetadataColumnId="Package\DFT_Load_Fact_Order\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[order_detail_key]"
+                      lineageId="Package\DFT_Load_Fact_Order\OLE DB Source.Outputs[OLE DB Source Output].Columns[order_detail_key]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -170,10 +170,6 @@
                       dataType="wstr"
                       length="50"
                       name="order_id" />
-                    <externalMetadataColumn
-                      refId="Package\DFT_Load_Fact_Order\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[order_detail_key]"
-                      dataType="i4"
-                      name="order_detail_key" />
                     <externalMetadataColumn
                       refId="Package\DFT_Load_Fact_Order\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[purchase_date_key]"
                       dataType="i4"
@@ -196,6 +192,10 @@
                       name="order_value"
                       precision="18"
                       scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_Fact_Order\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[order_detail_key]"
+                      dataType="i4"
+                      name="order_detail_key" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -251,55 +251,38 @@
                   name="SqlCommand"
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
     dod.order_id,
-
     dod.customer_key,
-
     dod.purchase_date_key,
-
     dod.delivered_date_key,
     dod.order_detail_key,
 
-    ISNULL(
-        DATEDIFF(
-            DAY,
-            dd_purchase.full_date,
-            dd_delivered.full_date
-        ),
-        0
+    DATEDIFF(
+        DAY,
+        dd_purchase.full_date,
+        dd_delivered.full_date
     ) AS waiting_day,
 
     ISNULL(oi.item_count, 0) AS item_count,
-
     ISNULL(op.total_payment_value, 0) AS order_value
 
 FROM dbo.DimOrderDetail dod
 
-
-/* =========================
-   JOIN DATE DIM
-========================= */
 LEFT JOIN dbo.DimDate dd_purchase
     ON dod.purchase_date_key = dd_purchase.date_key
 
 LEFT JOIN dbo.DimDate dd_delivered
     ON dod.delivered_date_key = dd_delivered.date_key
 
-/* =========================
-   COUNT ITEMS
-========================= */
 LEFT JOIN
 (
     SELECT
         order_id,
-        COUNT(*) AS item_count
+        COUNT(DISTINCT order_item_id) AS item_count
     FROM stg.order_items
     GROUP BY order_id
 ) oi
     ON dod.order_id = oi.order_id
 
-/* =========================
-   TOTAL PAYMENT
-========================= */
 LEFT JOIN
 (
     SELECT
@@ -561,39 +544,27 @@ LEFT JOIN
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="149.6,41.6"
-          Id="Package\DFT_Load_Fact_Order\OLE DB Source"
-          TopLeft="427.142858052132,110.882352843984" />
-        <NodeLayout
           Size="170.4,41.6"
           Id="Package\DFT_Load_Fact_Order\OLE DB Destination"
-          TopLeft="435.000000926001,391.529411421515" />
+          TopLeft="435.000000926001,392.294117303198" />
+        <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\DFT_Load_Fact_Order\OLE DB Source"
+          TopLeft="444.285715231482,217.176470397872" />
         <EdgeLayout
           Id="Package\DFT_Load_Fact_Order.Paths[OLE DB Source Output]"
-          TopLeft="501.942858052132,152.482352843984">
+          TopLeft="519.642858078741,258.776470397872">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="18.2571428738692,239.047058577531"
+              EndConnector="0,133.517646905326"
               Start="0,0"
-              End="18.2571428738692,231.547058577531">
+              End="0,126.017646905326">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,115.523529288766" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,115.523529288766"
-                    Point2="0,119.523529288766"
-                    Point3="4,119.523529288766" />
-                  <mssgle:LineSegment
-                    End="14.2571428738692,119.523529288766" />
-                  <mssgle:CubicBezierSegment
-                    Point1="14.2571428738692,119.523529288766"
-                    Point2="18.2571428738692,119.523529288766"
-                    Point3="18.2571428738692,123.523529288766" />
-                  <mssgle:LineSegment
-                    End="18.2571428738692,231.547058577531" />
+                    End="0,126.017646905326" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -606,14 +577,6 @@ LEFT JOIN
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\DFT_Load_Fact_Order\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
     design-time-name="Package\DFT_Load_Fact_Order\OLE DB Destination">
     <Properties>
       <Property>
@@ -623,6 +586,14 @@ LEFT JOIN
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_Load_Fact_Order\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
