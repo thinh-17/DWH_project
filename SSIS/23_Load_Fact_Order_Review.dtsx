@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="6"
-  DTS:VersionGUID="{ACDD1793-2DE8-49E6-A09E-D8A0E625CBFA}">
+  DTS:VersionBuild="15"
+  DTS:VersionGUID="{52048739-20FB-4EA0-A860-9F898C78D22D}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -32,78 +32,94 @@
           version="1">
           <components>
             <component
-              refId="Package\DFT_Load_Fact_ORDER_REVIEW\Derived Column"
-              componentClassID="Microsoft.DerivedColumn"
-              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
-              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
-              name="Derived Column"
+              refId="Package\DFT_Load_Fact_ORDER_REVIEW\Conditional Split"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="Conditional Split"
               usesDispositions="true">
               <inputs>
                 <input
-                  refId="Package\DFT_Load_Fact_ORDER_REVIEW\Derived Column.Inputs[Derived Column Input]"
-                  description="Input to the Derived Column Transformation"
-                  name="Derived Column Input">
+                  refId="Package\DFT_Load_Fact_ORDER_REVIEW\Conditional Split.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\DFT_Load_Fact_ORDER_REVIEW\Derived Column.Inputs[Derived Column Input].Columns[review_score]"
-                      cachedDataType="i4"
-                      cachedName="review_score"
-                      lineageId="Package\DFT_Load_Fact_ORDER_REVIEW\OLE DB Source.Outputs[OLE DB Source Output].Columns[review_score]" />
+                      refId="Package\DFT_Load_Fact_ORDER_REVIEW\Conditional Split.Inputs[Conditional Split Input].Columns[review_id]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="review_id"
+                      lineageId="Package\DFT_Load_Fact_ORDER_REVIEW\OLE DB Source.Outputs[OLE DB Source Output].Columns[review_id]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_Fact_ORDER_REVIEW\Conditional Split.Inputs[Conditional Split Input].Columns[order_id]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="order_id"
+                      lineageId="Package\DFT_Load_Fact_ORDER_REVIEW\OLE DB Source.Outputs[OLE DB Source Output].Columns[order_id]" />
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\DFT_Load_Fact_ORDER_REVIEW\Derived Column.Outputs[Derived Column Output]"
-                  description="Default Output of the Derived Column Transformation"
+                  refId="Package\DFT_Load_Fact_ORDER_REVIEW\Conditional Split.Outputs[valid_rows]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
                   exclusionGroup="1"
-                  name="Derived Column Output"
-                  synchronousInputId="Package\DFT_Load_Fact_ORDER_REVIEW\Derived Column.Inputs[Derived Column Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\DFT_Load_Fact_ORDER_REVIEW\Derived Column.Outputs[Derived Column Output].Columns[review_score_clean]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Computation"
-                      errorRowDisposition="FailComponent"
-                      lineageId="Package\DFT_Load_Fact_ORDER_REVIEW\Derived Column.Outputs[Derived Column Output].Columns[review_score_clean]"
-                      name="review_score_clean"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.String"
-                          description="Derived Column Expression"
-                          name="Expression">[ISNULL](#{Package\DFT_Load_Fact_ORDER_REVIEW\OLE DB Source.Outputs[OLE DB Source Output].Columns[review_score]}) ? 0 : #{Package\DFT_Load_Fact_ORDER_REVIEW\OLE DB Source.Outputs[OLE DB Source Output].Columns[review_score]}</property>
-                        <property
-                          containsID="true"
-                          dataType="System.String"
-                          description="Derived Column Friendly Expression"
-                          expressionType="Notify"
-                          name="FriendlyExpression">ISNULL(review_score) ? 0 : review_score</property>
-                      </properties>
-                    </outputColumn>
-                  </outputColumns>
+                  name="valid_rows"
+                  synchronousInputId="Package\DFT_Load_Fact_ORDER_REVIEW\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">![ISNULL](#{Package\DFT_Load_Fact_ORDER_REVIEW\OLE DB Source.Outputs[OLE DB Source Output].Columns[review_id]}) &amp;&amp; ![ISNULL](#{Package\DFT_Load_Fact_ORDER_REVIEW\OLE DB Source.Outputs[OLE DB Source Output].Columns[order_id]})</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">!ISNULL(review_id) &amp;&amp; !ISNULL(order_id)</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\DFT_Load_Fact_ORDER_REVIEW\Derived Column.Outputs[Derived Column Error Output]"
-                  description="Error Output of the Derived Column Transformation"
+                  refId="Package\DFT_Load_Fact_ORDER_REVIEW\Conditional Split.Outputs[check null]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="check null"
+                  synchronousInputId="Package\DFT_Load_Fact_ORDER_REVIEW\Conditional Split.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Load_Fact_ORDER_REVIEW\Conditional Split.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
                   exclusionGroup="1"
                   isErrorOut="true"
-                  name="Derived Column Error Output"
-                  synchronousInputId="Package\DFT_Load_Fact_ORDER_REVIEW\Derived Column.Inputs[Derived Column Input]">
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\DFT_Load_Fact_ORDER_REVIEW\Conditional Split.Inputs[Conditional Split Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\DFT_Load_Fact_ORDER_REVIEW\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      refId="Package\DFT_Load_Fact_ORDER_REVIEW\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\DFT_Load_Fact_ORDER_REVIEW\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      lineageId="Package\DFT_Load_Fact_ORDER_REVIEW\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\DFT_Load_Fact_ORDER_REVIEW\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      refId="Package\DFT_Load_Fact_ORDER_REVIEW\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\DFT_Load_Fact_ORDER_REVIEW\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\DFT_Load_Fact_ORDER_REVIEW\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -234,11 +250,11 @@
                       externalMetadataColumnId="Package\DFT_Load_Fact_ORDER_REVIEW\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[has_comment_message]"
                       lineageId="Package\DFT_Load_Fact_ORDER_REVIEW\OLE DB Source.Outputs[OLE DB Source Output].Columns[has_comment_message]" />
                     <inputColumn
-                      refId="Package\DFT_Load_Fact_ORDER_REVIEW\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[review_score_clean]"
+                      refId="Package\DFT_Load_Fact_ORDER_REVIEW\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[review_score]"
                       cachedDataType="i4"
-                      cachedName="review_score_clean"
+                      cachedName="review_score"
                       externalMetadataColumnId="Package\DFT_Load_Fact_ORDER_REVIEW\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[review_score]"
-                      lineageId="Package\DFT_Load_Fact_ORDER_REVIEW\Derived Column.Outputs[Derived Column Output].Columns[review_score_clean]" />
+                      lineageId="Package\DFT_Load_Fact_ORDER_REVIEW\OLE DB Source.Outputs[OLE DB Source Output].Columns[review_score]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -352,7 +368,7 @@
 
     1 AS review_count,
 
-    ISNULL(r.review_score, 0) AS review_score,
+    r.review_score AS review_score,
 
     CASE
         WHEN r.review_comment_message IS NOT NULL
@@ -618,15 +634,15 @@ LEFT JOIN dbo.DimDate dd_answer
           </components>
           <paths>
             <path
-              refId="Package\DFT_Load_Fact_ORDER_REVIEW.Paths[Derived Column Output]"
-              endId="Package\DFT_Load_Fact_ORDER_REVIEW\OLE DB Destination.Inputs[OLE DB Destination Input]"
-              name="Derived Column Output"
-              startId="Package\DFT_Load_Fact_ORDER_REVIEW\Derived Column.Outputs[Derived Column Output]" />
-            <path
               refId="Package\DFT_Load_Fact_ORDER_REVIEW.Paths[OLE DB Source Output]"
-              endId="Package\DFT_Load_Fact_ORDER_REVIEW\Derived Column.Inputs[Derived Column Input]"
+              endId="Package\DFT_Load_Fact_ORDER_REVIEW\Conditional Split.Inputs[Conditional Split Input]"
               name="OLE DB Source Output"
               startId="Package\DFT_Load_Fact_ORDER_REVIEW\OLE DB Source.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\DFT_Load_Fact_ORDER_REVIEW.Paths[valid_rows]"
+              endId="Package\DFT_Load_Fact_ORDER_REVIEW\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="valid_rows"
+              startId="Package\DFT_Load_Fact_ORDER_REVIEW\Conditional Split.Outputs[valid_rows]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
@@ -647,7 +663,7 @@ LEFT JOIN dbo.DimDate dd_answer
         <NodeLayout
           Size="235.2,41.6"
           Id="Package\DFT_Load_Fact_ORDER_REVIEW"
-          TopLeft="60,60" />
+          TopLeft="60.7142857158062,61.5294117633652" />
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -655,33 +671,33 @@ LEFT JOIN dbo.DimDate dd_answer
     design-time-name="Package\DFT_Load_Fact_ORDER_REVIEW">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="149.6,41.6"
           Id="Package\DFT_Load_Fact_ORDER_REVIEW\OLE DB Source"
-          TopLeft="451.428572389544,250.823529191908" />
+          TopLeft="450.714286673738,251.588235073591" />
+        <NodeLayout
+          Size="154.4,41.6"
+          Id="Package\DFT_Load_Fact_ORDER_REVIEW\Conditional Split"
+          TopLeft="449.285715242126,354.058823219066" />
         <NodeLayout
           Size="170.4,41.6"
           Id="Package\DFT_Load_Fact_ORDER_REVIEW\OLE DB Destination"
           TopLeft="445.000000947289,452.705881956127" />
-        <NodeLayout
-          Size="152.8,41.6"
-          Id="Package\DFT_Load_Fact_ORDER_REVIEW\Derived Column"
-          TopLeft="455.000000968576,345.647058520556" />
         <EdgeLayout
-          Id="Package\DFT_Load_Fact_ORDER_REVIEW.Paths[Derived Column Output]"
-          TopLeft="530.800000957932,387.247058520556">
+          Id="Package\DFT_Load_Fact_ORDER_REVIEW.Paths[OLE DB Source Output]"
+          TopLeft="526.000000957932,293.188235073591">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,65.4588234355707"
+              EndConnector="0,60.8705881454749"
               Start="0,0"
-              End="0,57.9588234355707">
+              End="0,53.3705881454749">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,57.9588234355707" />
+                    End="0,53.3705881454749" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -691,25 +707,27 @@ LEFT JOIN dbo.DimDate dd_answer
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\DFT_Load_Fact_ORDER_REVIEW.Paths[OLE DB Source Output]"
-          TopLeft="528.81428667906,292.423529191908">
+          Id="Package\DFT_Load_Fact_ORDER_REVIEW.Paths[valid_rows]"
+          TopLeft="528.342858094707,395.658823219066">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,53.2235293286481"
+              EndConnector="0,57.0470587370609"
               Start="0,0"
-              End="0,45.7235293286481">
+              End="0,49.5470587370609">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,45.7235293286481" />
+                    End="0,49.5470587370609" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="-24.24658203125,19.2422793685305,48.4931640625,11.0625"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

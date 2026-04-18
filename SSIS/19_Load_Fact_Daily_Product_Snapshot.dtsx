@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="17"
-  DTS:VersionGUID="{AEFA6520-A642-4B10-BEAC-88D541C8B5BC}">
+  DTS:VersionBuild="30"
+  DTS:VersionGUID="{555D87DD-DAE0-45E3-85E9-333D99CE3C4F}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -125,14 +125,16 @@
                       refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[total_revenue]"
                       cachedDataType="numeric"
                       cachedName="total_revenue"
-                      cachedPrecision="38"
+                      cachedPrecision="18"
                       cachedScale="2"
                       externalMetadataColumnId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[total_revenue]"
                       lineageId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[total_revenue]" />
                     <inputColumn
                       refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[avg_review_score]"
-                      cachedDataType="r8"
+                      cachedDataType="numeric"
                       cachedName="avg_review_score"
+                      cachedPrecision="5"
+                      cachedScale="2"
                       externalMetadataColumnId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[avg_review_score]"
                       lineageId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[avg_review_score]" />
                   </inputColumns>
@@ -218,9 +220,9 @@
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
     dd.date_key AS snapshot_date_key,
     dp.product_key,
-    COUNT(*) AS items_sold_cnt,
-    SUM(ISNULL(oi.price, 0)) AS total_revenue,
-    AVG(rv.review_score) AS avg_review_score
+    COUNT(oi.price) AS items_sold_cnt,
+    CAST(SUM(ISNULL(oi.price, 0)) AS DECIMAL(18,2)) AS total_revenue,
+    CAST(AVG(rv.review_score) AS DECIMAL(5,2)) AS avg_review_score
 FROM stg.order_items oi
 INNER JOIN stg.orders o
     ON oi.order_id = o.order_id
@@ -287,15 +289,6 @@ GROUP BY
                       name="snapshot_date_key"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[product_key]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[product_key]"
-                      lineageId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[product_key]"
-                      name="product_key"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
                       refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[items_sold_cnt]"
                       dataType="i4"
                       errorOrTruncationOperation="Conversion"
@@ -312,17 +305,28 @@ GROUP BY
                       externalMetadataColumnId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[total_revenue]"
                       lineageId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[total_revenue]"
                       name="total_revenue"
-                      precision="38"
+                      precision="18"
                       scale="2"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[avg_review_score]"
-                      dataType="r8"
+                      dataType="numeric"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[avg_review_score]"
                       lineageId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[avg_review_score]"
                       name="avg_review_score"
+                      precision="5"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[product_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[product_key]"
+                      lineageId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].Columns[product_key]"
+                      name="product_key"
                       truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
@@ -332,10 +336,6 @@ GROUP BY
                       dataType="i4"
                       name="snapshot_date_key" />
                     <externalMetadataColumn
-                      refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[product_key]"
-                      dataType="i4"
-                      name="product_key" />
-                    <externalMetadataColumn
                       refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[items_sold_cnt]"
                       dataType="i4"
                       name="items_sold_cnt" />
@@ -343,12 +343,18 @@ GROUP BY
                       refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[total_revenue]"
                       dataType="numeric"
                       name="total_revenue"
-                      precision="38"
+                      precision="18"
                       scale="2" />
                     <externalMetadataColumn
                       refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[avg_review_score]"
-                      dataType="r8"
-                      name="avg_review_score" />
+                      dataType="numeric"
+                      name="avg_review_score"
+                      precision="5"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[product_key]"
+                      dataType="i4"
+                      name="product_key" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -376,13 +382,15 @@ GROUP BY
                       dataType="numeric"
                       lineageId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[total_revenue]"
                       name="total_revenue"
-                      precision="38"
+                      precision="18"
                       scale="2" />
                     <outputColumn
                       refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[avg_review_score]"
-                      dataType="r8"
+                      dataType="numeric"
                       lineageId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[avg_review_score]"
-                      name="avg_review_score" />
+                      name="avg_review_score"
+                      precision="5"
+                      scale="2" />
                     <outputColumn
                       refId="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
@@ -437,27 +445,27 @@ GROUP BY
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="149.6,41.6"
-          Id="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source"
-          TopLeft="493.571429622112,72.6470587598514" />
-        <NodeLayout
           Size="170.4,41.6"
           Id="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Destination"
-          TopLeft="488.57142961147,304.352940909693" />
+          TopLeft="485.000001032438,226.352940978063" />
+        <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source"
+          TopLeft="494.285715337918,71.8823528781688" />
         <EdgeLayout
           Id="Package\DFT_Load_Fact_Daily_Product_Snapshot.Paths[OLE DB Source Output]"
-          TopLeft="571.071429616791,114.247058759851">
+          TopLeft="569.642858185178,113.482352878169">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,190.105882149842"
+              EndConnector="0,112.870588099894"
               Start="0,0"
-              End="0,182.605882149842">
+              End="0,105.370588099894">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,182.605882149842" />
+                    End="0,105.370588099894" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -470,14 +478,6 @@ GROUP BY
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
     design-time-name="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Destination">
     <Properties>
       <Property>
@@ -487,6 +487,14 @@ GROUP BY
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_Load_Fact_Daily_Product_Snapshot\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>

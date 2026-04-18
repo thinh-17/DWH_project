@@ -1,6 +1,3 @@
-USE DW_Project;
-GO
-
 /* =========================================
    1. FCT_ORDER
 ========================================= */
@@ -14,7 +11,7 @@ BEGIN
         order_fact_key INT IDENTITY(1,1) PRIMARY KEY,
         order_id NVARCHAR(50) NOT NULL,
         customer_key INT NOT NULL,
-        order_status_key INT NOT NULL,
+        order_detail_key INT NOT NULL,
         purchase_date_key INT NOT NULL,
         delivered_date_key INT NULL,
         waiting_day INT NULL,
@@ -24,46 +21,9 @@ BEGIN
 END;
 GO
 
-/* =========================================
-   2. FCT_ORDER_ITEM
-========================================= */
-IF OBJECT_ID('dbo.FCT_ORDER_ITEM', 'U') IS NULL
-BEGIN
-    CREATE TABLE dbo.FCT_ORDER_ITEM
-    (
-        order_item_fact_key INT IDENTITY(1,1) PRIMARY KEY,
-
-        order_id NVARCHAR(50) NOT NULL,
-        order_item_id INT NOT NULL,
-
-        customer_key INT NOT NULL,
-        seller_key INT NOT NULL,
-        product_key INT NOT NULL,
-        order_status_key INT NOT NULL,
-
-        purchase_date_key INT NULL,
-        delivered_carrier_date_key INT NULL,
-        delivered_customer_date_key INT NULL,
-        estimated_delivery_date_key INT NULL,
-        shipping_limit_date_key INT NULL,
-
-        freight_value DECIMAL(18,2) NULL,
-        gross_item_amount DECIMAL(18,2) NULL,
-
-        item_count INT NULL,
-
-        delivery_lead_time_days DECIMAL(18,2) NULL,
-        estimated_vs_actual_days DECIMAL(18,2) NULL,
-
-        is_delivered BIT NULL,
-        is_cancelled BIT NULL,
-        is_late_delivery BIT NULL
-    );
-END;
-GO
 
 /* =========================================
-   3. FCT_ORDER_REVIEW
+   2. FCT_ORDER_REVIEW
 ========================================= */
 IF OBJECT_ID('dbo.FCT_ORDER_REVIEW', 'U') IS NULL
 BEGIN
@@ -113,7 +73,7 @@ END;
 GO
 
 /* =========================================
-   4. FCT_DAILY_ORDER_SNAPSHOT
+   3. FCT_DAILY_ORDER_SNAPSHOT
 ========================================= */
 
 IF OBJECT_ID('dbo.FCT_DAILY_ORDER_SNAPSHOT', 'U') IS NULL
@@ -126,7 +86,6 @@ BEGIN
         total_orders_approved INT NOT NULL DEFAULT 0,
         total_orders_delivered INT NOT NULL DEFAULT 0,
         total_orders_cancelled INT NOT NULL DEFAULT 0,
-
         total_revenue DECIMAL(18,2) NOT NULL DEFAULT 0,
 
         CONSTRAINT FK_FDOS_Date
@@ -136,7 +95,7 @@ BEGIN
 END;
 GO
 /* =========================================
-   5. FCT_DAILY_SELLER_SNAPSHOT
+   4. FCT_DAILY_SELLER_SNAPSHOT
 ========================================= */
 IF OBJECT_ID('dbo.FCT_DAILY_SELLER_SNAPSHOT', 'U') IS NULL
 BEGIN
@@ -144,17 +103,12 @@ BEGIN
     (
         snapshot_date_key INT NOT NULL,
         seller_key INT NOT NULL,
-
         orders_created_cnt INT NOT NULL DEFAULT 0,
         items_sold_cnt INT NOT NULL DEFAULT 0,
-
         total_revenue DECIMAL(18,2) NOT NULL DEFAULT 0,
-
         delivered_orders_cnt INT NOT NULL DEFAULT 0,
         cancelled_orders_cnt INT NOT NULL DEFAULT 0,
-
         avg_review_score DECIMAL(5,2) NULL,
-
         distinct_products_sold INT NOT NULL DEFAULT 0,
 
         /* Composite PK */
@@ -175,7 +129,7 @@ END;
 GO
 
 /* =========================================
-   6. FCT_DAILY_PRODUCT_SNAPSHOT
+   5. FCT_DAILY_PRODUCT_SNAPSHOT
 ========================================= */
 IF OBJECT_ID('dbo.FCT_DAILY_PRODUCT_SNAPSHOT', 'U') IS NULL
 BEGIN
@@ -183,11 +137,8 @@ BEGIN
     (
         snapshot_date_key INT NOT NULL,
         product_key INT NOT NULL,
-
         items_sold_cnt INT NOT NULL DEFAULT 0,
-
         total_revenue DECIMAL(18,2) NOT NULL DEFAULT 0,
-
         avg_review_score DECIMAL(5,2) NULL,
 
         CONSTRAINT PK_FCT_DAILY_PRODUCT_SNAPSHOT
@@ -200,6 +151,26 @@ BEGIN
         CONSTRAINT FK_FDPS_Product
             FOREIGN KEY (product_key)
             REFERENCES dbo.DimProduct(product_key)
+    );
+END;
+GO
+/* =========================================
+   6. FCT_CUSTOMER_BEHAVIOR_SNAPSHOT
+========================================= */
+IF OBJECT_ID('dbo.FCT_CUSTOMER_BEHAVIOR_SNAPSHOT', 'U') IS NULL
+BEGIN
+    CREATE TABLE dbo.FCT_CUSTOMER_BEHAVIOR_SNAPSHOT
+    (
+        customer_key INT NOT NULL PRIMARY KEY,
+        avg_score_review DECIMAL(5,2) NULL,
+        total_spend DECIMAL(18,2) NOT NULL DEFAULT 0,
+        order_cnt INT NOT NULL DEFAULT 0,
+        order_cancelled_cnt INT NOT NULL DEFAULT 0,
+        avg_day_return_to_buy DECIMAL(10,2) NULL,
+
+        CONSTRAINT FK_FCBS_Customer
+            FOREIGN KEY (customer_key)
+            REFERENCES dbo.DimCustomer(customer_key)
     );
 END;
 GO
