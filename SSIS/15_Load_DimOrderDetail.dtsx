@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="15_Load_DimOrderDetail"
   DTS:PackageType="5"
-  DTS:VersionBuild="13"
-  DTS:VersionGUID="{68CD2C82-9760-42AA-A5B6-5461DDB49860}">
+  DTS:VersionBuild="16"
+  DTS:VersionGUID="{24C730A2-CB8E-4E38-B646-74F2AF6150FF}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -191,56 +191,49 @@ where [refTable].[order_id] = ?</property>
               </outputs>
             </component>
             <component
-              refId="Package\DFT_Load_Dim_OrderDetail\Conditional Split"
+              refId="Package\DFT_Load_Dim_OrderDetail\Check_null"
               componentClassID="Microsoft.ConditionalSplit"
               contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
               description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
-              name="Conditional Split"
+              name="Check_null"
               usesDispositions="true">
               <inputs>
                 <input
-                  refId="Package\DFT_Load_Dim_OrderDetail\Conditional Split.Inputs[Conditional Split Input]"
+                  refId="Package\DFT_Load_Dim_OrderDetail\Check_null.Inputs[Conditional Split Input]"
                   description="Input to the Conditional Split Transformation"
                   name="Conditional Split Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\DFT_Load_Dim_OrderDetail\Conditional Split.Inputs[Conditional Split Input].Columns[order_status]"
-                      cachedDataType="wstr"
-                      cachedLength="50"
-                      cachedName="order_status"
-                      lineageId="Package\DFT_Load_Dim_OrderDetail\OLE DB Source.Outputs[OLE DB Source Output].Columns[order_status]" />
-                    <inputColumn
-                      refId="Package\DFT_Load_Dim_OrderDetail\Conditional Split.Inputs[Conditional Split Input].Columns[order_status_exist]"
-                      cachedDataType="wstr"
-                      cachedLength="50"
-                      cachedName="order_status_exist"
-                      lineageId="Package\DFT_Load_Dim_OrderDetail\check order exist.Outputs[Lookup Match Output].Columns[order_status_exist]" />
+                      refId="Package\DFT_Load_Dim_OrderDetail\Check_null.Inputs[Conditional Split Input].Columns[purchase_date_key]"
+                      cachedDataType="i4"
+                      cachedName="purchase_date_key"
+                      lineageId="Package\DFT_Load_Dim_OrderDetail\OLE DB Source.Outputs[OLE DB Source Output].Columns[purchase_date_key]" />
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\DFT_Load_Dim_OrderDetail\Conditional Split.Outputs[order_status_change]"
+                  refId="Package\DFT_Load_Dim_OrderDetail\Check_null.Outputs[purchase_date_key_valid]"
                   description="Output 1 of the Conditional Split Transformation"
                   errorOrTruncationOperation="Computation"
                   errorRowDisposition="FailComponent"
                   exclusionGroup="1"
-                  name="order_status_change"
-                  synchronousInputId="Package\DFT_Load_Dim_OrderDetail\Conditional Split.Inputs[Conditional Split Input]"
+                  name="purchase_date_key_valid"
+                  synchronousInputId="Package\DFT_Load_Dim_OrderDetail\Check_null.Inputs[Conditional Split Input]"
                   truncationRowDisposition="FailComponent">
                   <properties>
                     <property
                       containsID="true"
                       dataType="System.String"
                       description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
-                      name="Expression">#{Package\DFT_Load_Dim_OrderDetail\OLE DB Source.Outputs[OLE DB Source Output].Columns[order_status]} != #{Package\DFT_Load_Dim_OrderDetail\check order exist.Outputs[Lookup Match Output].Columns[order_status_exist]}</property>
+                      name="Expression">![ISNULL](#{Package\DFT_Load_Dim_OrderDetail\OLE DB Source.Outputs[OLE DB Source Output].Columns[purchase_date_key]})</property>
                     <property
                       containsID="true"
                       dataType="System.String"
                       description="Specifies the friendly version of the expression. This expression version uses column names."
                       expressionType="Notify"
-                      name="FriendlyExpression">order_status != order_status_exist</property>
+                      name="FriendlyExpression">!ISNULL(purchase_date_key)</property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
@@ -249,11 +242,11 @@ where [refTable].[order_id] = ?</property>
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\DFT_Load_Dim_OrderDetail\Conditional Split.Outputs[order_status_non_change]"
+                  refId="Package\DFT_Load_Dim_OrderDetail\Check_null.Outputs[purchase_date_key_invalid]"
                   description="Default Output of the Conditional Split Transformation"
                   exclusionGroup="1"
-                  name="order_status_non_change"
-                  synchronousInputId="Package\DFT_Load_Dim_OrderDetail\Conditional Split.Inputs[Conditional Split Input]">
+                  name="purchase_date_key_invalid"
+                  synchronousInputId="Package\DFT_Load_Dim_OrderDetail\Check_null.Inputs[Conditional Split Input]">
                   <properties>
                     <property
                       dataType="System.Boolean"
@@ -262,23 +255,23 @@ where [refTable].[order_id] = ?</property>
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\DFT_Load_Dim_OrderDetail\Conditional Split.Outputs[Conditional Split Error Output]"
+                  refId="Package\DFT_Load_Dim_OrderDetail\Check_null.Outputs[Conditional Split Error Output]"
                   description="Error Output of the Conditional Split Transformation"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="Conditional Split Error Output"
-                  synchronousInputId="Package\DFT_Load_Dim_OrderDetail\Conditional Split.Inputs[Conditional Split Input]">
+                  synchronousInputId="Package\DFT_Load_Dim_OrderDetail\Check_null.Inputs[Conditional Split Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\DFT_Load_Dim_OrderDetail\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      refId="Package\DFT_Load_Dim_OrderDetail\Check_null.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\DFT_Load_Dim_OrderDetail\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      lineageId="Package\DFT_Load_Dim_OrderDetail\Check_null.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\DFT_Load_Dim_OrderDetail\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      refId="Package\DFT_Load_Dim_OrderDetail\Check_null.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\DFT_Load_Dim_OrderDetail\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\DFT_Load_Dim_OrderDetail\Check_null.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -971,11 +964,107 @@ LEFT JOIN dbo.DimDate dd_delivered
                 </output>
               </outputs>
             </component>
+            <component
+              refId="Package\DFT_Load_Dim_OrderDetail\order_status_changed"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="order_status_changed"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT_Load_Dim_OrderDetail\order_status_changed.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Load_Dim_OrderDetail\order_status_changed.Inputs[Conditional Split Input].Columns[order_status]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="order_status"
+                      lineageId="Package\DFT_Load_Dim_OrderDetail\OLE DB Source.Outputs[OLE DB Source Output].Columns[order_status]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_Dim_OrderDetail\order_status_changed.Inputs[Conditional Split Input].Columns[order_status_exist]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="order_status_exist"
+                      lineageId="Package\DFT_Load_Dim_OrderDetail\check order exist.Outputs[Lookup Match Output].Columns[order_status_exist]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Load_Dim_OrderDetail\order_status_changed.Outputs[order_status_change]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="order_status_change"
+                  synchronousInputId="Package\DFT_Load_Dim_OrderDetail\order_status_changed.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">#{Package\DFT_Load_Dim_OrderDetail\OLE DB Source.Outputs[OLE DB Source Output].Columns[order_status]} != #{Package\DFT_Load_Dim_OrderDetail\check order exist.Outputs[Lookup Match Output].Columns[order_status_exist]}</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">order_status != order_status_exist</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Load_Dim_OrderDetail\order_status_changed.Outputs[order_status_non_change]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="order_status_non_change"
+                  synchronousInputId="Package\DFT_Load_Dim_OrderDetail\order_status_changed.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Load_Dim_OrderDetail\order_status_changed.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\DFT_Load_Dim_OrderDetail\order_status_changed.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_OrderDetail\order_status_changed.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Dim_OrderDetail\order_status_changed.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_OrderDetail\order_status_changed.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Dim_OrderDetail\order_status_changed.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
           </components>
           <paths>
             <path
               refId="Package\DFT_Load_Dim_OrderDetail.Paths[Lookup Match Output]"
-              endId="Package\DFT_Load_Dim_OrderDetail\Conditional Split.Inputs[Conditional Split Input]"
+              endId="Package\DFT_Load_Dim_OrderDetail\order_status_changed.Inputs[Conditional Split Input]"
               name="Lookup Match Output"
               startId="Package\DFT_Load_Dim_OrderDetail\check order exist.Outputs[Lookup Match Output]" />
             <path
@@ -990,14 +1079,19 @@ LEFT JOIN dbo.DimDate dd_delivered
               startId="Package\DFT_Load_Dim_OrderDetail\check order exist.Outputs[Lookup No Match Output]" />
             <path
               refId="Package\DFT_Load_Dim_OrderDetail.Paths[OLE DB Source Output]"
-              endId="Package\DFT_Load_Dim_OrderDetail\Lookup.Inputs[Lookup Input]"
+              endId="Package\DFT_Load_Dim_OrderDetail\Check_null.Inputs[Conditional Split Input]"
               name="OLE DB Source Output"
               startId="Package\DFT_Load_Dim_OrderDetail\OLE DB Source.Outputs[OLE DB Source Output]" />
             <path
               refId="Package\DFT_Load_Dim_OrderDetail.Paths[order_status_change]"
               endId="Package\DFT_Load_Dim_OrderDetail\OLE DB Destination.Inputs[OLE DB Destination Input]"
               name="order_status_change"
-              startId="Package\DFT_Load_Dim_OrderDetail\Conditional Split.Outputs[order_status_change]" />
+              startId="Package\DFT_Load_Dim_OrderDetail\order_status_changed.Outputs[order_status_change]" />
+            <path
+              refId="Package\DFT_Load_Dim_OrderDetail.Paths[purchase_date_key_valid]"
+              endId="Package\DFT_Load_Dim_OrderDetail\Lookup.Inputs[Lookup Input]"
+              name="purchase_date_key_valid"
+              startId="Package\DFT_Load_Dim_OrderDetail\Check_null.Outputs[purchase_date_key_valid]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
@@ -1028,135 +1122,29 @@ LEFT JOIN dbo.DimDate dd_delivered
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\DFT_Load_Dim_OrderDetail\OLE DB Source"
+          TopLeft="20.000000042574,8.41176469850914" />
+        <NodeLayout
           Size="170.4,41.6"
           Id="Package\DFT_Load_Dim_OrderDetail\OLE DB Destination"
           TopLeft="466.428572421476,392.294117303198" />
         <NodeLayout
-          Size="149.6,41.6"
-          Id="Package\DFT_Load_Dim_OrderDetail\OLE DB Source"
-          TopLeft="165.000000351241,74.9411764048994" />
-        <NodeLayout
-          Size="158.4,41.6"
-          Id="Package\DFT_Load_Dim_OrderDetail\check order exist"
-          TopLeft="158.571428908985,283.152940932484" />
-        <NodeLayout
-          Size="154.4,41.6"
-          Id="Package\DFT_Load_Dim_OrderDetail\Conditional Split"
+          Size="183.2,41.6"
+          Id="Package\DFT_Load_Dim_OrderDetail\order_status_changed"
           TopLeft="152.142857466729,386.176470249737" />
-        <EdgeLayout
-          Id="Package\DFT_Load_Dim_OrderDetail.Paths[Lookup Match Output]"
-          TopLeft="237.771428908985,324.752940932484">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-8.42857144225582,61.423529317253"
-              Start="0,0"
-              End="-8.42857144225582,53.923529317253">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,26.7117646586265" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,26.7117646586265"
-                    Point2="0,30.7117646586265"
-                    Point3="-4,30.7117646586265" />
-                  <mssgle:LineSegment
-                    End="-4.42857144225582,30.7117646586265" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-4.42857144225582,30.7117646586265"
-                    Point2="-8.42857144225582,30.7117646586265"
-                    Point3="-8.42857144225582,34.7117646586265" />
-                  <mssgle:LineSegment
-                    End="-8.42857144225582,53.923529317253" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-52.4056724398779,35.7117646586265,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\DFT_Load_Dim_OrderDetail.Paths[order_status_change]"
-          TopLeft="306.542857466729,410.035293776467">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="159.885714954747,0"
-              Start="0,0"
-              End="152.385714954747,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="152.385714954747,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="29.1720176336234,5,94.0416796875,11.6630859375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <NodeLayout
           Size="179.2,41.6"
           Id="Package\DFT_Load_Dim_OrderDetail\OLE DB Destination 1"
           TopLeft="470.714286716313,283.705882104262" />
-        <EdgeLayout
-          Id="Package\DFT_Load_Dim_OrderDetail.Paths[Lookup No Match Output]"
-          TopLeft="316.971428908985,304.229411518373">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="153.742857807328,0"
-              Start="0,0"
-              End="146.242857807328,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="146.242857807328,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="17.3150421849138,5,111.6127734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <NodeLayout
           Size="112.8,41.6"
           Id="Package\DFT_Load_Dim_OrderDetail\Lookup"
           TopLeft="180.000000383173,168.999999851865" />
-        <EdgeLayout
-          Id="Package\DFT_Load_Dim_OrderDetail.Paths[OLE DB Source Output]"
-          TopLeft="238.100000367207,116.541176404899">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,52.4588234469656"
-              Start="0,0"
-              End="0,44.9588234469656">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,44.9588234469656" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+        <NodeLayout
+          Size="158.4,41.6"
+          Id="Package\DFT_Load_Dim_OrderDetail\check order exist"
+          TopLeft="158.571428908985,283.152940932484" />
         <EdgeLayout
           Id="Package\DFT_Load_Dim_OrderDetail.Paths[Lookup Match Output1]"
           TopLeft="237.085714646079,210.599999851865">
@@ -1181,9 +1169,163 @@ LEFT JOIN dbo.DimDate dd_delivered
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_Load_Dim_OrderDetail.Paths[Lookup Match Output]"
+          TopLeft="240.757143187857,324.752940932484">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,61.423529317253"
+              Start="0,0"
+              End="0,53.923529317253">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,53.923529317253" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,21.1570771586265,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_Load_Dim_OrderDetail.Paths[order_status_change]"
+          TopLeft="335.342857466729,410.035293776467">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="131.085714954747,0"
+              Start="0,0"
+              End="123.585714954747,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="123.585714954747,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="14.7720176336235,5,94.0416796875,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_Load_Dim_OrderDetail.Paths[Lookup No Match Output]"
+          TopLeft="316.971428908985,304.229411518373">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="153.742857807328,0"
+              Start="0,0"
+              End="146.242857807328,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="146.242857807328,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="17.315042184914,5,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="128.8,41.6"
+          Id="Package\DFT_Load_Dim_OrderDetail\Check_null"
+          TopLeft="280.714286311853,61.1764705346117" />
+        <EdgeLayout
+          Id="Package\DFT_Load_Dim_OrderDetail.Paths[OLE DB Source Output]"
+          TopLeft="169.600000042574,29.2117646985091">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="111.114286269279,52.7647058361026"
+              Start="0,0"
+              End="103.614286269279,52.7647058361026">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="51.5571431346393,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="51.5571431346393,0"
+                    Point2="55.5571431346393,0"
+                    Point3="55.5571431346393,4" />
+                  <mssgle:LineSegment
+                    End="55.5571431346393,48.7647058361026" />
+                  <mssgle:CubicBezierSegment
+                    Point1="55.5571431346393,48.7647058361026"
+                    Point2="55.5571431346393,52.7647058361026"
+                    Point3="59.5571431346393,52.7647058361026" />
+                  <mssgle:LineSegment
+                    End="103.614286269279,52.7647058361026" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_Load_Dim_OrderDetail.Paths[purchase_date_key_valid]"
+          TopLeft="345.114286311853,102.776470534612">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-108.71428592868,66.2235293172533"
+              Start="0,0"
+              End="-108.71428592868,58.7235293172533">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.1117646586266" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29.1117646586266"
+                    Point2="0,33.1117646586266"
+                    Point3="-4,33.1117646586266" />
+                  <mssgle:LineSegment
+                    End="-104.71428592868,33.1117646586266" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-104.71428592868,33.1117646586266"
+                    Point2="-108.71428592868,33.1117646586266"
+                    Point3="-108.71428592868,37.1117646586266" />
+                  <mssgle:LineSegment
+                    End="-108.71428592868,58.7235293172533" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-110.28675233934,38.1117646586266,111.85921875,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_Load_Dim_OrderDetail\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\DFT_Load_Dim_OrderDetail\OLE DB Destination">
     <Properties>
@@ -1194,37 +1336,6 @@ LEFT JOIN dbo.DimDate dd_delivered
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\DFT_Load_Dim_OrderDetail\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\DFT_Load_Dim_OrderDetail\check order exist">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[dbo].[DimOrderDetail]</Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
@@ -1247,7 +1358,7 @@ LEFT JOIN dbo.DimDate dd_delivered
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -1257,7 +1368,30 @@ LEFT JOIN dbo.DimDate dd_delivered
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_Load_Dim_OrderDetail\check order exist">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimOrderDetail]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>

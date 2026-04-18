@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package2"
   DTS:PackageType="5"
-  DTS:VersionBuild="6"
-  DTS:VersionGUID="{14601F32-D7CF-4CA2-B032-5211E6B470EC}">
+  DTS:VersionBuild="9"
+  DTS:VersionGUID="{470DFD0D-EF77-4888-A664-6B701C21DBD3}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -32,149 +32,51 @@
           version="1">
           <components>
             <component
-              refId="Package\DFT_Load_Dim_Product\Check_Update_price"
+              refId="Package\DFT_Load_Dim_Product\Check_Null"
               componentClassID="Microsoft.ConditionalSplit"
               contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
               description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
-              name="Check_Update_price"
+              name="Check_Null"
               usesDispositions="true">
               <inputs>
                 <input
-                  refId="Package\DFT_Load_Dim_Product\Check_Update_price.Inputs[Conditional Split Input]"
+                  refId="Package\DFT_Load_Dim_Product\Check_Null.Inputs[Conditional Split Input]"
                   description="Input to the Conditional Split Transformation"
                   name="Conditional Split Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\DFT_Load_Dim_Product\Check_Update_price.Inputs[Conditional Split Input].Columns[product_price_exist]"
-                      cachedDataType="numeric"
-                      cachedName="product_price_exist"
-                      cachedPrecision="18"
-                      cachedScale="2"
-                      lineageId="Package\DFT_Load_Dim_Product\exist_product.Outputs[Lookup Match Output].Columns[product_price_exist]" />
-                    <inputColumn
-                      refId="Package\DFT_Load_Dim_Product\Check_Update_price.Inputs[Conditional Split Input].Columns[product_price_std]"
-                      cachedDataType="numeric"
-                      cachedName="product_price_std"
-                      cachedPrecision="38"
-                      cachedScale="6"
-                      lineageId="Package\DFT_Load_Dim_Product\DC Standardize Location.Outputs[Derived Column Output].Columns[product_price_std]" />
-                  </inputColumns>
-                  <externalMetadataColumns />
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\DFT_Load_Dim_Product\Check_Update_price.Outputs[UpdatePrice]"
-                  description="Output 1 of the Conditional Split Transformation"
-                  errorOrTruncationOperation="Computation"
-                  errorRowDisposition="FailComponent"
-                  exclusionGroup="1"
-                  name="UpdatePrice"
-                  synchronousInputId="Package\DFT_Load_Dim_Product\Check_Update_price.Inputs[Conditional Split Input]"
-                  truncationRowDisposition="FailComponent">
-                  <properties>
-                    <property
-                      containsID="true"
-                      dataType="System.String"
-                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
-                      name="Expression">#{Package\DFT_Load_Dim_Product\DC Standardize Location.Outputs[Derived Column Output].Columns[product_price_std]} != #{Package\DFT_Load_Dim_Product\exist_product.Outputs[Lookup Match Output].Columns[product_price_exist]}</property>
-                    <property
-                      containsID="true"
-                      dataType="System.String"
-                      description="Specifies the friendly version of the expression. This expression version uses column names."
-                      expressionType="Notify"
-                      name="FriendlyExpression">product_price_std != product_price_exist</property>
-                    <property
-                      dataType="System.Int32"
-                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
-                      name="EvaluationOrder">0</property>
-                  </properties>
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\DFT_Load_Dim_Product\Check_Update_price.Outputs[NonUpdatePrice]"
-                  description="Default Output of the Conditional Split Transformation"
-                  exclusionGroup="1"
-                  name="NonUpdatePrice"
-                  synchronousInputId="Package\DFT_Load_Dim_Product\Check_Update_price.Inputs[Conditional Split Input]">
-                  <properties>
-                    <property
-                      dataType="System.Boolean"
-                      name="IsDefaultOut">true</property>
-                  </properties>
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\DFT_Load_Dim_Product\Check_Update_price.Outputs[Conditional Split Error Output]"
-                  description="Error Output of the Conditional Split Transformation"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="Conditional Split Error Output"
-                  synchronousInputId="Package\DFT_Load_Dim_Product\Check_Update_price.Inputs[Conditional Split Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\DFT_Load_Dim_Product\Check_Update_price.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\DFT_Load_Dim_Product\Check_Update_price.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\DFT_Load_Dim_Product\Check_Update_price.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\DFT_Load_Dim_Product\Check_Update_price.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\DFT_Load_Dim_Product\Conditional Split"
-              componentClassID="Microsoft.ConditionalSplit"
-              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
-              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
-              name="Conditional Split"
-              usesDispositions="true">
-              <inputs>
-                <input
-                  refId="Package\DFT_Load_Dim_Product\Conditional Split.Inputs[Conditional Split Input]"
-                  description="Input to the Conditional Split Transformation"
-                  name="Conditional Split Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\DFT_Load_Dim_Product\Conditional Split.Inputs[Conditional Split Input].Columns[product_category_name_english_std]"
+                      refId="Package\DFT_Load_Dim_Product\Check_Null.Inputs[Conditional Split Input].Columns[product_category_name_english_std]"
                       cachedDataType="wstr"
                       cachedLength="255"
                       cachedName="product_category_name_english_std"
-                      lineageId="Package\DFT_Load_Dim_Product\DC Standardize Location.Outputs[Derived Column Output].Columns[product_category_name_english_std]" />
+                      lineageId="Package\DFT_Load_Dim_Product\Normalize data.Outputs[Derived Column Output].Columns[product_category_name_english_std]" />
                     <inputColumn
-                      refId="Package\DFT_Load_Dim_Product\Conditional Split.Inputs[Conditional Split Input].Columns[product_price_std]"
+                      refId="Package\DFT_Load_Dim_Product\Check_Null.Inputs[Conditional Split Input].Columns[product_price_std]"
                       cachedDataType="numeric"
                       cachedName="product_price_std"
                       cachedPrecision="38"
                       cachedScale="6"
-                      lineageId="Package\DFT_Load_Dim_Product\DC Standardize Location.Outputs[Derived Column Output].Columns[product_price_std]" />
+                      lineageId="Package\DFT_Load_Dim_Product\Normalize data.Outputs[Derived Column Output].Columns[product_price_std]" />
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\DFT_Load_Dim_Product\Conditional Split.Outputs[ValidProduct]"
+                  refId="Package\DFT_Load_Dim_Product\Check_Null.Outputs[ValidProduct]"
                   description="Output 2 of the Conditional Split Transformation"
                   errorOrTruncationOperation="Computation"
                   errorRowDisposition="FailComponent"
                   exclusionGroup="1"
                   name="ValidProduct"
-                  synchronousInputId="Package\DFT_Load_Dim_Product\Conditional Split.Inputs[Conditional Split Input]"
+                  synchronousInputId="Package\DFT_Load_Dim_Product\Check_Null.Inputs[Conditional Split Input]"
                   truncationRowDisposition="FailComponent">
                   <properties>
                     <property
                       containsID="true"
                       dataType="System.String"
                       description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
-                      name="Expression">![ISNULL](#{Package\DFT_Load_Dim_Product\DC Standardize Location.Outputs[Derived Column Output].Columns[product_category_name_english_std]}) &amp;&amp; ![ISNULL](#{Package\DFT_Load_Dim_Product\DC Standardize Location.Outputs[Derived Column Output].Columns[product_price_std]})</property>
+                      name="Expression">![ISNULL](#{Package\DFT_Load_Dim_Product\Normalize data.Outputs[Derived Column Output].Columns[product_category_name_english_std]}) &amp;&amp; ![ISNULL](#{Package\DFT_Load_Dim_Product\Normalize data.Outputs[Derived Column Output].Columns[product_price_std]})</property>
                     <property
                       containsID="true"
                       dataType="System.String"
@@ -189,11 +91,11 @@
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\DFT_Load_Dim_Product\Conditional Split.Outputs[Invalidproduct]"
+                  refId="Package\DFT_Load_Dim_Product\Check_Null.Outputs[Invalidproduct]"
                   description="Default Output of the Conditional Split Transformation"
                   exclusionGroup="1"
                   name="Invalidproduct"
-                  synchronousInputId="Package\DFT_Load_Dim_Product\Conditional Split.Inputs[Conditional Split Input]">
+                  synchronousInputId="Package\DFT_Load_Dim_Product\Check_Null.Inputs[Conditional Split Input]">
                   <properties>
                     <property
                       dataType="System.Boolean"
@@ -202,23 +104,143 @@
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\DFT_Load_Dim_Product\Conditional Split.Outputs[Conditional Split Error Output]"
+                  refId="Package\DFT_Load_Dim_Product\Check_Null.Outputs[Conditional Split Error Output]"
                   description="Error Output of the Conditional Split Transformation"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="Conditional Split Error Output"
-                  synchronousInputId="Package\DFT_Load_Dim_Product\Conditional Split.Inputs[Conditional Split Input]">
+                  synchronousInputId="Package\DFT_Load_Dim_Product\Check_Null.Inputs[Conditional Split Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\DFT_Load_Dim_Product\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      refId="Package\DFT_Load_Dim_Product\Check_Null.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\DFT_Load_Dim_Product\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      lineageId="Package\DFT_Load_Dim_Product\Check_Null.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\DFT_Load_Dim_Product\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      refId="Package\DFT_Load_Dim_Product\Check_Null.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\DFT_Load_Dim_Product\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\DFT_Load_Dim_Product\Check_Null.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Load_Dim_Product\Check_Update"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="Check_Update"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT_Load_Dim_Product\Check_Update.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Load_Dim_Product\Check_Update.Inputs[Conditional Split Input].Columns[product_price_exist]"
+                      cachedDataType="numeric"
+                      cachedName="product_price_exist"
+                      cachedPrecision="18"
+                      cachedScale="2"
+                      lineageId="Package\DFT_Load_Dim_Product\exist_product.Outputs[Lookup Match Output].Columns[product_price_exist]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_Dim_Product\Check_Update.Inputs[Conditional Split Input].Columns[product_price_std]"
+                      cachedDataType="numeric"
+                      cachedName="product_price_std"
+                      cachedPrecision="38"
+                      cachedScale="6"
+                      lineageId="Package\DFT_Load_Dim_Product\Normalize data.Outputs[Derived Column Output].Columns[product_price_std]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_Dim_Product\Check_Update.Inputs[Conditional Split Input].Columns[product_description_length]"
+                      cachedDataType="i4"
+                      cachedName="product_description_length"
+                      lineageId="Package\DFT_Load_Dim_Product\OLE DB Source.Outputs[OLE DB Source Output].Columns[product_description_length]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_Dim_Product\Check_Update.Inputs[Conditional Split Input].Columns[product_category_name_english_std]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="product_category_name_english_std"
+                      lineageId="Package\DFT_Load_Dim_Product\Normalize data.Outputs[Derived Column Output].Columns[product_category_name_english_std]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_Dim_Product\Check_Update.Inputs[Conditional Split Input].Columns[product_description_length_exist]"
+                      cachedDataType="i4"
+                      cachedName="product_description_length_exist"
+                      lineageId="Package\DFT_Load_Dim_Product\exist_product.Outputs[Lookup Match Output].Columns[product_description_length_exist]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_Dim_Product\Check_Update.Inputs[Conditional Split Input].Columns[product_category_name_english_exist]"
+                      cachedDataType="wstr"
+                      cachedLength="200"
+                      cachedName="product_category_name_english_exist"
+                      lineageId="Package\DFT_Load_Dim_Product\exist_product.Outputs[Lookup Match Output].Columns[product_category_name_english_exist]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Load_Dim_Product\Check_Update.Outputs[UpdatePrice]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="UpdatePrice"
+                  synchronousInputId="Package\DFT_Load_Dim_Product\Check_Update.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">#{Package\DFT_Load_Dim_Product\Normalize data.Outputs[Derived Column Output].Columns[product_price_std]} != #{Package\DFT_Load_Dim_Product\exist_product.Outputs[Lookup Match Output].Columns[product_price_exist]} || #{Package\DFT_Load_Dim_Product\Normalize data.Outputs[Derived Column Output].Columns[product_category_name_english_std]} != #{Package\DFT_Load_Dim_Product\exist_product.Outputs[Lookup Match Output].Columns[product_category_name_english_exist]} || #{Package\DFT_Load_Dim_Product\OLE DB Source.Outputs[OLE DB Source Output].Columns[product_description_length]} != #{Package\DFT_Load_Dim_Product\exist_product.Outputs[Lookup Match Output].Columns[product_description_length_exist]}</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">product_price_std != product_price_exist || product_category_name_english_std != product_category_name_english_exist || product_description_length != product_description_length_exist</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Load_Dim_Product\Check_Update.Outputs[NonUpdatePrice]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="NonUpdatePrice"
+                  synchronousInputId="Package\DFT_Load_Dim_Product\Check_Update.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Load_Dim_Product\Check_Update.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\DFT_Load_Dim_Product\Check_Update.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Product\Check_Update.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Dim_Product\Check_Update.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Product\Check_Update.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Dim_Product\Check_Update.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -292,119 +314,6 @@
                       refId="Package\DFT_Load_Dim_Product\Create_Version.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
                       dataType="i4"
                       lineageId="Package\DFT_Load_Dim_Product\Create_Version.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\DFT_Load_Dim_Product\DC Standardize Location"
-              componentClassID="Microsoft.DerivedColumn"
-              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
-              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
-              name="DC Standardize Location"
-              usesDispositions="true">
-              <inputs>
-                <input
-                  refId="Package\DFT_Load_Dim_Product\DC Standardize Location.Inputs[Derived Column Input]"
-                  description="Input to the Derived Column Transformation"
-                  name="Derived Column Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\DFT_Load_Dim_Product\DC Standardize Location.Inputs[Derived Column Input].Columns[product_category_name_english]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="product_category_name_english"
-                      lineageId="Package\DFT_Load_Dim_Product\OLE DB Source.Outputs[OLE DB Source Output].Columns[product_category_name_english]" />
-                    <inputColumn
-                      refId="Package\DFT_Load_Dim_Product\DC Standardize Location.Inputs[Derived Column Input].Columns[product_price]"
-                      cachedDataType="numeric"
-                      cachedName="product_price"
-                      cachedPrecision="38"
-                      cachedScale="6"
-                      lineageId="Package\DFT_Load_Dim_Product\OLE DB Source.Outputs[OLE DB Source Output].Columns[product_price]" />
-                  </inputColumns>
-                  <externalMetadataColumns />
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\DFT_Load_Dim_Product\DC Standardize Location.Outputs[Derived Column Output]"
-                  description="Default Output of the Derived Column Transformation"
-                  exclusionGroup="1"
-                  name="Derived Column Output"
-                  synchronousInputId="Package\DFT_Load_Dim_Product\DC Standardize Location.Inputs[Derived Column Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\DFT_Load_Dim_Product\DC Standardize Location.Outputs[Derived Column Output].Columns[product_category_name_english_std]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Computation"
-                      errorRowDisposition="FailComponent"
-                      length="255"
-                      lineageId="Package\DFT_Load_Dim_Product\DC Standardize Location.Outputs[Derived Column Output].Columns[product_category_name_english_std]"
-                      name="product_category_name_english_std"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.String"
-                          description="Derived Column Expression"
-                          name="Expression">[TRIM](#{Package\DFT_Load_Dim_Product\OLE DB Source.Outputs[OLE DB Source Output].Columns[product_category_name_english]})</property>
-                        <property
-                          containsID="true"
-                          dataType="System.String"
-                          description="Derived Column Friendly Expression"
-                          expressionType="Notify"
-                          name="FriendlyExpression">TRIM(product_category_name_english)</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\DFT_Load_Dim_Product\DC Standardize Location.Outputs[Derived Column Output].Columns[product_price_std]"
-                      dataType="numeric"
-                      errorOrTruncationOperation="Computation"
-                      errorRowDisposition="FailComponent"
-                      lineageId="Package\DFT_Load_Dim_Product\DC Standardize Location.Outputs[Derived Column Output].Columns[product_price_std]"
-                      name="product_price_std"
-                      precision="38"
-                      scale="6"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.String"
-                          description="Derived Column Expression"
-                          name="Expression">[ROUND](#{Package\DFT_Load_Dim_Product\OLE DB Source.Outputs[OLE DB Source Output].Columns[product_price]},2)</property>
-                        <property
-                          containsID="true"
-                          dataType="System.String"
-                          description="Derived Column Friendly Expression"
-                          expressionType="Notify"
-                          name="FriendlyExpression">ROUND(product_price,2)</property>
-                      </properties>
-                    </outputColumn>
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\DFT_Load_Dim_Product\DC Standardize Location.Outputs[Derived Column Error Output]"
-                  description="Error Output of the Derived Column Transformation"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="Derived Column Error Output"
-                  synchronousInputId="Package\DFT_Load_Dim_Product\DC Standardize Location.Inputs[Derived Column Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\DFT_Load_Dim_Product\DC Standardize Location.Outputs[Derived Column Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\DFT_Load_Dim_Product\DC Standardize Location.Outputs[Derived Column Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\DFT_Load_Dim_Product\DC Standardize Location.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\DFT_Load_Dim_Product\DC Standardize Location.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -583,6 +492,35 @@ where [refTable].[product_id] = ?</property>
                           name="CopyFromReferenceColumn">product_price</property>
                       </properties>
                     </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Product\exist_product.Outputs[Lookup Match Output].Columns[product_description_length_exist]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\DFT_Load_Dim_Product\exist_product.Outputs[Lookup Match Output].Columns[product_description_length_exist]"
+                      name="product_description_length_exist"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">product_description_length</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Product\exist_product.Outputs[Lookup Match Output].Columns[product_category_name_english_exist]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="200"
+                      lineageId="Package\DFT_Load_Dim_Product\exist_product.Outputs[Lookup Match Output].Columns[product_category_name_english_exist]"
+                      name="product_category_name_english_exist"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">product_category_name_english</property>
+                      </properties>
+                    </outputColumn>
                   </outputColumns>
                   <externalMetadataColumns />
                 </output>
@@ -709,7 +647,7 @@ where [refTable].[product_id] = ?</property>
                       cachedLength="255"
                       cachedName="product_category_name_english_std"
                       externalMetadataColumnId="Package\DFT_Load_Dim_Product\Insert new record.Inputs[OLE DB Destination Input].ExternalColumns[product_category_name_english]"
-                      lineageId="Package\DFT_Load_Dim_Product\DC Standardize Location.Outputs[Derived Column Output].Columns[product_category_name_english_std]" />
+                      lineageId="Package\DFT_Load_Dim_Product\Normalize data.Outputs[Derived Column Output].Columns[product_category_name_english_std]" />
                     <inputColumn
                       refId="Package\DFT_Load_Dim_Product\Insert new record.Inputs[OLE DB Destination Input].Columns[product_description_length]"
                       cachedDataType="i4"
@@ -723,7 +661,7 @@ where [refTable].[product_id] = ?</property>
                       cachedPrecision="38"
                       cachedScale="6"
                       externalMetadataColumnId="Package\DFT_Load_Dim_Product\Insert new record.Inputs[OLE DB Destination Input].ExternalColumns[product_price]"
-                      lineageId="Package\DFT_Load_Dim_Product\DC Standardize Location.Outputs[Derived Column Output].Columns[product_price_std]" />
+                      lineageId="Package\DFT_Load_Dim_Product\Normalize data.Outputs[Derived Column Output].Columns[product_price_std]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -874,7 +812,7 @@ where [refTable].[product_id] = ?</property>
                       cachedLength="255"
                       cachedName="product_category_name_english_std"
                       externalMetadataColumnId="Package\DFT_Load_Dim_Product\Insert new version.Inputs[OLE DB Destination Input].ExternalColumns[product_category_name_english]"
-                      lineageId="Package\DFT_Load_Dim_Product\DC Standardize Location.Outputs[Derived Column Output].Columns[product_category_name_english_std]" />
+                      lineageId="Package\DFT_Load_Dim_Product\Normalize data.Outputs[Derived Column Output].Columns[product_category_name_english_std]" />
                     <inputColumn
                       refId="Package\DFT_Load_Dim_Product\Insert new version.Inputs[OLE DB Destination Input].Columns[product_description_length]"
                       cachedDataType="i4"
@@ -888,7 +826,7 @@ where [refTable].[product_id] = ?</property>
                       cachedPrecision="38"
                       cachedScale="6"
                       externalMetadataColumnId="Package\DFT_Load_Dim_Product\Insert new version.Inputs[OLE DB Destination Input].ExternalColumns[product_price]"
-                      lineageId="Package\DFT_Load_Dim_Product\DC Standardize Location.Outputs[Derived Column Output].Columns[product_price_std]" />
+                      lineageId="Package\DFT_Load_Dim_Product\Normalize data.Outputs[Derived Column Output].Columns[product_price_std]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -941,6 +879,119 @@ where [refTable].[product_id] = ?</property>
                       refId="Package\DFT_Load_Dim_Product\Insert new version.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       dataType="i4"
                       lineageId="Package\DFT_Load_Dim_Product\Insert new version.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Load_Dim_Product\Normalize data"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Normalize data"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT_Load_Dim_Product\Normalize data.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Load_Dim_Product\Normalize data.Inputs[Derived Column Input].Columns[product_category_name_english]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="product_category_name_english"
+                      lineageId="Package\DFT_Load_Dim_Product\OLE DB Source.Outputs[OLE DB Source Output].Columns[product_category_name_english]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_Dim_Product\Normalize data.Inputs[Derived Column Input].Columns[product_price]"
+                      cachedDataType="numeric"
+                      cachedName="product_price"
+                      cachedPrecision="38"
+                      cachedScale="6"
+                      lineageId="Package\DFT_Load_Dim_Product\OLE DB Source.Outputs[OLE DB Source Output].Columns[product_price]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Load_Dim_Product\Normalize data.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\DFT_Load_Dim_Product\Normalize data.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Product\Normalize data.Outputs[Derived Column Output].Columns[product_category_name_english_std]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\DFT_Load_Dim_Product\Normalize data.Outputs[Derived Column Output].Columns[product_category_name_english_std]"
+                      name="product_category_name_english_std"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[TRIM](#{Package\DFT_Load_Dim_Product\OLE DB Source.Outputs[OLE DB Source Output].Columns[product_category_name_english]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">TRIM(product_category_name_english)</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Product\Normalize data.Outputs[Derived Column Output].Columns[product_price_std]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT_Load_Dim_Product\Normalize data.Outputs[Derived Column Output].Columns[product_price_std]"
+                      name="product_price_std"
+                      precision="38"
+                      scale="6"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[ROUND](#{Package\DFT_Load_Dim_Product\OLE DB Source.Outputs[OLE DB Source Output].Columns[product_price]},2)</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">ROUND(product_price,2)</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Load_Dim_Product\Normalize data.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\DFT_Load_Dim_Product\Normalize data.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Product\Normalize data.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Dim_Product\Normalize data.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Product\Normalize data.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Dim_Product\Normalize data.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -1227,12 +1278,12 @@ GROUP BY
               startId="Package\DFT_Load_Dim_Product\Update_Version.Outputs[Derived Column Output]" />
             <path
               refId="Package\DFT_Load_Dim_Product.Paths[Derived Column Output2]"
-              endId="Package\DFT_Load_Dim_Product\Conditional Split.Inputs[Conditional Split Input]"
+              endId="Package\DFT_Load_Dim_Product\Check_Null.Inputs[Conditional Split Input]"
               name="Derived Column Output"
-              startId="Package\DFT_Load_Dim_Product\DC Standardize Location.Outputs[Derived Column Output]" />
+              startId="Package\DFT_Load_Dim_Product\Normalize data.Outputs[Derived Column Output]" />
             <path
               refId="Package\DFT_Load_Dim_Product.Paths[Lookup Match Output]"
-              endId="Package\DFT_Load_Dim_Product\Check_Update_price.Inputs[Conditional Split Input]"
+              endId="Package\DFT_Load_Dim_Product\Check_Update.Inputs[Conditional Split Input]"
               name="Lookup Match Output"
               startId="Package\DFT_Load_Dim_Product\exist_product.Outputs[Lookup Match Output]" />
             <path
@@ -1242,19 +1293,19 @@ GROUP BY
               startId="Package\DFT_Load_Dim_Product\exist_product.Outputs[Lookup No Match Output]" />
             <path
               refId="Package\DFT_Load_Dim_Product.Paths[OLE DB Source Output]"
-              endId="Package\DFT_Load_Dim_Product\DC Standardize Location.Inputs[Derived Column Input]"
+              endId="Package\DFT_Load_Dim_Product\Normalize data.Inputs[Derived Column Input]"
               name="OLE DB Source Output"
               startId="Package\DFT_Load_Dim_Product\OLE DB Source.Outputs[OLE DB Source Output]" />
             <path
               refId="Package\DFT_Load_Dim_Product.Paths[UpdateLocation]"
               endId="Package\DFT_Load_Dim_Product\Update_Version.Inputs[Derived Column Input]"
               name="UpdateLocation"
-              startId="Package\DFT_Load_Dim_Product\Check_Update_price.Outputs[UpdatePrice]" />
+              startId="Package\DFT_Load_Dim_Product\Check_Update.Outputs[UpdatePrice]" />
             <path
               refId="Package\DFT_Load_Dim_Product.Paths[ValidProduct]"
               endId="Package\DFT_Load_Dim_Product\exist_product.Inputs[Lookup Input]"
               name="ValidProduct"
-              startId="Package\DFT_Load_Dim_Product\Conditional Split.Outputs[ValidProduct]" />
+              startId="Package\DFT_Load_Dim_Product\Check_Null.Outputs[ValidProduct]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
@@ -1285,79 +1336,127 @@ GROUP BY
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="165.6,41.6"
-          Id="Package\DFT_Load_Dim_Product\Insert new version"
-          TopLeft="640.357144220295,509.761764348113" />
-        <NodeLayout
-          Size="174.4,41.6"
-          Id="Package\DFT_Load_Dim_Product\Check_Update_price"
-          TopLeft="364.285715061183,410.073529052319" />
-        <NodeLayout
-          Size="192.8,41.6"
-          Id="Package\DFT_Load_Dim_Product\DC Standardize Location"
-          TopLeft="40.5357143720041,159.058823389991" />
-        <NodeLayout
           Size="162.4,41.6"
           Id="Package\DFT_Load_Dim_Product\Insert new record"
           TopLeft="268.750000572099,512.926470138635" />
-        <NodeLayout
-          Size="154.4,41.6"
-          Id="Package\DFT_Load_Dim_Product\Conditional Split"
-          TopLeft="61.2500001303851,272.999999760705" />
-        <NodeLayout
-          Size="141.6,41.6"
-          Id="Package\DFT_Load_Dim_Product\exist_product"
-          TopLeft="25.17857148217,405.611764356659" />
-        <NodeLayout
-          Size="152.8,41.6"
-          Id="Package\DFT_Load_Dim_Product\Update_Version"
-          TopLeft="646.6071442336,410.349999729369" />
         <NodeLayout
           Size="149.6,41.6"
           Id="Package\DFT_Load_Dim_Product\Create_Version"
           TopLeft="39.2857143693432,517.13235248789" />
         <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\DFT_Load_Dim_Product\Update_Version"
+          TopLeft="646.6071442336,410.349999729369" />
+        <NodeLayout
+          Size="165.6,41.6"
+          Id="Package\DFT_Load_Dim_Product\Insert new version"
+          TopLeft="640.357144220295,509.761764348113" />
+        <NodeLayout
+          Size="148.8,41.6"
+          Id="Package\DFT_Load_Dim_Product\Normalize data"
+          TopLeft="40.5357143720041,159.058823389991" />
+        <NodeLayout
           Size="149.6,41.6"
           Id="Package\DFT_Load_Dim_Product\OLE DB Source"
           TopLeft="64.8214287094161,18.3529411603835" />
+        <NodeLayout
+          Size="141.6,41.6"
+          Id="Package\DFT_Load_Dim_Product\exist_product"
+          TopLeft="25.17857148217,405.611764356659" />
+        <NodeLayout
+          Size="145.6,41.6"
+          Id="Package\DFT_Load_Dim_Product\Check_Update"
+          TopLeft="364.285715061183,410.073529052319" />
+        <NodeLayout
+          Size="130.4,41.6"
+          Id="Package\DFT_Load_Dim_Product\Check_Null"
+          TopLeft="61.2500001303851,272.999999760705" />
         <EdgeLayout
-          Id="Package\DFT_Load_Dim_Product.Paths[UpdateLocation]"
-          TopLeft="538.685715061183,431.011764390844">
+          Id="Package\DFT_Load_Dim_Product.Paths[ValidProduct]"
+          TopLeft="126.450000130385,314.599999760705">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="107.921429172417,0"
+              EndConnector="-30.4714286482151,91.011764595954"
               Start="0,0"
-              End="100.421429172417,0">
+              End="-30.4714286482151,83.511764595954">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="100.421429172417,0" />
+                    End="0,41.505882297977" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,41.505882297977"
+                    Point2="0,45.505882297977"
+                    Point3="-4,45.505882297977" />
+                  <mssgle:LineSegment
+                    End="-26.4714286482151,45.505882297977" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-26.4714286482151,45.505882297977"
+                    Point2="-30.4714286482151,45.505882297977"
+                    Point3="-30.4714286482151,49.505882297977" />
+                  <mssgle:LineSegment
+                    End="-30.4714286482151,83.511764595954" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="14.4707145862086,5,71.48,16"
+              BoundingBox="-43.7152846366075,50.505882297977,56.959140625,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_Load_Dim_Product.Paths[UpdateLocation]"
+          TopLeft="509.885715061183,431.011764390844">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="136.721429172417,0"
+              Start="0,0"
+              End="129.221429172417,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="129.221429172417,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="37.6954216174585,5,53.8305859375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\DFT_Load_Dim_Product.Paths[OLE DB Source Output]"
-          TopLeft="138.27857154071,59.9529411603835">
+          TopLeft="139.621428709416,59.9529411603835">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,99.1058822296075"
+              EndConnector="-24.685714337412,99.1058822296075"
               Start="0,0"
-              End="0,91.6058822296075">
+              End="-24.685714337412,91.6058822296075">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,91.6058822296075" />
+                    End="0,45.5529411148038" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,45.5529411148038"
+                    Point2="0,49.5529411148038"
+                    Point3="-4,49.5529411148038" />
+                  <mssgle:LineSegment
+                    End="-20.685714337412,49.5529411148038" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-20.685714337412,49.5529411148038"
+                    Point2="-24.685714337412,49.5529411148038"
+                    Point3="-24.685714337412,53.5529411148038" />
+                  <mssgle:LineSegment
+                    End="-24.685714337412,91.6058822296075" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1400,6 +1499,64 @@ GROUP BY
             <mssgm:EdgeLabel
               BoundingBox="-46.7528152751634,39.9602940656155,111.6127734375,11.609375"
               RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_Load_Dim_Product.Paths[Lookup Match Output]"
+          TopLeft="166.77857148217,428.642646704489">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="197.507143579013,0"
+              Start="0,0"
+              End="190.007143579013,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="190.007143579013,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="46.8121850707565,5,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_Load_Dim_Product.Paths[Derived Column Output2]"
+          TopLeft="114.935714372004,200.658823389991">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="11.514285758381,72.341176370714"
+              Start="0,0"
+              End="11.514285758381,64.841176370714">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.170588185357" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,32.170588185357"
+                    Point2="0,36.170588185357"
+                    Point3="4,36.170588185357" />
+                  <mssgle:LineSegment
+                    End="7.51428575838099,36.170588185357" />
+                  <mssgle:CubicBezierSegment
+                    Point1="7.51428575838099,36.170588185357"
+                    Point2="11.514285758381,36.170588185357"
+                    Point3="11.514285758381,40.170588185357" />
+                  <mssgle:LineSegment
+                    End="11.514285758381,64.841176370714" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -1446,104 +1603,9 @@ GROUP BY
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <EdgeLayout
-          Id="Package\DFT_Load_Dim_Product.Paths[Derived Column Output2]"
-          TopLeft="137.692857251195,200.658823389991">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,72.341176370714"
-              Start="0,0"
-              End="0,64.841176370714">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,64.841176370714" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\DFT_Load_Dim_Product.Paths[ValidProduct]"
-          TopLeft="138.450000130385,314.599999760705">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-42.4714286482151,91.011764595954"
-              Start="0,0"
-              End="-42.4714286482151,83.511764595954">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,41.505882297977" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,41.505882297977"
-                    Point2="0,45.505882297977"
-                    Point3="-4,45.505882297977" />
-                  <mssgle:LineSegment
-                    End="-38.4714286482151,45.505882297977" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-38.4714286482151,45.505882297977"
-                    Point2="-42.4714286482151,45.505882297977"
-                    Point3="-42.4714286482151,49.505882297977" />
-                  <mssgle:LineSegment
-                    End="-42.4714286482151,83.511764595954" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-49.7152846366075,50.505882297977,56.959140625,9.7490234375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\DFT_Load_Dim_Product.Paths[Lookup Match Output]"
-          TopLeft="166.77857148217,428.642646704489">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="197.507143579013,0"
-              Start="0,0"
-              End="190.007143579013,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="190.007143579013,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="46.8121850707565,5,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\DFT_Load_Dim_Product\Insert new version">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\DFT_Load_Dim_Product\Insert new record">
     <Properties>
@@ -1558,12 +1620,33 @@ GROUP BY
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
+    design-time-name="Package\DFT_Load_Dim_Product\Insert new version">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_Load_Dim_Product\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
     design-time-name="Package\DFT_Load_Dim_Product\exist_product">
     <Properties>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -1573,16 +1656,8 @@ GROUP BY
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
       </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\DFT_Load_Dim_Product\OLE DB Source">
-    <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
       </Property>

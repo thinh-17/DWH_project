@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package4"
   DTS:PackageType="5"
-  DTS:VersionBuild="2"
-  DTS:VersionGUID="{752340D0-9C57-406F-B80A-4B73EFF6C61D}">
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{F7CAEB10-98D3-46AA-B9E4-61DA056D29CB}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -31,6 +31,95 @@
         <pipeline
           version="1">
           <components>
+            <component
+              refId="Package\DFT_Load_Dim_Review_Score\Conditional Split"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="Conditional Split"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT_Load_Dim_Review_Score\Conditional Split.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Load_Dim_Review_Score\Conditional Split.Inputs[Conditional Split Input].Columns[review_score]"
+                      cachedDataType="i4"
+                      cachedName="review_score"
+                      lineageId="Package\DFT_Load_Dim_Review_Score\OLE DB Source.Outputs[OLE DB Source Output].Columns[review_score]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Load_Dim_Review_Score\Conditional Split.Outputs[review_score_valid]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="review_score_valid"
+                  synchronousInputId="Package\DFT_Load_Dim_Review_Score\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">![ISNULL](#{Package\DFT_Load_Dim_Review_Score\OLE DB Source.Outputs[OLE DB Source Output].Columns[review_score]})</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">!ISNULL(review_score)</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Load_Dim_Review_Score\Conditional Split.Outputs[review_score_invalid]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="review_score_invalid"
+                  synchronousInputId="Package\DFT_Load_Dim_Review_Score\Conditional Split.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Load_Dim_Review_Score\Conditional Split.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\DFT_Load_Dim_Review_Score\Conditional Split.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Review_Score\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Dim_Review_Score\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Review_Score\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Dim_Review_Score\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
             <component
               refId="Package\DFT_Load_Dim_Review_Score\Derived Column"
               componentClassID="Microsoft.DerivedColumn"
@@ -502,9 +591,14 @@ where [refTable].[review_score] = ?</property>
               startId="Package\DFT_Load_Dim_Review_Score\Lookup.Outputs[Lookup No Match Output]" />
             <path
               refId="Package\DFT_Load_Dim_Review_Score.Paths[OLE DB Source Output]"
-              endId="Package\DFT_Load_Dim_Review_Score\Lookup.Inputs[Lookup Input]"
+              endId="Package\DFT_Load_Dim_Review_Score\Conditional Split.Inputs[Conditional Split Input]"
               name="OLE DB Source Output"
               startId="Package\DFT_Load_Dim_Review_Score\OLE DB Source.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\DFT_Load_Dim_Review_Score.Paths[review_score_valid]"
+              endId="Package\DFT_Load_Dim_Review_Score\Lookup.Inputs[Lookup Input]"
+              name="review_score_valid"
+              startId="Package\DFT_Load_Dim_Review_Score\Conditional Split.Outputs[review_score_valid]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
@@ -533,57 +627,23 @@ where [refTable].[review_score] = ?</property>
     design-time-name="Package\DFT_Load_Dim_Review_Score">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="170.4,41.6"
-          Id="Package\DFT_Load_Dim_Review_Score\OLE DB Destination"
-          TopLeft="542.857144012744,372.411764379449" />
+          Size="112.8,41.6"
+          Id="Package\DFT_Load_Dim_Review_Score\Lookup"
+          TopLeft="157.857143193179,282.388235050801" />
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\DFT_Load_Dim_Review_Score\Derived Column"
+          TopLeft="395.000000840851,261.529411535465" />
         <NodeLayout
           Size="149.6,41.6"
           Id="Package\DFT_Load_Dim_Review_Score\OLE DB Source"
           TopLeft="58.5714286961115,18.3529411603835" />
         <NodeLayout
-          Size="112.8,41.6"
-          Id="Package\DFT_Load_Dim_Review_Score\Lookup"
-          TopLeft="157.857143193179,282.388235050801" />
-        <EdgeLayout
-          Id="Package\DFT_Load_Dim_Review_Score.Paths[OLE DB Source Output]"
-          TopLeft="133.371428696111,59.9529411603835">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="80.8857144970678,222.435293890417"
-              Start="0,0"
-              End="80.8857144970678,214.935293890417">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,107.217646945209" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,107.217646945209"
-                    Point2="0,111.217646945209"
-                    Point3="4,111.217646945209" />
-                  <mssgle:LineSegment
-                    End="76.8857144970678,111.217646945209" />
-                  <mssgle:CubicBezierSegment
-                    Point1="76.8857144970678,111.217646945209"
-                    Point2="80.8857144970678,111.217646945209"
-                    Point3="80.8857144970678,115.217646945209" />
-                  <mssgle:LineSegment
-                    End="80.8857144970678,214.935293890417" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="152.8,41.6"
-          Id="Package\DFT_Load_Dim_Review_Score\Derived Column"
-          TopLeft="395.000000840851,261.529411535465" />
+          Size="170.4,41.6"
+          Id="Package\DFT_Load_Dim_Review_Score\OLE DB Destination"
+          TopLeft="542.857144012744,372.411764379449" />
         <EdgeLayout
           Id="Package\DFT_Load_Dim_Review_Score.Paths[Lookup No Match Output]"
           TopLeft="270.657143193179,303.188235050801">
@@ -616,7 +676,7 @@ where [refTable].[review_score] = ?</property>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="6.36504210508618,1,111.6127734375,11.609375"
+              BoundingBox="6.3650421050862,1,111.6127734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -654,19 +714,103 @@ where [refTable].[review_score] = ?</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="154.4,41.6"
+          Id="Package\DFT_Load_Dim_Review_Score\Conditional Split"
+          TopLeft="105.714285939324,126.176470477637" />
+        <EdgeLayout
+          Id="Package\DFT_Load_Dim_Review_Score.Paths[OLE DB Source Output]"
+          TopLeft="133.371428696111,59.9529411603835">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="49.5428572432122,66.2235293172532"
+              Start="0,0"
+              End="49.5428572432122,58.7235293172532">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.1117646586266" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29.1117646586266"
+                    Point2="0,33.1117646586266"
+                    Point3="4,33.1117646586266" />
+                  <mssgle:LineSegment
+                    End="45.5428572432122,33.1117646586266" />
+                  <mssgle:CubicBezierSegment
+                    Point1="45.5428572432122,33.1117646586266"
+                    Point2="49.5428572432122,33.1117646586266"
+                    Point3="49.5428572432122,37.1117646586266" />
+                  <mssgle:LineSegment
+                    End="49.5428572432122,58.7235293172532" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_Load_Dim_Review_Score.Paths[review_score_valid]"
+          TopLeft="182.914285939324,167.776470477637">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="31.3428572538553,114.611764573164"
+              Start="0,0"
+              End="31.3428572538553,107.111764573164">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,53.3058822865821" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,53.3058822865821"
+                    Point2="0,57.3058822865821"
+                    Point3="4,57.3058822865821" />
+                  <mssgle:LineSegment
+                    End="27.3428572538553,57.3058822865821" />
+                  <mssgle:CubicBezierSegment
+                    Point1="27.3428572538553,57.3058822865821"
+                    Point2="31.3428572538553,57.3058822865821"
+                    Point3="31.3428572538553,61.3058822865821" />
+                  <mssgle:LineSegment
+                    End="31.3428572538553,107.111764573164" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-26.3781807480723,62.3058822865821,84.09921875,11.0625"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\DFT_Load_Dim_Review_Score\OLE DB Destination">
+    design-time-name="Package\DFT_Load_Dim_Review_Score\Lookup">
     <Properties>
       <Property>
-        <Name>DataSourceViewID</Name>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimReviewScore]</Value>
       </Property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q2:string">Table</Value>
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
@@ -679,25 +823,15 @@ where [refTable].[review_score] = ?</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\DFT_Load_Dim_Review_Score\Lookup">
+    design-time-name="Package\DFT_Load_Dim_Review_Score\OLE DB Destination">
     <Properties>
       <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[dbo].[DimReviewScore]</Value>
+        <Name>DataSourceViewID</Name>
       </Property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
+          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>

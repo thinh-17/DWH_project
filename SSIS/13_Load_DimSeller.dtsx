@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="9"
-  DTS:VersionGUID="{047890BC-F29B-4992-A120-659ED25C1425}">
+  DTS:VersionBuild="10"
+  DTS:VersionGUID="{F31ACCB3-30E6-4CF2-9301-A4FF1F38BEB6}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -120,6 +120,108 @@
               </outputs>
             </component>
             <component
+              refId="Package\DFT_Load_Dim_Seller\Check null"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="Check null"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT_Load_Dim_Seller\Check null.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Load_Dim_Seller\Check null.Inputs[Conditional Split Input].Columns[seller_city_clean]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="seller_city_clean"
+                      lineageId="Package\DFT_Load_Dim_Seller\DC Clean Location.Outputs[Derived Column Output].Columns[seller_city_clean]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_Dim_Seller\Check null.Inputs[Conditional Split Input].Columns[seller_state_clean]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="seller_state_clean"
+                      lineageId="Package\DFT_Load_Dim_Seller\DC Clean Location.Outputs[Derived Column Output].Columns[seller_state_clean]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_Dim_Seller\Check null.Inputs[Conditional Split Input].Columns[seller_id]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="seller_id"
+                      lineageId="Package\DFT_Load_Dim_Seller\OLE DB Source.Outputs[OLE DB Source Output].Columns[seller_id]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Load_Dim_Seller\Check null.Outputs[ValidSeller]"
+                  description="Output 2 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="ValidSeller"
+                  synchronousInputId="Package\DFT_Load_Dim_Seller\Check null.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">![ISNULL](#{Package\DFT_Load_Dim_Seller\OLE DB Source.Outputs[OLE DB Source Output].Columns[seller_id]}) &amp;&amp; ![ISNULL](#{Package\DFT_Load_Dim_Seller\DC Clean Location.Outputs[Derived Column Output].Columns[seller_city_clean]}) &amp;&amp; ![ISNULL](#{Package\DFT_Load_Dim_Seller\DC Clean Location.Outputs[Derived Column Output].Columns[seller_state_clean]})</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">!ISNULL(seller_id) &amp;&amp; !ISNULL(seller_city_clean) &amp;&amp; !ISNULL(seller_state_clean)</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Load_Dim_Seller\Check null.Outputs[InvalidCustomer]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="InvalidCustomer"
+                  synchronousInputId="Package\DFT_Load_Dim_Seller\Check null.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Load_Dim_Seller\Check null.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\DFT_Load_Dim_Seller\Check null.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Seller\Check null.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Dim_Seller\Check null.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Dim_Seller\Check null.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Dim_Seller\Check null.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
               refId="Package\DFT_Load_Dim_Seller\Check_Update_Location"
               componentClassID="Microsoft.ConditionalSplit"
               contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
@@ -143,7 +245,7 @@
                       cachedDataType="wstr"
                       cachedLength="110"
                       cachedName="seller_location_key"
-                      lineageId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Customer.Outputs[Lookup Match Output].Columns[seller_location_key]" />
+                      lineageId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Seller.Outputs[Lookup Match Output].Columns[seller_location_key]" />
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
@@ -163,7 +265,7 @@
                       containsID="true"
                       dataType="System.String"
                       description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
-                      name="Expression">#{Package\DFT_Load_Dim_Seller\Build LocationKey.Outputs[Derived Column Output].Columns[locationKeyInput]} != #{Package\DFT_Load_Dim_Seller\Lookup_Exist_Customer.Outputs[Lookup Match Output].Columns[seller_location_key]}</property>
+                      name="Expression">#{Package\DFT_Load_Dim_Seller\Build LocationKey.Outputs[Derived Column Output].Columns[locationKeyInput]} != #{Package\DFT_Load_Dim_Seller\Lookup_Exist_Seller.Outputs[Lookup Match Output].Columns[seller_location_key]}</property>
                     <property
                       containsID="true"
                       dataType="System.String"
@@ -208,108 +310,6 @@
                       refId="Package\DFT_Load_Dim_Seller\Check_Update_Location.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
                       dataType="i4"
                       lineageId="Package\DFT_Load_Dim_Seller\Check_Update_Location.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\DFT_Load_Dim_Seller\Conditional Split"
-              componentClassID="Microsoft.ConditionalSplit"
-              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
-              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
-              name="Conditional Split"
-              usesDispositions="true">
-              <inputs>
-                <input
-                  refId="Package\DFT_Load_Dim_Seller\Conditional Split.Inputs[Conditional Split Input]"
-                  description="Input to the Conditional Split Transformation"
-                  name="Conditional Split Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\DFT_Load_Dim_Seller\Conditional Split.Inputs[Conditional Split Input].Columns[seller_city_clean]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="seller_city_clean"
-                      lineageId="Package\DFT_Load_Dim_Seller\DC Clean Location.Outputs[Derived Column Output].Columns[seller_city_clean]" />
-                    <inputColumn
-                      refId="Package\DFT_Load_Dim_Seller\Conditional Split.Inputs[Conditional Split Input].Columns[seller_state_clean]"
-                      cachedDataType="wstr"
-                      cachedLength="10"
-                      cachedName="seller_state_clean"
-                      lineageId="Package\DFT_Load_Dim_Seller\DC Clean Location.Outputs[Derived Column Output].Columns[seller_state_clean]" />
-                    <inputColumn
-                      refId="Package\DFT_Load_Dim_Seller\Conditional Split.Inputs[Conditional Split Input].Columns[seller_id]"
-                      cachedDataType="wstr"
-                      cachedLength="50"
-                      cachedName="seller_id"
-                      lineageId="Package\DFT_Load_Dim_Seller\OLE DB Source.Outputs[OLE DB Source Output].Columns[seller_id]" />
-                  </inputColumns>
-                  <externalMetadataColumns />
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\DFT_Load_Dim_Seller\Conditional Split.Outputs[ValidSeller]"
-                  description="Output 2 of the Conditional Split Transformation"
-                  errorOrTruncationOperation="Computation"
-                  errorRowDisposition="FailComponent"
-                  exclusionGroup="1"
-                  name="ValidSeller"
-                  synchronousInputId="Package\DFT_Load_Dim_Seller\Conditional Split.Inputs[Conditional Split Input]"
-                  truncationRowDisposition="FailComponent">
-                  <properties>
-                    <property
-                      containsID="true"
-                      dataType="System.String"
-                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
-                      name="Expression">![ISNULL](#{Package\DFT_Load_Dim_Seller\OLE DB Source.Outputs[OLE DB Source Output].Columns[seller_id]}) &amp;&amp; ![ISNULL](#{Package\DFT_Load_Dim_Seller\DC Clean Location.Outputs[Derived Column Output].Columns[seller_city_clean]}) &amp;&amp; ![ISNULL](#{Package\DFT_Load_Dim_Seller\DC Clean Location.Outputs[Derived Column Output].Columns[seller_state_clean]})</property>
-                    <property
-                      containsID="true"
-                      dataType="System.String"
-                      description="Specifies the friendly version of the expression. This expression version uses column names."
-                      expressionType="Notify"
-                      name="FriendlyExpression">!ISNULL(seller_id) &amp;&amp; !ISNULL(seller_city_clean) &amp;&amp; !ISNULL(seller_state_clean)</property>
-                    <property
-                      dataType="System.Int32"
-                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
-                      name="EvaluationOrder">0</property>
-                  </properties>
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\DFT_Load_Dim_Seller\Conditional Split.Outputs[InvalidCustomer]"
-                  description="Default Output of the Conditional Split Transformation"
-                  exclusionGroup="1"
-                  name="InvalidCustomer"
-                  synchronousInputId="Package\DFT_Load_Dim_Seller\Conditional Split.Inputs[Conditional Split Input]">
-                  <properties>
-                    <property
-                      dataType="System.Boolean"
-                      name="IsDefaultOut">true</property>
-                  </properties>
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\DFT_Load_Dim_Seller\Conditional Split.Outputs[Conditional Split Error Output]"
-                  description="Error Output of the Conditional Split Transformation"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="Conditional Split Error Output"
-                  synchronousInputId="Package\DFT_Load_Dim_Seller\Conditional Split.Inputs[Conditional Split Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\DFT_Load_Dim_Seller\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\DFT_Load_Dim_Seller\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\DFT_Load_Dim_Seller\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\DFT_Load_Dim_Seller\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -895,11 +895,11 @@
               </outputs>
             </component>
             <component
-              refId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Customer"
+              refId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Seller"
               componentClassID="Microsoft.Lookup"
               contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
               description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
-              name="Lookup_Exist_Customer"
+              name="Lookup_Exist_Seller"
               usesDispositions="true"
               version="6">
               <properties>
@@ -985,7 +985,7 @@ where [refTable].[seller_id] = ?</property>
               </properties>
               <connections>
                 <connection
-                  refId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Customer.Connections[OleDbConnection]"
+                  refId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Seller.Connections[OleDbConnection]"
                   connectionManagerID="{92C61F5A-46B9-4BA0-9D3F-5F0222D9D592}:external"
                   connectionManagerRefId="Project.ConnectionManagers[CM_DW_SQLSERVER]"
                   description="Connection manager used to access lookup data."
@@ -993,11 +993,11 @@ where [refTable].[seller_id] = ?</property>
               </connections>
               <inputs>
                 <input
-                  refId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Customer.Inputs[Lookup Input]"
+                  refId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Seller.Inputs[Lookup Input]"
                   name="Lookup Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Customer.Inputs[Lookup Input].Columns[seller_id]"
+                      refId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Seller.Inputs[Lookup Input].Columns[seller_id]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="seller_id"
@@ -1019,17 +1019,17 @@ where [refTable].[seller_id] = ?</property>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Customer.Outputs[Lookup Match Output]"
+                  refId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Seller.Outputs[Lookup Match Output]"
                   errorOrTruncationOperation="Lookup"
                   exclusionGroup="1"
                   name="Lookup Match Output"
-                  synchronousInputId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Customer.Inputs[Lookup Input]">
+                  synchronousInputId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Seller.Inputs[Lookup Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Customer.Outputs[Lookup Match Output].Columns[version]"
+                      refId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Seller.Outputs[Lookup Match Output].Columns[version]"
                       dataType="i4"
                       errorOrTruncationOperation="Copy Column"
-                      lineageId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Customer.Outputs[Lookup Match Output].Columns[version]"
+                      lineageId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Seller.Outputs[Lookup Match Output].Columns[version]"
                       name="version"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -1040,11 +1040,11 @@ where [refTable].[seller_id] = ?</property>
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Customer.Outputs[Lookup Match Output].Columns[seller_location_key]"
+                      refId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Seller.Outputs[Lookup Match Output].Columns[seller_location_key]"
                       dataType="wstr"
                       errorOrTruncationOperation="Copy Column"
                       length="110"
-                      lineageId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Customer.Outputs[Lookup Match Output].Columns[seller_location_key]"
+                      lineageId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Seller.Outputs[Lookup Match Output].Columns[seller_location_key]"
                       name="seller_location_key"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -1058,30 +1058,30 @@ where [refTable].[seller_id] = ?</property>
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Customer.Outputs[Lookup No Match Output]"
+                  refId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Seller.Outputs[Lookup No Match Output]"
                   description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
                   exclusionGroup="1"
                   name="Lookup No Match Output"
-                  synchronousInputId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Customer.Inputs[Lookup Input]">
+                  synchronousInputId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Seller.Inputs[Lookup Input]">
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Customer.Outputs[Lookup Error Output]"
+                  refId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Seller.Outputs[Lookup Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="Lookup Error Output"
-                  synchronousInputId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Customer.Inputs[Lookup Input]">
+                  synchronousInputId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Seller.Inputs[Lookup Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Customer.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      refId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Seller.Outputs[Lookup Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Customer.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      lineageId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Seller.Outputs[Lookup Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Customer.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      refId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Seller.Outputs[Lookup Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Customer.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Seller.Outputs[Lookup Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -1261,7 +1261,7 @@ FROM stg.sellers;</property>
                       refId="Package\DFT_Load_Dim_Seller\Update_Version.Inputs[Derived Column Input].Columns[version]"
                       cachedDataType="i4"
                       cachedName="version"
-                      lineageId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Customer.Outputs[Lookup Match Output].Columns[version]" />
+                      lineageId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Seller.Outputs[Lookup Match Output].Columns[version]" />
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
@@ -1287,7 +1287,7 @@ FROM stg.sellers;</property>
                           containsID="true"
                           dataType="System.String"
                           description="Derived Column Expression"
-                          name="Expression">(DT_I4)(#{Package\DFT_Load_Dim_Seller\Lookup_Exist_Customer.Outputs[Lookup Match Output].Columns[version]} + 1)</property>
+                          name="Expression">(DT_I4)(#{Package\DFT_Load_Dim_Seller\Lookup_Exist_Seller.Outputs[Lookup Match Output].Columns[version]} + 1)</property>
                         <property
                           containsID="true"
                           dataType="System.String"
@@ -1333,12 +1333,12 @@ FROM stg.sellers;</property>
               startId="Package\DFT_Load_Dim_Seller\DC Standardize Location.Outputs[Derived Column Output]" />
             <path
               refId="Package\DFT_Load_Dim_Seller.Paths[Derived Column Output1]"
-              endId="Package\DFT_Load_Dim_Seller\Conditional Split.Inputs[Conditional Split Input]"
+              endId="Package\DFT_Load_Dim_Seller\Check null.Inputs[Conditional Split Input]"
               name="Derived Column Output"
               startId="Package\DFT_Load_Dim_Seller\DC Clean Location.Outputs[Derived Column Output]" />
             <path
               refId="Package\DFT_Load_Dim_Seller.Paths[Derived Column Output2]"
-              endId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Customer.Inputs[Lookup Input]"
+              endId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Seller.Inputs[Lookup Input]"
               name="Derived Column Output"
               startId="Package\DFT_Load_Dim_Seller\Build LocationKey.Outputs[Derived Column Output]" />
             <path
@@ -1355,12 +1355,12 @@ FROM stg.sellers;</property>
               refId="Package\DFT_Load_Dim_Seller.Paths[Lookup Match Output]"
               endId="Package\DFT_Load_Dim_Seller\Check_Update_Location.Inputs[Conditional Split Input]"
               name="Lookup Match Output"
-              startId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Customer.Outputs[Lookup Match Output]" />
+              startId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Seller.Outputs[Lookup Match Output]" />
             <path
               refId="Package\DFT_Load_Dim_Seller.Paths[Lookup No Match Output]"
               endId="Package\DFT_Load_Dim_Seller\Create_Version.Inputs[Derived Column Input]"
               name="Lookup No Match Output"
-              startId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Customer.Outputs[Lookup No Match Output]" />
+              startId="Package\DFT_Load_Dim_Seller\Lookup_Exist_Seller.Outputs[Lookup No Match Output]" />
             <path
               refId="Package\DFT_Load_Dim_Seller.Paths[OLE DB Source Output]"
               endId="Package\DFT_Load_Dim_Seller\DC Standardize Location.Inputs[Derived Column Input]"
@@ -1375,7 +1375,7 @@ FROM stg.sellers;</property>
               refId="Package\DFT_Load_Dim_Seller.Paths[ValidCustomer]"
               endId="Package\DFT_Load_Dim_Seller\Build LocationKey.Inputs[Derived Column Input]"
               name="ValidCustomer"
-              startId="Package\DFT_Load_Dim_Seller\Conditional Split.Outputs[ValidSeller]" />
+              startId="Package\DFT_Load_Dim_Seller\Check null.Outputs[ValidSeller]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
@@ -1426,12 +1426,12 @@ FROM stg.sellers;</property>
           Id="Package\DFT_Load_Dim_Seller\Insert new record"
           TopLeft="268.750000572099,512.926470138635" />
         <NodeLayout
-          Size="154.4,41.6"
-          Id="Package\DFT_Load_Dim_Seller\Conditional Split"
+          Size="126.4,41.6"
+          Id="Package\DFT_Load_Dim_Seller\Check null"
           TopLeft="61.2500001303851,272.999999760705" />
         <NodeLayout
-          Size="191.2,41.6"
-          Id="Package\DFT_Load_Dim_Seller\Lookup_Exist_Customer"
+          Size="172,41.6"
+          Id="Package\DFT_Load_Dim_Seller\Lookup_Exist_Seller"
           TopLeft="25.17857148217,405.611764356659" />
         <NodeLayout
           Size="152.8,41.6"
@@ -1473,25 +1473,25 @@ FROM stg.sellers;</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\DFT_Load_Dim_Seller.Paths[ValidCustomer]"
-          TopLeft="215.650000130385,297.628515193746">
+          TopLeft="187.650000130385,297.628515193746">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="117.171429137825,0"
+              EndConnector="145.171429137825,0"
               Start="0,0"
-              End="109.671429137825,0">
+              End="137.671429137825,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="109.671429137825,0" />
+                    End="137.671429137825,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="31.0388395689125,5,47.59375,9.7490234375"
+              BoundingBox="45.0388395689125,5,47.59375,9.7490234375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -1543,18 +1543,18 @@ FROM stg.sellers;</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\DFT_Load_Dim_Seller.Paths[Lookup No Match Output]"
-          TopLeft="117.432142925757,447.211764356659">
+          TopLeft="112.632142925757,447.211764356659">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,69.9205881312311"
+              EndConnector="0,69.9205881312309"
               Start="0,0"
-              End="0,62.4205881312311">
+              End="0,62.4205881312309">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,62.4205881312311" />
+                    End="0,62.4205881312309" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1567,25 +1567,25 @@ FROM stg.sellers;</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\DFT_Load_Dim_Seller.Paths[Lookup Match Output]"
-          TopLeft="216.37857148217,428.642646704489">
+          TopLeft="197.17857148217,428.642646704489">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="147.907143579013,0"
+              EndConnector="167.107143579013,0"
               Start="0,0"
-              End="140.407143579013,0">
+              End="159.607143579013,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="140.407143579013,0" />
+                    End="159.607143579013,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="22.0121850707565,5,96.3827734375,11.609375"
+              BoundingBox="31.6121850707565,5,96.3827734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -1639,26 +1639,26 @@ FROM stg.sellers;</property>
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-292.84285778604,83.3547337298716"
+              EndConnector="-302.44285778604,83.354733729872"
               Start="0,0"
-              End="-292.84285778604,75.8547337298716">
+              End="-302.44285778604,75.854733729872">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,37.6773668649358" />
+                    End="0,37.677366864936" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,37.6773668649358"
-                    Point2="0,41.6773668649358"
-                    Point3="-4,41.6773668649358" />
+                    Point1="0,37.677366864936"
+                    Point2="0,41.677366864936"
+                    Point3="-4,41.677366864936" />
                   <mssgle:LineSegment
-                    End="-288.84285778604,41.6773668649358" />
+                    End="-298.44285778604,41.677366864936" />
                   <mssgle:CubicBezierSegment
-                    Point1="-288.84285778604,41.6773668649358"
-                    Point2="-292.84285778604,41.6773668649358"
-                    Point3="-292.84285778604,45.6773668649358" />
+                    Point1="-298.44285778604,41.677366864936"
+                    Point2="-302.44285778604,41.677366864936"
+                    Point3="-302.44285778604,45.677366864936" />
                   <mssgle:LineSegment
-                    End="-292.84285778604,75.8547337298716" />
+                    End="-302.44285778604,75.854733729872" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1673,26 +1673,26 @@ FROM stg.sellers;</property>
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-284.08571488024,69.2823528439838"
+              EndConnector="-298.085714880241,69.282352843984"
               Start="0,0"
-              End="-284.08571488024,61.7823528439838">
+              End="-298.085714880241,61.782352843984">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,30.6411764219919" />
+                    End="0,30.641176421992" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,30.6411764219919"
-                    Point2="0,34.6411764219919"
-                    Point3="-4,34.6411764219919" />
+                    Point1="0,30.641176421992"
+                    Point2="0,34.641176421992"
+                    Point3="-4,34.641176421992" />
                   <mssgle:LineSegment
-                    End="-280.08571488024,34.6411764219919" />
+                    End="-294.085714880241,34.641176421992" />
                   <mssgle:CubicBezierSegment
-                    Point1="-280.08571488024,34.6411764219919"
-                    Point2="-284.08571488024,34.6411764219919"
-                    Point3="-284.08571488024,38.6411764219919" />
+                    Point1="-294.085714880241,34.641176421992"
+                    Point2="-298.085714880241,34.641176421992"
+                    Point3="-298.085714880241,38.641176421992" />
                   <mssgle:LineSegment
-                    End="-284.08571488024,61.7823528439838" />
+                    End="-298.085714880241,61.782352843984" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1731,7 +1731,7 @@ FROM stg.sellers;</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\DFT_Load_Dim_Seller\Lookup_Exist_Customer">
+    design-time-name="Package\DFT_Load_Dim_Seller\Lookup_Exist_Seller">
     <Properties>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
