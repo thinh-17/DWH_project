@@ -87,7 +87,6 @@ BEGIN
         total_orders_approved INT NOT NULL DEFAULT 0,
         total_orders_delivered INT NOT NULL DEFAULT 0,
         total_orders_cancelled INT NOT NULL DEFAULT 0,
-
         total_revenue DECIMAL(18,2) NOT NULL DEFAULT 0,
 
         CONSTRAINT FK_FDOS_Date
@@ -105,17 +104,12 @@ BEGIN
     (
         snapshot_date_key INT NOT NULL,
         seller_key INT NOT NULL,
-
         orders_created_cnt INT NOT NULL DEFAULT 0,
         items_sold_cnt INT NOT NULL DEFAULT 0,
-
         total_revenue DECIMAL(18,2) NOT NULL DEFAULT 0,
-
         delivered_orders_cnt INT NOT NULL DEFAULT 0,
         cancelled_orders_cnt INT NOT NULL DEFAULT 0,
-
         avg_review_score DECIMAL(5,2) NULL,
-
         distinct_products_sold INT NOT NULL DEFAULT 0,
 
         /* Composite PK */
@@ -144,11 +138,8 @@ BEGIN
     (
         snapshot_date_key INT NOT NULL,
         product_key INT NOT NULL,
-
         items_sold_cnt INT NOT NULL DEFAULT 0,
-
         total_revenue DECIMAL(18,2) NOT NULL DEFAULT 0,
-
         avg_review_score DECIMAL(5,2) NULL,
 
         CONSTRAINT PK_FCT_DAILY_PRODUCT_SNAPSHOT
@@ -172,15 +163,10 @@ BEGIN
     CREATE TABLE dbo.FCT_CUSTOMER_BEHAVIOR_SNAPSHOT
     (
         customer_key INT NOT NULL PRIMARY KEY,
-
         avg_score_review DECIMAL(5,2) NULL,
-
         total_spend DECIMAL(18,2) NOT NULL DEFAULT 0,
-
         order_cnt INT NOT NULL DEFAULT 0,
-
         order_cancelled_cnt INT NOT NULL DEFAULT 0,
-
         avg_day_return_to_buy DECIMAL(10,2) NULL,
 
         CONSTRAINT FK_FCBS_Customer
