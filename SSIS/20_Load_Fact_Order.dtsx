@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="20_Load_Fact_Order"
   DTS:PackageType="5"
-  DTS:VersionBuild="27"
-  DTS:VersionGUID="{6CDE6680-3557-40D9-8899-75348D425F88}">
+  DTS:VersionBuild="29"
+  DTS:VersionGUID="{71D3B9D9-EC2F-450D-84D4-5D7C90AAA0AB}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -546,14 +546,14 @@ LEFT JOIN
         <NodeLayout
           Size="170.4,41.6"
           Id="Package\DFT_Load_Fact_Order\OLE DB Destination"
-          TopLeft="435.000000926001,392.294117303198" />
+          TopLeft="441.428572368257,392.294117303198" />
         <NodeLayout
           Size="149.6,41.6"
           Id="Package\DFT_Load_Fact_Order\OLE DB Source"
           TopLeft="444.285715231482,217.176470397872" />
         <EdgeLayout
           Id="Package\DFT_Load_Fact_Order.Paths[OLE DB Source Output]"
-          TopLeft="519.642858078741,258.776470397872">
+          TopLeft="522.85714379987,258.776470397872">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"

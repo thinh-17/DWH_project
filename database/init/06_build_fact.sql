@@ -99,67 +99,119 @@ LEFT JOIN dbo.DimDate dd_answer
        = dd_answer.date_key;
 
 -- ============================================
--- 3 Fact Daily Order Snapshot
+-- 3 Fact Daily Order Snapshot vừa fix
 -- detail: snapshot hàng ngày, mỗi ngày có một bản ghi tổng hợp số lượng order, doanh thu, ... (sạch không thêm check)
 -- ============================================
+WITH order_base AS (
+    SELECT
+        dod.order_id,
+        dod.purchase_date_key,
+
+        /* chuẩn hóa status về 1 dòng / order */
+        MAX(dod.order_status) AS order_status,
+
+        /* lấy value từ fact */
+        MAX(fo.order_value) AS order_value
+
+    FROM dbo.DimOrderDetail dod
+
+    LEFT JOIN dbo.FCT_ORDER fo
+        ON dod.order_id = fo.order_id
+
+    GROUP BY
+        dod.order_id,
+        dod.purchase_date_key
+)
+
 SELECT
     dd.date_key AS snapshot_date_key,
 
-    /* tổng số order tạo trong ngày */
-    COUNT(fo.order_id) AS total_orders_created,
+    /* số order tạo */
+    COUNT(ob.order_id) AS total_orders_created,
+    SUM(CASE WHEN ob.order_status = ('approved') THEN 1 ELSE 0 END)
+        AS total_orders_approved,
+    /* số order delivered */
+    SUM(CASE WHEN ob.order_status = 'delivered' THEN 1 ELSE 0 END)
+        AS total_orders_delivered,
 
-    /* tổng số order delivered */
-    SUM(
-        CASE
-            WHEN dod.order_status = 'delivered' THEN 1
-            ELSE 0
-        END
-    ) AS total_orders_delivered,
+    /* số order cancelled */
+    SUM(CASE WHEN ob.order_status IN ('canceled','cancelled') THEN 1 ELSE 0 END)
+        AS total_orders_cancelled,
 
-    /* tổng số order cancelled */
-    SUM(
-        CASE
-            WHEN dod.order_status IN ('canceled', 'cancelled') THEN 1
-            ELSE 0
-        END
-    ) AS total_orders_cancelled,
-
-    /* tổng doanh thu */
-    ISNULL(SUM(fo.order_value), 0) AS total_revenue
-
+    /* doanh thu */
+    SUM(ISNULL(ob.order_value, 0)) AS total_revenue
 
 FROM dbo.DimDate dd
 
-LEFT JOIN dbo.DimOrderDetail dod
-    ON dod.purchase_date_key = dd.date_key
-
-LEFT JOIN dbo.FCT_ORDER fo
-    ON dod.order_id = fo.order_id
+LEFT JOIN order_base ob
+    ON ob.purchase_date_key = dd.date_key
 
 GROUP BY dd.date_key
 
 ORDER BY dd.date_key;
 --============================================
--- 4 Fact Daily Product Snapshot
+-- 4 Fact Daily Product Snapshot vừa fix
 -- detail: snapshot hàng ngày theo sản phẩm, mỗi ngày có một bản ghi tổng hợp số lượng bán ra, doanh thu, ... ISNULL(oi.price, 0)  
 --============================================
+-- SELECT
+--     dd.date_key AS snapshot_date_key,
+--     dp.product_key,
+--     COUNT(oi.price) AS items_sold_cnt,
+--     CAST(SUM(ISNULL(oi.price, 0)) AS DECIMAL(18,2)) AS total_revenue,
+--     CAST(AVG(rv.review_score) AS DECIMAL(5,2)) AS avg_review_score
+-- FROM stg.order_items oi
+-- INNER JOIN stg.orders o
+--     ON oi.order_id = o.order_id
+-- INNER JOIN dbo.DimProduct dp
+--     ON oi.product_id = dp.product_id
+--     AND dp.product_price = oi.price
+-- INNER JOIN dbo.DimDate dd
+--     ON CAST(CONVERT(VARCHAR(8), o.order_purchase_timestamp, 112) AS INT)
+--        = dd.date_key
+-- LEFT JOIN
+-- (
+--     SELECT
+--         order_id,
+--         AVG(CAST(review_score AS FLOAT)) AS review_score
+--     FROM dbo.FCT_ORDER_REVIEW
+--     GROUP BY order_id
+-- ) rv
+--     ON oi.order_id = rv.order_id
+-- GROUP BY
+--     dd.date_key,
+--     dp.product_key
 SELECT
     dd.date_key AS snapshot_date_key,
     dp.product_key,
-    COUNT(oi.price) AS items_sold_cnt,
+
+    COUNT(*) AS items_sold_cnt,
     CAST(SUM(ISNULL(oi.price, 0)) AS DECIMAL(18,2)) AS total_revenue,
     CAST(AVG(rv.review_score) AS DECIMAL(5,2)) AS avg_review_score
+
 FROM stg.order_items oi
+
 INNER JOIN stg.orders o
     ON oi.order_id = o.order_id
+
+/* DIM PRODUCT (match theo price như bạn chọn) */
 INNER JOIN dbo.DimProduct dp
     ON oi.product_id = dp.product_id
-    AND dp.price = oi.price
+    AND dp.product_price = oi.price
+
+/* JOIN PRODUCT GỐC lấy số lượng(Portuguese) */
+LEFT JOIN stg.products p
+    ON oi.product_id = p.product_id
+	AND p.product_description_lenght = dp.product_description_length
+
+/* TRANSLATION → EN */
+LEFT JOIN stg.product_category_name_translation pct
+    ON p.product_category_name = pct.product_category_name
+
 INNER JOIN dbo.DimDate dd
     ON CAST(CONVERT(VARCHAR(8), o.order_purchase_timestamp, 112) AS INT)
        = dd.date_key
-LEFT JOIN
-(
+
+LEFT JOIN (
     SELECT
         order_id,
         AVG(CAST(review_score AS FLOAT)) AS review_score
@@ -167,9 +219,15 @@ LEFT JOIN
     GROUP BY order_id
 ) rv
     ON oi.order_id = rv.order_id
+
 GROUP BY
     dd.date_key,
-    dp.product_key
+    dp.product_key,
+    pct.product_category_name_english
+
+ORDER BY
+    dd.date_key,
+    dp.product_key;
 --============================================
 -- 5 Fact Daily Seller Snapshot 
 -- detail: snapshot hàng ngày theo seller
@@ -228,9 +286,19 @@ LEFT JOIN
 /* =========================
    DIM SELLER
 ========================= */
-LEFT JOIN dbo.DimSeller ds
+LEFT JOIN (
+    SELECT *
+    FROM (
+        SELECT *,
+               ROW_NUMBER() OVER (
+                   PARTITION BY seller_id
+                   ORDER BY version DESC
+               ) AS rn
+        FROM dbo.DimSeller
+    ) t
+    WHERE rn = 1
+) ds
     ON oi.seller_id = ds.seller_id
-    AND ds.version = 1
 
 /* =========================
    DIM DATE

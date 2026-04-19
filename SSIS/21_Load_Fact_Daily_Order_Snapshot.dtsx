@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="14"
-  DTS:VersionGUID="{61B1015B-EC23-4EC0-AE3B-2A8A599E5F13}">
+  DTS:VersionBuild="17"
+  DTS:VersionGUID="{9AAEEC9F-D7F6-4310-A950-7EDD7754BE07}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -223,46 +223,49 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">WITH order_base AS (
+    SELECT
+        dod.order_id,
+        dod.purchase_date_key,
+
+        /* chuẩn hóa status về 1 dòng / order */
+        MAX(dod.order_status) AS order_status,
+
+        /* lấy value từ fact */
+        MAX(fo.order_value) AS order_value
+
+    FROM dbo.DimOrderDetail dod
+
+    LEFT JOIN dbo.FCT_ORDER fo
+        ON dod.order_id = fo.order_id
+
+    GROUP BY
+        dod.order_id,
+        dod.purchase_date_key
+)
+
+SELECT
     dd.date_key AS snapshot_date_key,
 
-    /* tổng số order tạo trong ngày */
-    COUNT(fo.order_id) AS total_orders_created,
+    /* số order tạo */
+    COUNT(ob.order_id) AS total_orders_created,
+    SUM(CASE WHEN ob.order_status = ('approved') THEN 1 ELSE 0 END)
+        AS total_orders_approved,
+    /* số order delivered */
+    SUM(CASE WHEN ob.order_status = 'delivered' THEN 1 ELSE 0 END)
+        AS total_orders_delivered,
 
-    /* tổng số order approved */
-    SUM(
-        CASE
-            WHEN LOWER(dod.order_status) = 'approved' THEN 1
-            ELSE 0
-        END
-    ) AS total_orders_approved,
+    /* số order cancelled */
+    SUM(CASE WHEN ob.order_status IN ('canceled','cancelled') THEN 1 ELSE 0 END)
+        AS total_orders_cancelled,
 
-    /* tổng số order delivered */
-    SUM(
-        CASE
-            WHEN LOWER(dod.order_status) = 'delivered' THEN 1
-            ELSE 0
-        END
-    ) AS total_orders_delivered,
-
-    /* tổng số order cancelled */
-    SUM(
-        CASE
-            WHEN LOWER(dod.order_status) IN ('canceled', 'cancelled') THEN 1
-            ELSE 0
-        END
-    ) AS total_orders_cancelled,
-
-    /* tổng doanh thu */
-    ISNULL(SUM(fo.order_value), 0) AS total_revenue
+    /* doanh thu */
+    SUM(ISNULL(ob.order_value, 0)) AS total_revenue
 
 FROM dbo.DimDate dd
 
-LEFT JOIN dbo.DimOrderDetail dod
-    ON dod.purchase_date_key = dd.date_key
-
-LEFT JOIN dbo.FCT_ORDER fo
-    ON dod.order_id = fo.order_id
+LEFT JOIN order_base ob
+    ON ob.purchase_date_key = dd.date_key
 
 GROUP BY dd.date_key
 
@@ -486,33 +489,21 @@ ORDER BY dd.date_key;</property>
         <NodeLayout
           Size="170.4,41.6"
           Id="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Destination"
-          TopLeft="500.000001064369,209.529411581045" />
+          TopLeft="482.142858169213,224.058823333015" />
         <EdgeLayout
           Id="Package\DFT_Load_Fact_Daily_Order_Snapshot.Paths[OLE DB Source Output]"
-          TopLeft="572.65714391695,136.423529328648">
+          TopLeft="569.285715327275,136.423529328648">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="12.5428571474188,73.105882252397"
+              EndConnector="0,87.6352940043671"
               Start="0,0"
-              End="12.5428571474188,65.605882252397">
+              End="0,80.1352940043671">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,32.5529411261985" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,32.5529411261985"
-                    Point2="0,36.5529411261985"
-                    Point3="4,36.5529411261985" />
-                  <mssgle:LineSegment
-                    End="8.54285714741877,36.5529411261985" />
-                  <mssgle:CubicBezierSegment
-                    Point1="8.54285714741877,36.5529411261985"
-                    Point2="12.5428571474188,36.5529411261985"
-                    Point3="12.5428571474188,40.5529411261985" />
-                  <mssgle:LineSegment
-                    End="12.5428571474188,65.605882252397" />
+                    End="0,80.1352940043671" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

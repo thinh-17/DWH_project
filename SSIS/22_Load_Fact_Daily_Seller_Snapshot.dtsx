@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="12"
-  DTS:VersionGUID="{FD8795C4-E11D-42A3-BC7C-0B9550A58D24}">
+  DTS:VersionBuild="14"
+  DTS:VersionGUID="{6CB7C8D9-A7C6-47B5-A6E7-87D95F366FBF}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -293,9 +293,7 @@ FROM stg.order_items oi
 INNER JOIN stg.orders o
     ON oi.order_id = o.order_id
 
-/* =========================
-   REVIEW (PRE-AGG để tránh nhân dòng)
-========================= */
+
 LEFT JOIN
 (
     SELECT
@@ -306,30 +304,32 @@ LEFT JOIN
 ) rv
     ON oi.order_id = rv.order_id
 
-/* =========================
-   DIM SELLER
-========================= */
-LEFT JOIN dbo.DimSeller ds
-    ON oi.seller_id = ds.seller_id
-    AND ds.version = 1
 
-/* =========================
-   DIM DATE
-========================= */
+LEFT JOIN (
+    SELECT *
+    FROM (
+        SELECT *,
+               ROW_NUMBER() OVER (
+                   PARTITION BY seller_id
+                   ORDER BY version DESC
+               ) AS rn
+        FROM dbo.DimSeller
+    ) t
+    WHERE rn = 1
+) ds
+    ON oi.seller_id = ds.seller_id
+
+
 LEFT JOIN dbo.DimDate dd
     ON CAST(CONVERT(VARCHAR(8), o.order_purchase_timestamp, 112) AS INT)
        = dd.date_key
 
-/* =========================
-   GROUP BY
-========================= */
+
 GROUP BY
     ISNULL(dd.date_key, -1),
     ISNULL(ds.seller_key, -1)
 
-/* =========================
-   ORDER
-========================= */
+
 ORDER BY
     snapshot_date_key,
     seller_key;</property>

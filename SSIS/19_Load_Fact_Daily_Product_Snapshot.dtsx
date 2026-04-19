@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="31"
-  DTS:VersionGUID="{F6003646-1E75-4138-B9A1-877DBF94BA07}">
+  DTS:VersionBuild="34"
+  DTS:VersionGUID="{92CFC5D8-8C93-4478-924A-578F5E23E9B2}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -220,20 +220,35 @@
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
     dd.date_key AS snapshot_date_key,
     dp.product_key,
-    COUNT(oi.price) AS items_sold_cnt,
+
+    COUNT(*) AS items_sold_cnt,
     CAST(SUM(ISNULL(oi.price, 0)) AS DECIMAL(18,2)) AS total_revenue,
     CAST(AVG(rv.review_score) AS DECIMAL(5,2)) AS avg_review_score
+
 FROM stg.order_items oi
+
 INNER JOIN stg.orders o
     ON oi.order_id = o.order_id
+
+/* DIM PRODUCT (match theo price như bạn chọn) */
 INNER JOIN dbo.DimProduct dp
     ON oi.product_id = dp.product_id
-    AND dp.version = 1
+    AND dp.product_price = oi.price
+
+/* JOIN PRODUCT GỐC lấy số lượng(Portuguese) */
+LEFT JOIN stg.products p
+    ON oi.product_id = p.product_id
+	AND p.product_description_lenght = dp.product_description_length
+
+/* TRANSLATION → EN */
+LEFT JOIN stg.product_category_name_translation pct
+    ON p.product_category_name = pct.product_category_name
+
 INNER JOIN dbo.DimDate dd
     ON CAST(CONVERT(VARCHAR(8), o.order_purchase_timestamp, 112) AS INT)
        = dd.date_key
-LEFT JOIN
-(
+
+LEFT JOIN (
     SELECT
         order_id,
         AVG(CAST(review_score AS FLOAT)) AS review_score
@@ -241,9 +256,15 @@ LEFT JOIN
     GROUP BY order_id
 ) rv
     ON oi.order_id = rv.order_id
+
 GROUP BY
     dd.date_key,
-    dp.product_key</property>
+    dp.product_key,
+    pct.product_category_name_english
+
+ORDER BY
+    dd.date_key,
+    dp.product_key;</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
