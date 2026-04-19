@@ -196,7 +196,7 @@ INNER JOIN stg.orders o
 /* DIM PRODUCT (match theo price như bạn chọn) */
 INNER JOIN dbo.DimProduct dp
     ON oi.product_id = dp.product_id
-    AND dp.product_price = oi.price
+    AND dp.product_price = (oi.price AS DECIMAL(18,2))
 
 /* JOIN PRODUCT GỐC lấy số lượng(Portuguese) */
 LEFT JOIN stg.products p
@@ -228,10 +228,12 @@ GROUP BY
 ORDER BY
     dd.date_key,
     dp.product_key;
+
 --============================================
 -- 5 Fact Daily Seller Snapshot 
 -- detail: snapshot hàng ngày theo seller
 --============================================
+
 SELECT
     ISNULL(dd.date_key, -1) AS snapshot_date_key,
     ISNULL(ds.seller_key, -1) AS seller_key,
