@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="15"
-  DTS:VersionGUID="{52048739-20FB-4EA0-A860-9F898C78D22D}">
+  DTS:VersionBuild="16"
+  DTS:VersionGUID="{CB958852-0E53-49F4-8741-8B44C3AAD2B7}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -685,28 +685,6 @@ LEFT JOIN dbo.DimDate dd_answer
           Id="Package\DFT_Load_Fact_ORDER_REVIEW\OLE DB Destination"
           TopLeft="445.000000947289,452.705881956127" />
         <EdgeLayout
-          Id="Package\DFT_Load_Fact_ORDER_REVIEW.Paths[OLE DB Source Output]"
-          TopLeft="526.000000957932,293.188235073591">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60.8705881454749"
-              Start="0,0"
-              End="0,53.3705881454749">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,53.3705881454749" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
           Id="Package\DFT_Load_Fact_ORDER_REVIEW.Paths[valid_rows]"
           TopLeft="528.342858094707,395.658823219066">
           <EdgeLayout.Curve>
@@ -728,6 +706,28 @@ LEFT JOIN dbo.DimDate dd_answer
             <mssgm:EdgeLabel
               BoundingBox="-24.24658203125,19.2422793685305,48.4931640625,11.0625"
               RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_Load_Fact_ORDER_REVIEW.Paths[OLE DB Source Output]"
+          TopLeft="526.000000957932,293.188235073591">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.8705881454749"
+              Start="0,0"
+              End="0,53.3705881454749">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,53.3705881454749" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

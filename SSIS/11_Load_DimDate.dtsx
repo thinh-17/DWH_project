@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="12"
-  DTS:VersionGUID="{D3AD8E3A-A172-46E2-9BA9-2C44A89A2940}">
+  DTS:VersionBuild="16"
+  DTS:VersionGUID="{59F11F80-6DF6-416F-B2CE-ADDD3B63B616}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -50,7 +50,7 @@
         <NodeLayout
           Size="144.8,41.6"
           Id="Package\Load DimDate"
-          TopLeft="267.85714342734,189.647058657296" />
+          TopLeft="267.85714342734,188.117646893931" />
       </GraphLayout>
     </LayoutInfo>
   </Package>

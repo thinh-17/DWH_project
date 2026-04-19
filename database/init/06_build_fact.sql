@@ -154,7 +154,7 @@ INNER JOIN stg.orders o
     ON oi.order_id = o.order_id
 INNER JOIN dbo.DimProduct dp
     ON oi.product_id = dp.product_id
-    AND dp.version = 1
+    AND dp.price = oi.price
 INNER JOIN dbo.DimDate dd
     ON CAST(CONVERT(VARCHAR(8), o.order_purchase_timestamp, 112) AS INT)
        = dd.date_key

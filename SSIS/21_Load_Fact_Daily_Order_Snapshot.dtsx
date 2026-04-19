@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="12"
-  DTS:VersionGUID="{F5C03CA1-1923-4E4F-BF36-79838B4342B7}">
+  DTS:VersionBuild="14"
+  DTS:VersionGUID="{61B1015B-EC23-4EC0-AE3B-2A8A599E5F13}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -480,13 +480,13 @@ ORDER BY dd.date_key;</property>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="170.4,41.6"
-          Id="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Destination"
-          TopLeft="500.000001064369,209.529411581045" />
-        <NodeLayout
           Size="149.6,41.6"
           Id="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Source"
           TopLeft="497.85714391695,94.8235293286482" />
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\DFT_Load_Fact_Daily_Order_Snapshot\OLE DB Destination"
+          TopLeft="500.000001064369,209.529411581045" />
         <EdgeLayout
           Id="Package\DFT_Load_Fact_Daily_Order_Snapshot.Paths[OLE DB Source Output]"
           TopLeft="572.65714391695,136.423529328648">

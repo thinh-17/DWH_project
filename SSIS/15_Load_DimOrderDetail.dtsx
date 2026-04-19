@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="15_Load_DimOrderDetail"
   DTS:PackageType="5"
-  DTS:VersionBuild="16"
-  DTS:VersionGUID="{24C730A2-CB8E-4E38-B646-74F2AF6150FF}">
+  DTS:VersionBuild="17"
+  DTS:VersionGUID="{0C3A7817-FAEC-4DB3-8C80-B41838268852}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -1122,17 +1122,17 @@ LEFT JOIN dbo.DimDate dd_delivered
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="149.6,41.6"
-          Id="Package\DFT_Load_Dim_OrderDetail\OLE DB Source"
-          TopLeft="20.000000042574,8.41176469850914" />
+          Size="183.2,41.6"
+          Id="Package\DFT_Load_Dim_OrderDetail\order_status_changed"
+          TopLeft="152.142857466729,386.176470249737" />
         <NodeLayout
           Size="170.4,41.6"
           Id="Package\DFT_Load_Dim_OrderDetail\OLE DB Destination"
           TopLeft="466.428572421476,392.294117303198" />
         <NodeLayout
-          Size="183.2,41.6"
-          Id="Package\DFT_Load_Dim_OrderDetail\order_status_changed"
-          TopLeft="152.142857466729,386.176470249737" />
+          Size="128.8,41.6"
+          Id="Package\DFT_Load_Dim_OrderDetail\Check_null"
+          TopLeft="280.714286311853,61.1764705346117" />
         <NodeLayout
           Size="179.2,41.6"
           Id="Package\DFT_Load_Dim_OrderDetail\OLE DB Destination 1"
@@ -1145,6 +1145,128 @@ LEFT JOIN dbo.DimDate dd_delivered
           Size="158.4,41.6"
           Id="Package\DFT_Load_Dim_OrderDetail\check order exist"
           TopLeft="158.571428908985,283.152940932484" />
+        <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\DFT_Load_Dim_OrderDetail\OLE DB Source"
+          TopLeft="20.000000042574,8.41176469850914" />
+        <EdgeLayout
+          Id="Package\DFT_Load_Dim_OrderDetail.Paths[purchase_date_key_valid]"
+          TopLeft="345.114286311853,102.776470534612">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-108.71428592868,66.2235293172533"
+              Start="0,0"
+              End="-108.71428592868,58.7235293172533">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.1117646586266" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29.1117646586266"
+                    Point2="0,33.1117646586266"
+                    Point3="-4,33.1117646586266" />
+                  <mssgle:LineSegment
+                    End="-104.71428592868,33.1117646586266" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-104.71428592868,33.1117646586266"
+                    Point2="-108.71428592868,33.1117646586266"
+                    Point3="-108.71428592868,37.1117646586266" />
+                  <mssgle:LineSegment
+                    End="-108.71428592868,58.7235293172533" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-110.28675233934,38.1117646586266,111.85921875,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_Load_Dim_OrderDetail.Paths[order_status_change]"
+          TopLeft="335.342857466729,410.035293776467">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="131.085714954747,0"
+              Start="0,0"
+              End="123.585714954747,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="123.585714954747,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="14.7720176336235,5,94.0416796875,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_Load_Dim_OrderDetail.Paths[OLE DB Source Output]"
+          TopLeft="169.600000042574,29.2117646985091">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="111.114286269279,52.7647058361026"
+              Start="0,0"
+              End="103.614286269279,52.7647058361026">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="51.5571431346393,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="51.5571431346393,0"
+                    Point2="55.5571431346393,0"
+                    Point3="55.5571431346393,4" />
+                  <mssgle:LineSegment
+                    End="55.5571431346393,48.7647058361026" />
+                  <mssgle:CubicBezierSegment
+                    Point1="55.5571431346393,48.7647058361026"
+                    Point2="55.5571431346393,52.7647058361026"
+                    Point3="59.5571431346393,52.7647058361026" />
+                  <mssgle:LineSegment
+                    End="103.614286269279,52.7647058361026" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_Load_Dim_OrderDetail.Paths[Lookup No Match Output]"
+          TopLeft="316.971428908985,304.229411518373">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="153.742857807328,0"
+              Start="0,0"
+              End="146.242857807328,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="146.242857807328,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="17.315042184914,5,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\DFT_Load_Dim_OrderDetail.Paths[Lookup Match Output1]"
           TopLeft="237.085714646079,210.599999851865">
@@ -1193,139 +1315,9 @@ LEFT JOIN dbo.DimDate dd_delivered
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <EdgeLayout
-          Id="Package\DFT_Load_Dim_OrderDetail.Paths[order_status_change]"
-          TopLeft="335.342857466729,410.035293776467">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="131.085714954747,0"
-              Start="0,0"
-              End="123.585714954747,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="123.585714954747,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="14.7720176336235,5,94.0416796875,11.6630859375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\DFT_Load_Dim_OrderDetail.Paths[Lookup No Match Output]"
-          TopLeft="316.971428908985,304.229411518373">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="153.742857807328,0"
-              Start="0,0"
-              End="146.242857807328,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="146.242857807328,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="17.315042184914,5,111.6127734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="128.8,41.6"
-          Id="Package\DFT_Load_Dim_OrderDetail\Check_null"
-          TopLeft="280.714286311853,61.1764705346117" />
-        <EdgeLayout
-          Id="Package\DFT_Load_Dim_OrderDetail.Paths[OLE DB Source Output]"
-          TopLeft="169.600000042574,29.2117646985091">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="111.114286269279,52.7647058361026"
-              Start="0,0"
-              End="103.614286269279,52.7647058361026">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="51.5571431346393,0" />
-                  <mssgle:CubicBezierSegment
-                    Point1="51.5571431346393,0"
-                    Point2="55.5571431346393,0"
-                    Point3="55.5571431346393,4" />
-                  <mssgle:LineSegment
-                    End="55.5571431346393,48.7647058361026" />
-                  <mssgle:CubicBezierSegment
-                    Point1="55.5571431346393,48.7647058361026"
-                    Point2="55.5571431346393,52.7647058361026"
-                    Point3="59.5571431346393,52.7647058361026" />
-                  <mssgle:LineSegment
-                    End="103.614286269279,52.7647058361026" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\DFT_Load_Dim_OrderDetail.Paths[purchase_date_key_valid]"
-          TopLeft="345.114286311853,102.776470534612">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-108.71428592868,66.2235293172533"
-              Start="0,0"
-              End="-108.71428592868,58.7235293172533">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,29.1117646586266" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,29.1117646586266"
-                    Point2="0,33.1117646586266"
-                    Point3="-4,33.1117646586266" />
-                  <mssgle:LineSegment
-                    End="-104.71428592868,33.1117646586266" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-104.71428592868,33.1117646586266"
-                    Point2="-108.71428592868,33.1117646586266"
-                    Point3="-108.71428592868,37.1117646586266" />
-                  <mssgle:LineSegment
-                    End="-108.71428592868,58.7235293172533" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-110.28675233934,38.1117646586266,111.85921875,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\DFT_Load_Dim_OrderDetail\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\DFT_Load_Dim_OrderDetail\OLE DB Destination">
     <Properties>
@@ -1393,6 +1385,14 @@ LEFT JOIN dbo.DimDate dd_delivered
         <Value
           type="q4:string">0</Value>
       </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_Load_Dim_OrderDetail\OLE DB Source">
+    <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
       </Property>

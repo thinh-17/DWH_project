@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="6"
-  DTS:VersionGUID="{701DC596-5092-41F7-81D8-19527CB147A8}">
+  DTS:VersionBuild="8"
+  DTS:VersionGUID="{C814C9A5-32F8-4E60-8A6C-1AFD54CB9D43}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -652,7 +652,7 @@
         <NodeLayout
           Size="152.8,41.6"
           Id="Package\DFT_Load_Geolocation_To_Staging\Derived Column"
-          TopLeft="358.571429334733,162.117646916721" />
+          TopLeft="365.714286492796,168.235293970182" />
         <NodeLayout
           Size="170.4,41.6"
           Id="Package\DFT_Load_Geolocation_To_Staging\OLE DB Destination"
@@ -663,18 +663,30 @@
           TopLeft="356.428572187314,79.5294116949953" />
         <EdgeLayout
           Id="Package\DFT_Load_Geolocation_To_Staging.Paths[Flat File Source Output]"
-          TopLeft="433.300000761024,121.129411694995">
+          TopLeft="431.628572187314,121.129411694995">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,40.9882352217259"
+              EndConnector="10.4857143054815,47.1058822751868"
               Start="0,0"
-              End="0,33.4882352217259">
+              End="10.4857143054815,39.6058822751868">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,33.4882352217259" />
+                    End="0,19.5529411375934" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.5529411375934"
+                    Point2="0,23.5529411375934"
+                    Point3="4,23.5529411375934" />
+                  <mssgle:LineSegment
+                    End="6.48571430548151,23.5529411375934" />
+                  <mssgle:CubicBezierSegment
+                    Point1="6.48571430548151,23.5529411375934"
+                    Point2="10.4857143054815,23.5529411375934"
+                    Point3="10.4857143054815,27.5529411375934" />
+                  <mssgle:LineSegment
+                    End="10.4857143054815,39.6058822751868" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -685,18 +697,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package\DFT_Load_Geolocation_To_Staging.Paths[Derived Column Output]"
-          TopLeft="437.585715045218,203.717646916721">
+          TopLeft="441.157143624249,209.835293970182">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,42.5176469850911"
+              EndConnector="0,36.3999999316298"
               Start="0,0"
-              End="0,35.0176469850911">
+              End="0,28.8999999316298">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,35.0176469850911" />
+                    End="0,28.8999999316298" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

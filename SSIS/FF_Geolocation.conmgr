@@ -12,7 +12,7 @@
       DTS:RowDelimiter=""
       DTS:TextQualifier="_x0022_"
       DTS:CodePage="1252"
-      DTS:ConnectionString="A:\DW_PROJECT\DWH_project\datasource\olist_geolocation_dataset.csv">
+      DTS:ConnectionString="F:\2025-2026_HK2\DataWarehouse\DWH_project\datasource\olist_geolocation_dataset.csv">
       <DTS:FlatFileColumns>
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -21,25 +21,25 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="geolocation_zip_code_prefix"
-          DTS:DTSID="{A3859969-5772-4A76-B866-592DB989F4AF}"
+          DTS:DTSID="{0744B055-1431-4485-81D4-C7285691380E}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
           DTS:ColumnDelimiter="_x002C_"
-          DTS:MaximumWidth="100"
+          DTS:MaximumWidth="50"
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="geolocation_lat"
-          DTS:DTSID="{D6514821-650E-4462-9B9B-7AE0D83750F2}"
+          DTS:DTSID="{773073DD-F66D-4345-862A-3A7465E6D238}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
           DTS:ColumnDelimiter="_x002C_"
-          DTS:MaximumWidth="100"
+          DTS:MaximumWidth="50"
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="geolocation_lng"
-          DTS:DTSID="{A1AE5850-B3D5-4DCD-9478-EAF6EF07144B}"
+          DTS:DTSID="{8F022C90-D363-4AD2-AE43-9E1AF42A7ACA}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -48,7 +48,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="geolocation_city"
-          DTS:DTSID="{8295BE1C-5798-4B79-A081-8ED94ECB2DC9}"
+          DTS:DTSID="{B7D90E43-0ED2-41FB-9808-6868DF6182D6}"
           DTS:CreationName="" />
         <DTS:FlatFileColumn
           DTS:ColumnType="Delimited"
@@ -57,7 +57,7 @@
           DTS:DataType="129"
           DTS:TextQualified="True"
           DTS:ObjectName="geolocation_state"
-          DTS:DTSID="{C7189F52-FBCD-4C7A-AFBA-1F397E71010F}"
+          DTS:DTSID="{F48D8B7A-2C53-4496-A815-13DEAEB38B09}"
           DTS:CreationName="" />
       </DTS:FlatFileColumns>
     </DTS:ConnectionManager>
