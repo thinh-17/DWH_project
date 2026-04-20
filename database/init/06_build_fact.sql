@@ -152,34 +152,7 @@ ORDER BY dd.date_key;
 --============================================
 -- 4 Fact Daily Product Snapshot vừa fix
 -- detail: snapshot hàng ngày theo sản phẩm, mỗi ngày có một bản ghi tổng hợp số lượng bán ra, doanh thu, ... ISNULL(oi.price, 0)  
---============================================
--- SELECT
---     dd.date_key AS snapshot_date_key,
---     dp.product_key,
---     COUNT(oi.price) AS items_sold_cnt,
---     CAST(SUM(ISNULL(oi.price, 0)) AS DECIMAL(18,2)) AS total_revenue,
---     CAST(AVG(rv.review_score) AS DECIMAL(5,2)) AS avg_review_score
--- FROM stg.order_items oi
--- INNER JOIN stg.orders o
---     ON oi.order_id = o.order_id
--- INNER JOIN dbo.DimProduct dp
---     ON oi.product_id = dp.product_id
---     AND dp.product_price = oi.price
--- INNER JOIN dbo.DimDate dd
---     ON CAST(CONVERT(VARCHAR(8), o.order_purchase_timestamp, 112) AS INT)
---        = dd.date_key
--- LEFT JOIN
--- (
---     SELECT
---         order_id,
---         AVG(CAST(review_score AS FLOAT)) AS review_score
---     FROM dbo.FCT_ORDER_REVIEW
---     GROUP BY order_id
--- ) rv
---     ON oi.order_id = rv.order_id
--- GROUP BY
---     dd.date_key,
---     dp.product_key
+
 SELECT
     dd.date_key AS snapshot_date_key,
     dp.product_key,
